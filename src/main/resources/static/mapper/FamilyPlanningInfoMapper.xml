@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.datong.dao.FamilyPlanningInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.datong.pojo.FamilyPlanningInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="p_id" jdbcType="VARCHAR" property="pId" />
+    <result column="is_together" jdbcType="BIT" property="isTogether" />
+    <result column="has_prove" jdbcType="BIT" property="hasProve" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="is_checked" jdbcType="BIT" property="isChecked" />
+    <result column="measure" jdbcType="VARCHAR" property="measure" />
+    <result column="pregnancy_info_id" jdbcType="INTEGER" property="pregnancyInfoId" />
+    <result column="boy_num" jdbcType="INTEGER" property="boyNum" />
+    <result column="girl_num" jdbcType="INTEGER" property="girlNum" />
+    <result column="inside_num" jdbcType="INTEGER" property="insideNum" />
+    <result column="outside_num" jdbcType="INTEGER" property="outsideNum" />
+    <result column="has_certificate" jdbcType="BIT" property="hasCertificate" />
+    <result column="is_levy" jdbcType="BIT" property="isLevy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, p_id, is_together, has_prove, number, is_checked, measure, pregnancy_info_id, 
+    boy_num, girl_num, inside_num, outside_num, has_certificate, is_levy
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from family_planning_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from family_planning_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.datong.pojo.FamilyPlanningInfo">
+    insert into family_planning_info (id, p_id, is_together, 
+      has_prove, number, is_checked, 
+      measure, pregnancy_info_id, boy_num, 
+      girl_num, inside_num, outside_num, 
+      has_certificate, is_levy)
+    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=VARCHAR}, #{isTogether,jdbcType=BIT}, 
+      #{hasProve,jdbcType=BIT}, #{number,jdbcType=VARCHAR}, #{isChecked,jdbcType=BIT}, 
+      #{measure,jdbcType=VARCHAR}, #{pregnancyInfoId,jdbcType=INTEGER}, #{boyNum,jdbcType=INTEGER}, 
+      #{girlNum,jdbcType=INTEGER}, #{insideNum,jdbcType=INTEGER}, #{outsideNum,jdbcType=INTEGER}, 
+      #{hasCertificate,jdbcType=BIT}, #{isLevy,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.datong.pojo.FamilyPlanningInfo">
+    insert into family_planning_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="isTogether != null">
+        is_together,
+      </if>
+      <if test="hasProve != null">
+        has_prove,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="isChecked != null">
+        is_checked,
+      </if>
+      <if test="measure != null">
+        measure,
+      </if>
+      <if test="pregnancyInfoId != null">
+        pregnancy_info_id,
+      </if>
+      <if test="boyNum != null">
+        boy_num,
+      </if>
+      <if test="girlNum != null">
+        girl_num,
+      </if>
+      <if test="insideNum != null">
+        inside_num,
+      </if>
+      <if test="outsideNum != null">
+        outside_num,
+      </if>
+      <if test="hasCertificate != null">
+        has_certificate,
+      </if>
+      <if test="isLevy != null">
+        is_levy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="isTogether != null">
+        #{isTogether,jdbcType=BIT},
+      </if>
+      <if test="hasProve != null">
+        #{hasProve,jdbcType=BIT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="isChecked != null">
+        #{isChecked,jdbcType=BIT},
+      </if>
+      <if test="measure != null">
+        #{measure,jdbcType=VARCHAR},
+      </if>
+      <if test="pregnancyInfoId != null">
+        #{pregnancyInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="boyNum != null">
+        #{boyNum,jdbcType=INTEGER},
+      </if>
+      <if test="girlNum != null">
+        #{girlNum,jdbcType=INTEGER},
+      </if>
+      <if test="insideNum != null">
+        #{insideNum,jdbcType=INTEGER},
+      </if>
+      <if test="outsideNum != null">
+        #{outsideNum,jdbcType=INTEGER},
+      </if>
+      <if test="hasCertificate != null">
+        #{hasCertificate,jdbcType=BIT},
+      </if>
+      <if test="isLevy != null">
+        #{isLevy,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.FamilyPlanningInfo">
+    update family_planning_info
+    <set>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="isTogether != null">
+        is_together = #{isTogether,jdbcType=BIT},
+      </if>
+      <if test="hasProve != null">
+        has_prove = #{hasProve,jdbcType=BIT},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="isChecked != null">
+        is_checked = #{isChecked,jdbcType=BIT},
+      </if>
+      <if test="measure != null">
+        measure = #{measure,jdbcType=VARCHAR},
+      </if>
+      <if test="pregnancyInfoId != null">
+        pregnancy_info_id = #{pregnancyInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="boyNum != null">
+        boy_num = #{boyNum,jdbcType=INTEGER},
+      </if>
+      <if test="girlNum != null">
+        girl_num = #{girlNum,jdbcType=INTEGER},
+      </if>
+      <if test="insideNum != null">
+        inside_num = #{insideNum,jdbcType=INTEGER},
+      </if>
+      <if test="outsideNum != null">
+        outside_num = #{outsideNum,jdbcType=INTEGER},
+      </if>
+      <if test="hasCertificate != null">
+        has_certificate = #{hasCertificate,jdbcType=BIT},
+      </if>
+      <if test="isLevy != null">
+        is_levy = #{isLevy,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.FamilyPlanningInfo">
+    update family_planning_info
+    set p_id = #{pId,jdbcType=VARCHAR},
+      is_together = #{isTogether,jdbcType=BIT},
+      has_prove = #{hasProve,jdbcType=BIT},
+      number = #{number,jdbcType=VARCHAR},
+      is_checked = #{isChecked,jdbcType=BIT},
+      measure = #{measure,jdbcType=VARCHAR},
+      pregnancy_info_id = #{pregnancyInfoId,jdbcType=INTEGER},
+      boy_num = #{boyNum,jdbcType=INTEGER},
+      girl_num = #{girlNum,jdbcType=INTEGER},
+      inside_num = #{insideNum,jdbcType=INTEGER},
+      outside_num = #{outsideNum,jdbcType=INTEGER},
+      has_certificate = #{hasCertificate,jdbcType=BIT},
+      is_levy = #{isLevy,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
