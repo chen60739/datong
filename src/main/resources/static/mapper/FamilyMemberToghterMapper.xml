@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.datong.dao.FamilyMemberToghterMapper">
+  <resultMap id="BaseResultMap" type="com.example.datong.pojo.FamilyMemberToghter">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="member_sex" jdbcType="BIT" property="memberSex" />
+    <result column="member_id_card" jdbcType="CHAR" property="memberIdCard" />
+    <result column="relation_id" jdbcType="INTEGER" property="relationId" />
+    <result column="has_vaccinate" jdbcType="BIT" property="hasVaccinate" />
+    <result column="is_local" jdbcType="BIT" property="isLocal" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, p_id, member_name, member_sex, member_id_card, relation_id, has_vaccinate, is_local
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from family_member_toghter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from family_member_toghter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.datong.pojo.FamilyMemberToghter">
+    insert into family_member_toghter (id, p_id, member_name, 
+      member_sex, member_id_card, relation_id, 
+      has_vaccinate, is_local)
+    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+      #{memberSex,jdbcType=BIT}, #{memberIdCard,jdbcType=CHAR}, #{relationId,jdbcType=INTEGER}, 
+      #{hasVaccinate,jdbcType=BIT}, #{isLocal,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.datong.pojo.FamilyMemberToghter">
+    insert into family_member_toghter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="memberSex != null">
+        member_sex,
+      </if>
+      <if test="memberIdCard != null">
+        member_id_card,
+      </if>
+      <if test="relationId != null">
+        relation_id,
+      </if>
+      <if test="hasVaccinate != null">
+        has_vaccinate,
+      </if>
+      <if test="isLocal != null">
+        is_local,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        #{memberSex,jdbcType=BIT},
+      </if>
+      <if test="memberIdCard != null">
+        #{memberIdCard,jdbcType=CHAR},
+      </if>
+      <if test="relationId != null">
+        #{relationId,jdbcType=INTEGER},
+      </if>
+      <if test="hasVaccinate != null">
+        #{hasVaccinate,jdbcType=BIT},
+      </if>
+      <if test="isLocal != null">
+        #{isLocal,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.FamilyMemberToghter">
+    update family_member_toghter
+    <set>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        member_sex = #{memberSex,jdbcType=BIT},
+      </if>
+      <if test="memberIdCard != null">
+        member_id_card = #{memberIdCard,jdbcType=CHAR},
+      </if>
+      <if test="relationId != null">
+        relation_id = #{relationId,jdbcType=INTEGER},
+      </if>
+      <if test="hasVaccinate != null">
+        has_vaccinate = #{hasVaccinate,jdbcType=BIT},
+      </if>
+      <if test="isLocal != null">
+        is_local = #{isLocal,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.FamilyMemberToghter">
+    update family_member_toghter
+    set p_id = #{pId,jdbcType=INTEGER},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      member_sex = #{memberSex,jdbcType=BIT},
+      member_id_card = #{memberIdCard,jdbcType=CHAR},
+      relation_id = #{relationId,jdbcType=INTEGER},
+      has_vaccinate = #{hasVaccinate,jdbcType=BIT},
+      is_local = #{isLocal,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
