@@ -5,6 +5,7 @@
     <title>注册</title>
     <link rel="stylesheet" href="/plugs/layui/css/layui.css">
     <script src="/plugs/layui/layui.js"></script>
+    <script src="/js/jquery-2.1.1.min.js"></script>
 </head>
 <body>
 <div class="layui-col-xs6 layui-col-md12">
@@ -13,18 +14,18 @@
         <h1>账号注册</h1>
     </div>
     <div style="float: top;margin-top: 20px">
-        <form method="post" class="layui-form">
+        <form method="post" class="layui-form" action="/register">
             <div class="layui-form-item">
                 <label for="phone" class="layui-form-label">
                     <span class="x-red">*</span>手机号</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="phone" name="phone" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    <input type="text" id="phone" name="phone" required="" lay-verify="phone" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
                 <label for="password" class="layui-form-label">
                     <span class="x-red">*</span>密码</label>
                 <div class="layui-input-inline">
-                    <input type="password" id="password" name="password" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    <input type="password" id="password" name="password" required="" lay-verify="pwd|required" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
                 <label for="unitName" class="layui-form-label">
@@ -42,15 +43,16 @@
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="countyCode">
+                    <select name="countyCode" id="countyCode" lay-filter="county" lay-verify="required">
                         <option value="">请选择县/区</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="townCode">
+                    <select name="townCode" lay-filter="town" id="town" lay-verify="required">
                         <option value="">请选择街道/镇</option>
                     </select>
                 </div>
+            </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
@@ -65,15 +67,41 @@
 
 <script>
     //Demo
-    layui.use('form', function(){
-        var form = layui.form;
+    layui.use(['form','jquery','layer'], function(){
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
 
         //监听提交
         form.on('submit(demo1)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return false;
+            //layer.msg(JSON.stringify(data.field));
+            form.verify({
+                pwd: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
+            });
+            //return false;
         });
-    });
+
+        form.on('select(county)', function(data){
+            $.getJSON("/getTown",{"countyCode":data.value},function (result) {
+                $("#town").empty();
+                for (var i = 0; i < result.length; i++) {
+                    $("#town").append("<option value='"+result[i].townCode+"'>"+result[i].townName+"</option>")
+                }
+                form.render("select");
+            })
+        });
+    })
+</script>
+<script>
+    $(function () {
+        $.getJSON("/getCounty",function (result) {
+            for (var i = 0; i < result.length; i++) {
+                $("#countyCode").append("<option value='"+result[i].countyCode+"'>"+result[i].countyName+"</option>")
+            }
+        })
+
+    })
 </script>
 </body>
 </html>
+
