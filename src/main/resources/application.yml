@@ -2,8 +2,19 @@
 server:
   port: 8888
 spring:
+  thymeleaf:  #springboot支持html文件  使用thymeleaf配置
+      cache: false
+      encoding: UTF-8
+      mode: LEGACYHTML5
+      prefix: classpath:/templates/               #/templates/
+      suffix: .html
+      check-template-location: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/datong?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     username: root
-    password: 802399
+    password: root
+
+mybatis:
+  mapper-locations: classpath*:static/mapper/*.xml #这个位置是配置  是配置dao层的mapper.xml存放的位置的
+  type-aliases-package: com.example.datong.*.model  #实体类 别名配置

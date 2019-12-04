@@ -1,6 +1,6 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.FloatingPopulation;
+import com.example.datong.model.FloatingPopulation;
 
 public interface FloatingPopulationMapper {
     int deleteByPrimaryKey(Integer id);

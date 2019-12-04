@@ -1,6 +1,8 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.CompanyRegistrationInfo;
+import com.example.datong.model.CompanyRegistrationInfo;
+
+import java.util.List;
 
 public interface CompanyRegistrationInfoMapper {
     int deleteByPrimaryKey(Integer unitId);
@@ -14,4 +16,6 @@ public interface CompanyRegistrationInfoMapper {
     int updateByPrimaryKeySelective(CompanyRegistrationInfo record);
 
     int updateByPrimaryKey(CompanyRegistrationInfo record);
+    //注册信息审核查询
+    List<CompanyRegistrationInfo> selectAll(CompanyRegistrationInfo companyRegistrationInfo);
 }

@@ -1,6 +1,6 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.CheckReason;
+import com.example.datong.model.CheckReason;
 
 public interface CheckReasonMapper {
     int deleteByPrimaryKey(Integer id);

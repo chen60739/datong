@@ -1,22 +1,22 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 public class SpouseInfo {
     private Integer id;
 
     private Integer pId;
-
+    //配偶姓名
     private String name;
-
+    //配偶身份证号
     private String idCard;
 
     private Integer countyCode;
-
+    //现居住地地址
     private String address;
-
+    //从业状况id
     private Integer employmentStateId;
-
+    //工作单位
     private String workUnit;
-
+    //联系电话
     private String phone;
 
     public Integer getId() {

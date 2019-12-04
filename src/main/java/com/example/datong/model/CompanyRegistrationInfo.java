@@ -1,4 +1,4 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 import java.util.Date;
 
@@ -152,7 +152,6 @@ public class CompanyRegistrationInfo {
     public void setWorkerNum(String workerNum) {
         this.workerNum = workerNum == null ? null : workerNum.trim();
     }
-
     public Date getGmtCreate() {
         return gmtCreate;
     }
@@ -175,5 +174,28 @@ public class CompanyRegistrationInfo {
 
     public void setIsChecked(Integer isChecked) {
         this.isChecked = isChecked;
+    }
+
+    @Override
+    public String toString() {
+        return "CompanyRegistrationInfo{" +
+                "unitId=" + unitId +
+                ", unitName='" + unitName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", countyCode='" + countyCode + '\'' +
+                ", townCode='" + townCode + '\'' +
+                ", unitTypeId=" + unitTypeId +
+                ", unitAddress='" + unitAddress + '\'' +
+                ", unitNum='" + unitNum + '\'' +
+                ", unitSocial='" + unitSocial + '\'' +
+                ", industryCategoryId='" + industryCategoryId + '\'' +
+                ", organizationCode='" + organizationCode + '\'' +
+                ", legalPersonName='" + legalPersonName + '\'' +
+                ", workerNum='" + workerNum + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", isChecked=" + isChecked +
+                '}';
     }
 }

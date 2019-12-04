@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.CompanyRegistrationInfoMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.CompanyRegistrationInfo">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.CompanyRegistrationInfo">
     <id column="unit_id" jdbcType="INTEGER" property="unitId" />
     <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
     <result column="phone" jdbcType="CHAR" property="phone" />
@@ -35,7 +35,7 @@
     delete from company_registration_info
     where unit_id = #{unitId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.CompanyRegistrationInfo">
+  <insert id="insert" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     insert into company_registration_info (unit_id, unit_name, phone, 
       password, county_code, town_code, 
       unit_type_id, unit_address, unit_num, 
@@ -49,7 +49,7 @@
       #{legalPersonName,jdbcType=VARCHAR}, #{workerNum,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModified,jdbcType=TIMESTAMP}, #{isChecked,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.CompanyRegistrationInfo">
+  <insert id="insertSelective" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     insert into company_registration_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="unitId != null">
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.CompanyRegistrationInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     update company_registration_info
     <set>
       <if test="unitName != null">
@@ -212,7 +212,7 @@
     </set>
     where unit_id = #{unitId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.CompanyRegistrationInfo">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     update company_registration_info
     set unit_name = #{unitName,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
@@ -232,4 +232,16 @@
       is_checked = #{isChecked,jdbcType=INTEGER}
     where unit_id = #{unitId,jdbcType=INTEGER}
   </update>
+  <!--注册信息审核查询-->
+  <select id="selectAll" resultMap="BaseResultMap">
+      SELECT  * FROM company_registration_info
+        <where>
+            <if test="unitName != null">
+              unit_name LIKE CONCAT("%",#{unitName},"%")
+            </if>
+            <if test="phone != null">
+              phone LIKE CONCAT("%",#{phone},"%")
+            </if>
+        </where>
+    </select>
 </mapper>

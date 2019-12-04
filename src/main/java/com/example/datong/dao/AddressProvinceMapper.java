@@ -1,6 +1,6 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.AddressProvince;
+import com.example.datong.model.AddressProvince;
 
 public interface AddressProvinceMapper {
     int deleteByPrimaryKey(Integer provinceId);

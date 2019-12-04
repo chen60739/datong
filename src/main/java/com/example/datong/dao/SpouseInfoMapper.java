@@ -1,6 +1,6 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.SpouseInfo;
+import com.example.datong.model.SpouseInfo;
 
 public interface SpouseInfoMapper {
     int deleteByPrimaryKey(Integer id);

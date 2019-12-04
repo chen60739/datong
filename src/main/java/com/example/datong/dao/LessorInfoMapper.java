@@ -1,6 +1,6 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.LessorInfo;
+import com.example.datong.model.LessorInfo;
 
 public interface LessorInfoMapper {
     int deleteByPrimaryKey(Integer id);

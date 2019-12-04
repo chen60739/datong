@@ -1,6 +1,6 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.Role;
+import com.example.datong.model.Role;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
