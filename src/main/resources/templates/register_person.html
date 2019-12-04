@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息添加</title>
+    <link rel="stylesheet" href="/plugs/layui/css/layui.css">
+    <script src="/plugs/layui/layui.js"></script>
+</head>
+
+<body >
+<div align="center"><h1>大同市流动人口信息详情</h1></div>
+<div style="float: top;margin-top: 20px">
+<form class="layui-form" action="">
+    <div class="layui-fluid">
+        <div class="layui-row">
+            <div class="layui-col-xs1">
+                <div class="grid-demo grid-demo-bg1">个人信息</div>
+                <hr class="layui-bg-black">
+            </div>
+
+            <div class="layui-col-xs11">
+                <div class="grid-demo">
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">曾用名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="sex" value="男" title="男">
+                                <input type="radio" name="sex" value="女" title="女" checked>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">来本地时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input" id="test12">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">公民身份证号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">民族</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">户籍详细地址</label>
+                            <div class="layui-input-inline">
+                                <select name="quiz1">
+                                    <option value="">请选择省</option>
+
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="quiz2">
+                                    <option value="">请选择市</option>
+
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="quiz3">
+                                    <option value="">请选择县/区</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="quiz4">
+                                    <option value="">请选择乡/镇</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入村庄" autocomplete="off" class="layui-input">
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">现居住详细地址</label>
+                            <div class="layui-input-inline">
+                                <select name="quiz1">
+                                    <option value="">请选择省</option>
+
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="quiz2">
+                                    <option value="">请选择市</option>
+
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="quiz3">
+                                    <option value="">请选择县/区</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="quiz4">
+                                    <option value="">请选择乡/镇</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入村庄" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">本人联系方式</label><br/>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">固定电话</label>
+                                <div class="layui-input-inline">
+                                    <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">移动电话</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">文化程度</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz">
+                                        <option value="">请选择问题</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">政治面貌</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz">
+                                        <option value="">请选择问题</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">宗教信仰</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz">
+                                        <option value="">请选择问题</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">身体状况</label><br/>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身高</label>
+                                <div class="layui-input-inline">
+                                    <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                                </div>
+                                <label class="layui-form-label">cm</label>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">体重</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                                </div>
+                                <label class="layui-form-label">公斤</label>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">血型</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz">
+                                        <option value="">请选择问题</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">健康状况</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz">
+                                        <option value="">请选择问题</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">从业状况</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz">
+                                        <option value="">请选择问题</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">婚姻状况</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz">
+                                        <option value="">请选择问题</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+            <div class="layui-col-xs1">
+                <div class="grid-demo grid-demo-bg1">配偶信息</div>
+                <hr class="layui-bg-black">
+            </div>
+            <div class="layui-col-xs11">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">配偶姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">配偶身份号码</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">现居住详细地址</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择省</option>
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz2">
+                            <option value="">请选择市</option>
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz3">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz4">
+                            <option value="">请选择乡/镇</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入村庄" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">从业状况</label>
+                        <div class="layui-input-inline">
+                            <select name="quiz">
+                                <option value="">请选择问题</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">工作单位</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">本人联系电话</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-col-xs1">
+                <div class="grid-demo grid-demo-bg1">同住家庭成员</div>
+                <hr class="layui-bg-black">
+            </div>
+            <div class="layui-col-xs11">
+                <label class="layui-form-label">成员表</label>
+                <table class="layui" id="test" border="1" style="height: 80px;width: 600px;">
+                    <tr>
+                        <td>关系</td>
+                        <td>公民身份号码</td>
+                        <td>姓名</td>
+                        <td>性别</td>
+                        <td>出生日期</td>
+                        <td>有误预防接种证</td>
+                        <td>是否在本市就学</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="quiz4">
+                            <option value="">请选择乡/镇</option>
+                        </select>
+                        </td>
+                        <td></td>
+                        <td> <input type="radio" name="sex" value="男" title="男">
+                            <input type="radio" name="sex" value="女" title="女" checked></td>
+                        <td></td>
+                        <td></td>
+                        <td> <input type="radio" name="sex" value="是" title="是">
+                            <input type="radio" name="sex" value="否" title="否" checked></td>
+                        <td> <input type="radio" name="sex" value="是" title="是">
+                            <input type="radio" name="sex" value="否" title="否" checked></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="layui-col-xs1">
+                <div class="grid-demo grid-demo-bg1">计生信息</div>
+                <hr class="layui-bg-black">
+            </div>
+            <div class="layui-col-xs11">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                    <label class="layui-form-label">夫妻同行</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="是" title="是">
+                        <input type="radio" name="sex" value="否" title="否" checked>
+                    </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">婚育证明</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="有" title="有">
+                            <input type="radio" name="sex" value="无" title="无" checked>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">婚育证编号</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">是否验证</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="是" title="是">
+                            <input type="radio" name="sex" value="否" title="否" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">生育情况</label><br/>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">生育子女数</label><label class="layui-form-label">男</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label">人</label>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">女</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label">人</label>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">政策内</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label">孩</label>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">政策外</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label">孩</label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">生育子女证</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="有" title="有">
+                            <input type="radio" name="sex" value="无" title="无" checked>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">社会抚养费征收</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="已缴" title="已缴">
+                            <input type="radio" name="sex" value="未缴" title="未缴" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                <label class="layui-form-label">怀孕避孕情况</label>
+                <div class="layui-input-inline">
+                    <select name="quiz">
+                        <option value="">请选择问题</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">措施时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">当年生育子女</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="sex" value="男" title="男">
+                        <input type="radio" name="sex" value="女" title="女" checked>
+                    </div>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label">出生日期</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label">政策外</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="内" title="内">
+                            <input type="radio" name="sex" value="外" title="外" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs1">
+                <div class="grid-demo grid-demo-bg1">就业信息</div>
+                <hr class="layui-bg-black">
+            </div>
+            <div class="layui-col-xs11">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用工单位名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单位类型</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz">
+                            <option value="">请选择问题</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">户籍详细地址</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择省</option>
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz2">
+                            <option value="">请选择市</option>
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz3">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz4">
+                            <option value="">请选择乡/镇</option>
+                        </select>
+                       </div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入村庄" autocomplete="off" class="layui-input">
+
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单位地址</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择省</option>
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz2">
+                            <option value="">请选择市</option>
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz3">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz4">
+                            <option value="">请选择乡/镇</option>
+                        </select>
+
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入门牌号" autocomplete="off" class="layui-input">
+
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label">组织机构代码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label">法人代表</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">劳动合同</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">保险</label>
+                    <div class="layui-input-inline">
+                        <input type="checkbox" name="hobbies" value="神经病保险" title="神经病保险">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">社会担保号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用工人数</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">行业类别</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                <label class="layui-form-label">职称</label>
+                <div class="layui-input-inline">
+                    <select name="quiz1">
+                        <option value="">请选择</option>
+
+                    </select>
+                </div>
+            </div>
+                <div class="layui-form-item">
+                <label class="layui-form-label">职业技能等级</label>
+                <div class="layui-input-inline">
+                    <select name="quiz1">
+                        <option value="">请选择</option>
+
+                    </select>
+                </div>
+            </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">职业</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs1">
+                <div class="grid-demo grid-demo-bg1">居住信息</div>
+                <hr class="layui-bg-black">
+            </div>
+            <div class="layui-col-xs11">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">居住方式</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">居住事由</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房屋类别</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房屋地址</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择省</option>
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz2">
+                            <option value="">请选择市</option>
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz3">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz4">
+                            <option value="">请选择乡/镇</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入村庄" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出租人情况</label>
+                    <div class="layui-input-block">
+                        <table class="layui" id="test2" border="1" style="height: 80px;width: 600px;">
+                            <tr>
+                                <td><select name="quiz3">
+                                    <option value="">请选择出租人情况</option>
+                                </select></td>
+                                <td></td>
+                                <td>联系电话</td>
+                                <td></td>
+                                <td>是否签订治安责任书</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>身份证</td>
+                                <td colspan="5"></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房屋类型</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                <label class="layui-form-label">房屋用途</label>
+                <div class="layui-input-inline">
+                    <select name="quiz1">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+
+            </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">信息采集员</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+</div>
+</body>
+<script>
+    layui.use(['form','laydate'], function(){
+        var form = layui.form,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#test1' //指定元素
+        });
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+</html>
