@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="plugs/layui/css/layui.css">
+    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+    <script src="/plugs/layui/layui.js"></script>
+    <script type="text/javascript" src="/plugs/layui/xadmin.js"></script>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                 <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
+                </div>
+            </div>
+            <button type="button" class="layui-btn">搜索</button>
+            <button type="button" class="layui-btn">通过审核</button>
+            <button type="button" class="layui-btn">不通过</button>
+        </div>
+        <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+        <table class="layui-hide" id="test"></table>
+    </div>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+</body>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看详情</a>
+</script>
+<script type="text/javascript"  th:inline="none">
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //方法级渲染
+        table.render({
+            elem: '#LAY_table_user'
+            ,url: '/back_register_info'
+            ,cols: [[
+                {checkbox: true, fixed: true}
+                ,{field:'unitId', width:80, title: '编号', sort: true, fixed: true}
+                ,{field:'unitName', width:160, title: '单位名称'}
+                ,{field:'unitPhone', width:120, title: '手机', sort: true}
+                ,{field:'gmtCreate', width:100, title: '提交时间'}
+                ,{fixed: 'right', width:110, align:'center', toolbar: '#barDemo', title: '详情'}
+                ,{field:'isChecked', width:100, title: '审核状态', sort: true}
+            ]]
+            ,id: 'testReload'
+            ,page: true
+            ,height: 310
+            ,width: 726
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        key: {
+                            id: demoReload.val()
+                        }
+                    }
+                }, 'data');
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+
+
+</script>
+</html>
