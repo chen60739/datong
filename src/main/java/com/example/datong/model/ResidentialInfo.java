@@ -1,13 +1,13 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 public class ResidentialInfo {
     private Integer id;
 
     private Integer pId;
 
-    private String townCode;
+    private String residentialTownCode;
 
-    private String addres;
+    private String residentialAddres;
 
     private Integer livingStyleId;
 
@@ -37,20 +37,20 @@ public class ResidentialInfo {
         this.pId = pId;
     }
 
-    public String getTownCode() {
-        return townCode;
+    public String getResidentialTownCode() {
+        return residentialTownCode;
     }
 
-    public void setTownCode(String townCode) {
-        this.townCode = townCode == null ? null : townCode.trim();
+    public void setResidentialTownCode(String residentialTownCode) {
+        this.residentialTownCode = residentialTownCode == null ? null : residentialTownCode.trim();
     }
 
-    public String getAddres() {
-        return addres;
+    public String getResidentialAddres() {
+        return residentialAddres;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres == null ? null : addres.trim();
+    public void setResidentialAddres(String residentialAddres) {
+        this.residentialAddres = residentialAddres == null ? null : residentialAddres.trim();
     }
 
     public Integer getLivingStyleId() {
@@ -99,5 +99,21 @@ public class ResidentialInfo {
 
     public void setMessagePerson(String messagePerson) {
         this.messagePerson = messagePerson == null ? null : messagePerson.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "ResidentialInfo{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", residentialTownCode='" + residentialTownCode + '\'' +
+                ", residentialAddres='" + residentialAddres + '\'' +
+                ", livingStyleId=" + livingStyleId +
+                ", reasonForResidenceId=" + reasonForResidenceId +
+                ", houseTypeId=" + houseTypeId +
+                ", houseGener=" + houseGener +
+                ", houseUse=" + houseUse +
+                ", messagePerson='" + messagePerson + '\'' +
+                '}';
     }
 }

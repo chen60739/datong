@@ -1,44 +1,41 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
+
 
 import java.util.Date;
 
-/**
- * 公司注册登录类
- */
 public class CompanyRegistrationInfo {
-
     private Integer unitId;
-    //公司名称
+
     private String unitName;
-    //联系电话
-    private String phone;
-    //密码
+
+    private String unitPhone;
+
     private String password;
-    //区编码
-    private String countyCode;
-    //镇编码
-    private String townCode;
-    //单位类型
+
+    private String unitCountyCode;
+
+    private String unitTownCode;
+
     private Integer unitTypeId;
-    //详细地址
+
     private String unitAddress;
-    //单位编号
+
     private String unitNum;
-    //单位社保号
+
     private String unitSocial;
-    //行业类别
+
     private String industryCategoryId;
-    //组织机构代码
+
     private String organizationCode;
-    //法人代表
+
     private String legalPersonName;
-    //用工人数
+
     private String workerNum;
-    //创建时间
+
     private Date gmtCreate;
-    //修改时间
+
     private Date gmtModified;
-    //审核状态
+
     private Integer isChecked;
 
     public Integer getUnitId() {
@@ -57,12 +54,12 @@ public class CompanyRegistrationInfo {
         this.unitName = unitName == null ? null : unitName.trim();
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUnitPhone() {
+        return unitPhone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+    public void setUnitPhone(String unitPhone) {
+        this.unitPhone = unitPhone == null ? null : unitPhone.trim();
     }
 
     public String getPassword() {
@@ -73,20 +70,20 @@ public class CompanyRegistrationInfo {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getCountyCode() {
-        return countyCode;
+    public String getUnitCountyCode() {
+        return unitCountyCode;
     }
 
-    public void setCountyCode(String countyCode) {
-        this.countyCode = countyCode == null ? null : countyCode.trim();
+    public void setUnitCountyCode(String unitCountyCode) {
+        this.unitCountyCode = unitCountyCode == null ? null : unitCountyCode.trim();
     }
 
-    public String getTownCode() {
-        return townCode;
+    public String getUnitTownCode() {
+        return unitTownCode;
     }
 
-    public void setTownCode(String townCode) {
-        this.townCode = townCode == null ? null : townCode.trim();
+    public void setUnitTownCode(String unitTownCode) {
+        this.unitTownCode = unitTownCode == null ? null : unitTownCode.trim();
     }
 
     public Integer getUnitTypeId() {
@@ -175,5 +172,28 @@ public class CompanyRegistrationInfo {
 
     public void setIsChecked(Integer isChecked) {
         this.isChecked = isChecked;
+    }
+
+    @Override
+    public String toString() {
+        return "CompanyRegistrationInfo{" +
+                "unitId=" + unitId +
+                ", unitName='" + unitName + '\'' +
+                ", unitPhone='" + unitPhone + '\'' +
+                ", password='" + password + '\'' +
+                ", unitCountyCode='" + unitCountyCode + '\'' +
+                ", unitTownCode='" + unitTownCode + '\'' +
+                ", unitTypeId=" + unitTypeId +
+                ", unitAddress='" + unitAddress + '\'' +
+                ", unitNum='" + unitNum + '\'' +
+                ", unitSocial='" + unitSocial + '\'' +
+                ", industryCategoryId='" + industryCategoryId + '\'' +
+                ", organizationCode='" + organizationCode + '\'' +
+                ", legalPersonName='" + legalPersonName + '\'' +
+                ", workerNum='" + workerNum + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", isChecked=" + isChecked +
+                '}';
     }
 }

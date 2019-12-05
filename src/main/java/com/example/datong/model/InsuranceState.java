@@ -1,10 +1,11 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 public class InsuranceState {
     private Integer id;
 
     private Integer pId;
 
+    //保险类型id
     private Integer insuranceId;
 
     public Integer getId() {

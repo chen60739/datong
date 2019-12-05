@@ -1,4 +1,4 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 import java.util.Date;
 
@@ -13,6 +13,8 @@ public class FloatingPopulation {
     private String nameUsedBefore;
     //性别 1 男  0 女
     private Boolean sex;
+    //照片
+    private String photo;
     //身份证号
     private String idCard;
     //固定电话
@@ -40,7 +42,7 @@ public class FloatingPopulation {
     //健康状况
     private Integer healthy;
     //残疾证编号
-    private String hCode;
+    private String disabilityCode;
     //从业情况
     private Integer employmentStateId;
     //婚姻状况
@@ -55,6 +57,18 @@ public class FloatingPopulation {
     private Date gmtModified;
     //审核状态
     private Integer isChecked;
+    //审核未通过原因表id
+    private Integer checkReasonId;
+    //公司id
+    private Integer companyId;
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
 
     public Integer getId() {
         return id;
@@ -192,12 +206,12 @@ public class FloatingPopulation {
         this.healthy = healthy;
     }
 
-    public String gethCode() {
-        return hCode;
+    public String getdisabilityCode() {
+        return disabilityCode;
     }
 
-    public void sethCode(String hCode) {
-        this.hCode = hCode == null ? null : hCode.trim();
+    public void setdisabilityCode(String disabilityCode) {
+        this.disabilityCode = disabilityCode == null ? null : disabilityCode.trim();
     }
 
     public Integer getEmploymentStateId() {
@@ -254,5 +268,71 @@ public class FloatingPopulation {
 
     public void setIsChecked(Integer isChecked) {
         this.isChecked = isChecked;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getDisabilityCode() {
+        return disabilityCode;
+    }
+
+    public void setDisabilityCode(String disabilityCode) {
+        this.disabilityCode = disabilityCode;
+    }
+
+    public Boolean getDel() {
+        return isDel;
+    }
+
+    public void setDel(Boolean del) {
+        isDel = del;
+    }
+
+    public Integer getCheckReasonId() {
+        return checkReasonId;
+    }
+
+    public void setCheckReasonId(Integer checkReasonId) {
+        this.checkReasonId = checkReasonId;
+    }
+
+    @Override
+    public String toString() {
+        return "FloatingPopulation{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", nameUsedBefore='" + nameUsedBefore + '\'' +
+                ", sex=" + sex +
+                ", photo='" + photo + '\'' +
+                ", idCard='" + idCard + '\'' +
+                ", fixedPhone='" + fixedPhone + '\'' +
+                ", householdCityCode='" + householdCityCode + '\'' +
+                ", phone='" + phone + '\'' +
+                ", nationId=" + nationId +
+                ", comeTime=" + comeTime +
+                ", educationLevelId=" + educationLevelId +
+                ", politicalOutlookId=" + politicalOutlookId +
+                ", faithId=" + faithId +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", bloodTypeId=" + bloodTypeId +
+                ", healthy=" + healthy +
+                ", disabilityCode='" + disabilityCode + '\'' +
+                ", employmentStateId=" + employmentStateId +
+                ", maritalStateId=" + maritalStateId +
+                ", isDel=" + isDel +
+                ", state=" + state +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", isChecked=" + isChecked +
+                ", checkReasonId=" + checkReasonId +
+                ", companyId=" + companyId +
+                '}';
     }
 }
