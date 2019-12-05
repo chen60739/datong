@@ -13,7 +13,7 @@ public class EmploymentInfo {
 
     private Integer skillId;
 
-    private Integer occupation;
+    private String occupation;
 
     public Integer getId() {
         return id;
@@ -63,11 +63,11 @@ public class EmploymentInfo {
         this.skillId = skillId;
     }
 
-    public Integer getOccupation() {
+    public String getOccupation() {
         return occupation;
     }
 
-    public void setOccupation(Integer occupation) {
+    public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
 
