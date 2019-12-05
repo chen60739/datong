@@ -1,7 +1,6 @@
 package com.example.datong.dao;
 
 import com.example.datong.model.Admin;
-import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer adminId);
@@ -17,7 +16,10 @@ public interface AdminMapper {
     int updateByPrimaryKey(Admin record);
 
     //登录
-    Admin selectOne(@Param("adminPhone") String adminPhone, @Param("adminPassword")String adminPassword);
+    Admin selectOne(String adminPhone,String adminPassword);
+
+    Admin selectOne1(String adminPhone);
+
 
 
 
