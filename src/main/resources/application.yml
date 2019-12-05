@@ -1,4 +1,3 @@
-
 server:
   port: 8888
 spring:
@@ -7,3 +6,5 @@ spring:
     url: jdbc:mysql://localhost:3306/datong?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     username: root
     password: 802399
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
