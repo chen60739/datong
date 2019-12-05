@@ -69,13 +69,13 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">来本地时间</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="comeTime" class="layui-input" id="date" required  lay-verify="required">
+                                    <input type="text" name="cometime" class="layui-input" id="pdate" required  lay-verify="required">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">身份证号</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="idCard" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                                    <input type="text" name="idCard"  lay-verify="required|identity" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -83,8 +83,9 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">民族</label>
                                 <div class="layui-input-inline">
-                                    <select name="nationId" >
+                                    <select name="nationId"  lay-verify="required">
                                         <option value="">请选择民族</option>
+                                        <option th:each="nation:${dictionary.nation}" th:value="${nation.dictionaryId}" th:text="${nation.dictionaryName}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -92,13 +93,13 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">户籍</label>
                             <div class="layui-input-inline">
-                                <select name="quiz1">
+                                <select lay-filter="province" lay-verify="required">
                                     <option value="">请选择省</option>
-
+                                    <option th:each="province:${provinces}" th:value="${province.provinceCode}" th:text="${province.provinceName}"></option>
                                 </select>
                             </div>
                             <div class="layui-input-inline">
-                                <select name="householdCityCode">
+                                <select name="householdCityCode" class="layui-form" id="city"  lay-verify="required">
                                     <option value="">请选择市</option>
                                 </select>
                             </div>
@@ -106,28 +107,29 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">现居住地址</label>
                             <div class="layui-input-inline">
-                                <select name="quiz1">
-                                    <option value="">请选择省</option>
+                                <select>
+                                    <option value="">山西省</option>
                                 </select>
                             </div>
                             <div class="layui-input-inline">
-                                <select name="quiz2">
-                                    <option value="">请选择市</option>
+                                <select>
+                                    <option value="">大同市</option>
 
                                 </select>
                             </div>
                             <div class="layui-input-inline">
-                                <select name="quiz3">
+                                <select lay-filter="countyNow"  lay-verify="required">
                                     <option value="">请选择县/区</option>
+                                    <option th:each="county:${counties}" th:value="${county.countyCode}" th:text="${county.countyName}"></option>
                                 </select>
                             </div>
                             <div class="layui-input-inline">
-                                <select name="quiz4">
+                                <select id="townNow"  lay-verify="required">
                                     <option value="">请选择乡/镇</option>
                                 </select>
                             </div>
                             <div class="layui-input-inline">
-                                <input type="text" name="title" required  lay-verify="required" placeholder="详细地址" autocomplete="off" class="layui-input">
+                                <input type="text" required  lay-verify="required" placeholder="详细地址" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -151,8 +153,9 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">文化程度</label>
                                 <div class="layui-input-inline">
-                                    <select name="educationLevelId">
-                                        <option value="">请选择问题</option>
+                                    <select name="educationLevelId"  lay-verify="required">
+                                        <option value="">请选择</option>
+                                        <option th:each="edu:${dictionary.educationLevel}" th:value="${edu.dictionaryId}" th:text="${edu.dictionaryName}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -161,8 +164,9 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">政治面貌</label>
                                 <div class="layui-input-inline">
-                                    <select name="politicalOutlookId">
-                                        <option value="">请选择问题</option>
+                                    <select name="politicalOutlookId"  lay-verify="required">
+                                        <option value="">请选择</option>
+                                        <option th:each="outlook:${dictionary.politicalOutlook}" th:value="${outlook.dictionaryId}" th:text="${outlook.dictionaryName}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -171,8 +175,9 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">宗教信仰</label>
                                 <div class="layui-input-inline">
-                                    <select name="faithId">
-                                        <option value="">请选择问题</option>
+                                    <select name="faithId"  lay-verify="required">
+                                        <option value="">请选择</option>
+                                        <option th:each="faith:${dictionary.faith}" th:value="${faith.dictionaryId}" th:text="${faith.dictionaryName}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -184,14 +189,14 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">身高</label>
                                 <div class="layui-input-inline">
-                                    <input type="tel" name="height" required lay-verify="required" autocomplete="off" class="layui-input">
+                                    <input type="tel" name="height" lay-verify="required|number" autocomplete="off" class="layui-input">
                                 </div>
                                 <label class="layui-form-label">cm</label>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">体重</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="weight" required lay-verify="required" autocomplete="off" class="layui-input">
+                                    <input type="text" name="weight" required lay-verify="required|number" autocomplete="off" class="layui-input">
                                 </div>
                                 <label class="layui-form-label">公斤</label>
                             </div>
@@ -200,8 +205,9 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">血型</label>
                                 <div class="layui-input-inline">
-                                    <select name="bloodTypeId">
+                                    <select name="bloodTypeId"  lay-verify="required">
                                         <option value="">请选择血型</option>
+                                        <option th:each="blood:${dictionary.bloodType}" th:value="${blood.dictionaryId}" th:text="${blood.dictionaryName}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -210,9 +216,16 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">健康状况</label>
                                 <div class="layui-input-inline">
-                                    <select name="healthy">
+                                    <select name="healthy"  lay-verify="required" lay-filter="healthy">
                                         <option value="">请选择健康状况</option>
+                                        <option th:each="healthy:${dictionary.healthy}" th:value="${healthy.dictionaryId}" th:text="${healthy.dictionaryName}"></option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="display: none" id="disabilityCode">
+                                <label class="layui-form-label">残疾证编号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="disabilityCode" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -220,8 +233,9 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">从业状况</label>
                                 <div class="layui-input-inline">
-                                    <select name="employmentStateId">
+                                    <select name="employmentStateId"  lay-verify="required">
                                         <option value="">请选择从业状况</option>
+                                        <option th:each="emp:${dictionary.employmentState}" th:value="${emp.dictionaryId}" th:text="${emp.dictionaryName}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -230,9 +244,9 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">婚姻状况</label>
                                 <div class="layui-input-inline">
-                                    <select name="maritalStateId" lay-filter="marital">
+                                    <select name="maritalStateId"  lay-verify="required" lay-filter="marital">
                                         <option value="">请选择婚姻状况</option>
-                                        <option value="1">已婚</option>
+                                        <option th:each="mar:${dictionary.maritalState}" th:value="${mar.dictionaryId}" th:text="${mar.dictionaryName}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -240,12 +254,12 @@
                 </div>
                 </div>
 
-            <div class="layui-col-xs11" id="spouse">
-                <!--<div class="layui-form-item">
-                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                        <legend>配偶信息</legend>
-                    </fieldset>
-                </div>
+            <div class="layui-col-xs11" id="spouse" style="display: none">
+                <div class="layui-form-item">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>配偶信息</legend>
+                </fieldset>
+            </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">配偶姓名</label>
                     <div class="layui-input-block">
@@ -255,18 +269,18 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">配偶身份号码</label>
                     <div class="layui-input-block">
-                        <input type="text" name="spouseInCard" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                        <input type="text" name="spouseInCard" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">现居住详细地址</label>
                     <div class="layui-input-inline">
-                        <select name="quiz1">
+                        <select>
                             <option value="">请选择省</option>
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="quiz2">
+                        <select>
                             <option value="">请选择市</option>
                         </select>
                     </div>
@@ -285,6 +299,7 @@
                         <div class="layui-input-inline">
                             <select name="spouseEmploymentStateId">
                                 <option value="">请选择从业状况</option>
+                                <option th:each="emp:${dictionary.employmentState}" th:value="${emp.dictionaryId}" th:text="${emp.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
@@ -304,7 +319,7 @@
                             <input type="text" name="spousePhone" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                </div>-->
+                </div>
             </div>
 
             <div class="layui-col-xs11">
@@ -330,10 +345,11 @@
                         <td>
                             <select name="relationId">
                                 <option value="">关系</option>
+                                <option th:each="relation:${dictionary.relation}" th:value="${relation.dictionaryId}" th:text="${relation.dictionaryName}"></option>
                             </select>
                         </td>
                         <td>
-                            <input class="layui-input" name="memberIdCard" placeholder="身份证号"/>
+                            <input class="layui-input" id="idcard" name="memberIdCard" placeholder="身份证号"/>
                         </td>
                         <td>
                             <input class="layui-input" name="memberName" placeholder="姓名"/>
@@ -343,7 +359,7 @@
                             <input type="radio" name="memberSex" value="0" title="女" checked>
                         </td>
                         <td>
-                            <input type="text" class="layui-input" id="pdate" placeholder="出生日期">
+                            <input type="text" class="layui-input" id="birth"  placeholder="出生日期">
                         </td>
                         <td> <input type="radio" name="hasVaccinate" value="1" title="是">
                             <input type="radio" name="hasVaccinate" value="0" title="否" checked></td>
@@ -354,8 +370,8 @@
                     </tr>
                 </table>
             </div>
-            <div class="layui-col-xs11" id="planning">
-                <!--<div class="layui-form-item">
+            <div class="layui-col-xs11" id="planning" style="display: none">
+                <div class="layui-form-item">
                     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
                         <legend>计生信息</legend>
                     </fieldset>
@@ -364,28 +380,28 @@
                     <div class="layui-inline">
                     <label class="layui-form-label">夫妻同行</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="sex" value="是" title="是">
-                        <input type="radio" name="sex" value="否" title="否" checked>
+                        <input type="radio" name="isToghter" value="1" title="是">
+                        <input type="radio" name="isToghter" value="0" title="否" checked>
                     </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">婚育证明</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="有" title="有">
-                            <input type="radio" name="sex" value="无" title="无" checked>
+                            <input type="radio" name="hasProve" value="1" title="有">
+                            <input type="radio" name="hasProve" value="0" title="无" checked>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">婚育证编号</label>
                         <div class="layui-input-inline">
-                            <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                            <input type="tel" name="number"  autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">是否验证</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="是" title="是">
-                            <input type="radio" name="sex" value="否" title="否" checked>
+                            <input type="radio" name="isChecked" value="1" title="是">
+                            <input type="radio" name="isChecked" value="0" title="否" checked>
                         </div>
                     </div>
                 </div>
@@ -396,14 +412,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">生育子女数</label><label class="layui-form-label">男</label>
                         <div class="layui-input-inline">
-                            <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                            <input type="tel" name="boyNum" autocomplete="off" class="layui-input">
                         </div>
                         <label class="layui-form-label">人</label>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">女</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                            <input type="text" name="girlNum" autocomplete="off" class="layui-input">
                         </div>
                         <label class="layui-form-label">人</label>
                     </div>
@@ -412,68 +428,69 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">政策内</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                            <input type="text" name="insideNum"  autocomplete="off" class="layui-input">
                         </div>
                         <label class="layui-form-label">孩</label>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">政策外</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                            <input type="text" name="outsideNum" autocomplete="off" class="layui-input">
                         </div>
                         <label class="layui-form-label">孩</label>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">生育子女证</label>
+                        <label class="layui-form-label">独生育子女证</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="有" title="有">
-                            <input type="radio" name="sex" value="无" title="无" checked>
+                            <input type="radio" name="hasCertificate" value="1" title="有">
+                            <input type="radio" name="hasCertificate" value="0" title="无" checked>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">社会抚养费</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="已缴" title="已缴">
-                            <input type="radio" name="sex" value="未缴" title="未缴" checked>
+                            <input type="radio" name="isLevy" value="1" title="已缴">
+                            <input type="radio" name="isLevy" value="0" title="未缴" checked>
                         </div>
                     </div>
                 </div>
                 <div class="layui-form-item">
                 <label class="layui-form-label">怀孕避孕情况</label>
                 <div class="layui-input-inline">
-                    <select name="quiz">
-                        <option value="">请选择问题</option>
+                    <select name="pregnancyInfoId">
+                        <option value="">请选择</option>
+                        <option th:each="pregnant:${dictionary.pregnancyInfo}" th:value="${pregnant.dictionaryId}" th:text="${pregnant.dictionaryName}"></option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
                     <label class="layui-form-label">措施时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        <input type="text" name="measure" autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">当年生育子女</label>
                     <div class="layui-input-inline">
-                        <input type="radio" name="sex" value="男" title="男">
-                        <input type="radio" name="sex" value="女" title="女" checked>
+                        <input type="radio" name="childSex" value="1" title="男">
+                        <input type="radio" name="childSex" value="0" title="女" checked>
                     </div>
                     <div class="layui-input-inline">
                         <label class="layui-form-label">出生日期</label>
                         <div class="layui-input-block">
-                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                            <input type="text" name="childBirthdayStr" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">政策外</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="已缴" title="内">
-                            <input type="radio" name="sex" value="未缴" title="外" checked>
+                            <input type="radio" name="isInside" value="1" title="内">
+                            <input type="radio" name="isInside" value="0" title="外" checked>
                         </div>
                     </div>
-                </div>-->
+                </div>
             </div>
             <div class="layui-col-xs11">
                 <div class="layui-form-item">
@@ -491,32 +508,33 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">单位类型</label>
                         <div class="layui-input-inline">
-                            <select name="unitTypeId">
+                            <select name="unitTypeId"  lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="utype:${dictionary.unitType}" th:value="${utype.dictionaryId}" th:text="${utype.dictionaryName}">请选择</option>
                             </select>
                         </div>
                     </div>
                 </div>
-
                 <div class="layui-form-item">
                     <label class="layui-form-label">单位地址</label>
                     <div class="layui-input-inline">
-                        <select name="">
-                            <option value="">请选择省</option>
+                        <select>
+                            <option value="">山西省</option>
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="">
-                            <option value="">请选择市</option>
+                        <select>
+                            <option value="">大同市</option>
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="unitCountyCode">
+                        <select name="unitCountyCode"  lay-verify="required" lay-filter="countyUnit">
                             <option value="">请选择县/区</option>
+                            <option th:each="county:${counties}" th:value="${county.countyCode}" th:text="${county.countyName}"></option>
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="unitTownCode">
+                        <select name="unitTownCode"  lay-verify="required" id="townUnit">
                             <option value="">请选择乡/镇</option>
                         </select>
 
@@ -525,8 +543,6 @@
                         <input type="text" name="unitAddress" required  lay-verify="required" placeholder="详细地址" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-
-
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">组织机构代码</label>
@@ -547,18 +563,17 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="layui-form-item">
                     <label class="layui-form-label">劳动合同</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="contractYear" lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" name="contractYear" lay-verify="required|number" autocomplete="off" class="layui-input" placeholder="输入合同年限">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">保险</label>
                     <div class="layui-input-inline">
-                        <input type="checkbox" name="hobbies" value="神经病保险" title="神经病保险">
+                        <input type="checkbox"  lay-verify="required" name="insuranceIds" th:each="insurance:${dictionary.insurance}" th:value="${insurance.dictionaryId}" th:title="${insurance.dictionaryName}">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -577,14 +592,15 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">用工人数</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="workerNum" lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" name="workerNum" lay-verify="required|number" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">行业类别</label>
                         <div class="layui-input-inline">
-                            <select name="industryCategoryId">
+                            <select name="industryCategoryId"  lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="industry:${dictionary.industryCategory}" th:value="${industry.dictionaryId}" th:text="${industry.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
@@ -594,16 +610,18 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">职称</label>
                         <div class="layui-input-inline">
-                            <select name="positionalTitleId">
+                            <select name="positionalTitleId"  lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="title:${dictionary.positionalTitle}" th:value="${title.dictionaryId}" th:text="${title.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">职业技能等级</label>
                         <div class="layui-input-inline">
-                            <select name="skillId">
+                            <select name="skillId"  lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="skill:${dictionary.skill}" th:value="${skill.dictionaryId}" th:text="${skill.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
@@ -626,24 +644,27 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">居住方式</label>
                         <div class="layui-input-inline">
-                            <select name="livingStyleId">
+                            <select name="livingStyleId" lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="style:${dictionary.livingStyle}" th:value="${style.dictionaryId}" th:text="${style.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">居住事由</label>
                         <div class="layui-input-inline">
-                            <select name="reasonForResidenceId">
+                            <select name="reasonForResidenceId"  lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="reason:${dictionary.reasonForResidence}" th:value="${reason.dictionaryId}" th:text="${reason.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">房屋类别</label>
                         <div class="layui-input-inline">
-                            <select name="houseType">
+                            <select name="houseTypeId"  lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="houseType:${dictionary.houseType}" th:value="${houseType.dictionaryId}" th:text="${houseType.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
@@ -652,22 +673,23 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">房屋地址</label>
                     <div class="layui-input-inline">
-                        <select name="quiz1">
-                            <option value="">请选择省</option>
+                        <select>
+                            <option value="">山西省</option>
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="quiz2">
-                            <option value="">请选择市</option>
+                        <select>
+                            <option value="">大同市</option>
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="quiz3">
+                        <select lay-filter="countyHouse"  lay-verify="required">
                             <option value="">请选择县/区</option>
+                            <option th:each="county:${counties}" th:value="${county.countyCode}" th:text="${county.countyName}"></option>
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="residentialTownCode">
+                        <select name="residentialTownCode" id="townHouse"  lay-verify="required">
                             <option value="">请选择乡/镇</option>
                         </select>
                     </div>
@@ -690,18 +712,20 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="lessorType">
+                                    <select name="lessorType"  lay-verify="required">
                                         <option value="">请选择出租人情况</option>
+                                        <option value="1">房东</option>
+                                        <option value="0">代理人</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input name="lessorName" class="layui-input">
+                                    <input name="lessorName"  lay-verify="required" class="layui-input">
                                 </td>
                                 <td>
-                                    <input name="lessorPhone" class="layui-input">
+                                    <input name="lessorPhone"  lay-verify="required|phone" class="layui-input">
                                 </td>
                                 <td>
-                                    <input name="lessorIdCard" class="layui-input">
+                                    <input name="lessorIdCard"  lay-verify="required|identity" class="layui-input">
                                 </td>
                                 <td>
                                     <input type="radio" name="isSign" value="1" title="是">
@@ -715,16 +739,18 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">房屋类型</label>
                         <div class="layui-input-inline">
-                            <select name="houseGener">
+                            <select name="houseGener"  lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="gener:${dictionary.houseGener}" th:value="${gener.dictionaryId}" th:text="${gener.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">房屋用途</label>
                         <div class="layui-input-inline">
-                            <select name="houseUse">
+                            <select name="houseUse"  lay-verify="required">
                                 <option value="">请选择</option>
+                                <option th:each="use:${dictionary.houseUse}" th:value="${use.dictionaryId}" th:text="${use.dictionaryName}"></option>
                             </select>
                         </div>
                     </div>
@@ -735,7 +761,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
@@ -844,35 +869,17 @@
             }
         });
 
-
-
-        //监听指定开关
-        form.on('switch(switchTest)', function(data){
-            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
         //监听提交
         form.on('submit(demo1)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
+            $.post("/addPerson",data.field,function (res) {
+                alert("yes");
+                
             })
-            return false;
-        });
 
-        //表单赋值
-        layui.$('#LAY-component-form-setval').on('click', function(){
-            form.val('example', {
-                "username": "贤心" // "name": "value"
-                ,"password": "123456"
-                ,"interest": 1
-                ,"like[write]": true //复选框选中状态
-                ,"close": true //开关状态
-                ,"sex": "女"
-                ,"desc": "我爱 layui"
-            });
+            /*layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })*/
+            return false;
         });
 
         //表单取值
@@ -911,196 +918,71 @@
         });
 
         form.on('select(marital)', function(data){
-            if(data.value==1){
-                $("#planning").append("<div class=\"layui-form-item\">\n" +
-                    "                    <fieldset class=\"layui-elem-field layui-field-title\" style=\"margin-top: 20px;\">\n" +
-                    "                        <legend>计生信息</legend>\n" +
-                    "                    </fieldset>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                    <label class=\"layui-form-label\">夫妻同行</label>\n" +
-                    "                    <div class=\"layui-input-block\">\n" +
-                    "                        <input type=\"radio\" name=\"sex\" value=\"是\" title=\"是\">\n" +
-                    "                        <input type=\"radio\" name=\"sex\" value=\"否\" title=\"否\" checked>\n" +
-                    "                    </div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">婚育证明</label>\n" +
-                    "                        <div class=\"layui-input-block\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"有\" title=\"有\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"无\" title=\"无\" checked>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">婚育证编号</label>\n" +
-                    "                        <div class=\"layui-input-inline\">\n" +
-                    "                            <input type=\"tel\" name=\"phone\" lay-verify=\"required|phone\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">是否验证</label>\n" +
-                    "                        <div class=\"layui-input-block\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"是\" title=\"是\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"否\" title=\"否\" checked>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <legend>生育情况</legend>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">生育子女数</label><label class=\"layui-form-label\">男</label>\n" +
-                    "                        <div class=\"layui-input-inline\">\n" +
-                    "                            <input type=\"tel\" name=\"phone\" lay-verify=\"required|phone\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                        </div>\n" +
-                    "                        <label class=\"layui-form-label\">人</label>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">女</label>\n" +
-                    "                        <div class=\"layui-input-inline\">\n" +
-                    "                            <input type=\"text\" name=\"email\" lay-verify=\"email\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                        </div>\n" +
-                    "                        <label class=\"layui-form-label\">人</label>\n" +
-                    "                    </div>\n" +
-                    "                    </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">政策内</label>\n" +
-                    "                        <div class=\"layui-input-inline\">\n" +
-                    "                            <input type=\"text\" name=\"email\" lay-verify=\"email\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                        </div>\n" +
-                    "                        <label class=\"layui-form-label\">孩</label>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">政策外</label>\n" +
-                    "                        <div class=\"layui-input-inline\">\n" +
-                    "                            <input type=\"text\" name=\"email\" lay-verify=\"email\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                        </div>\n" +
-                    "                        <label class=\"layui-form-label\">孩</label>\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">生育子女证</label>\n" +
-                    "                        <div class=\"layui-input-block\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"有\" title=\"有\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"无\" title=\"无\" checked>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">社会抚养费</label>\n" +
-                    "                        <div class=\"layui-input-block\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"已缴\" title=\"已缴\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"未缴\" title=\"未缴\" checked>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                <label class=\"layui-form-label\">怀孕避孕情况</label>\n" +
-                    "                <div class=\"layui-input-inline\">\n" +
-                    "                    <select name=\"quiz\">\n" +
-                    "                        <option value=\"\">请选择问题</option>\n" +
-                    "                    </select>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-input-inline\">\n" +
-                    "                    <label class=\"layui-form-label\">措施时间</label>\n" +
-                    "                    <div class=\"layui-input-block\">\n" +
-                    "                        <input type=\"text\" name=\"email\" lay-verify=\"email\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "            </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <label class=\"layui-form-label\">当年生育子女</label>\n" +
-                    "                    <div class=\"layui-input-inline\">\n" +
-                    "                        <input type=\"radio\" name=\"sex\" value=\"男\" title=\"男\">\n" +
-                    "                        <input type=\"radio\" name=\"sex\" value=\"女\" title=\"女\" checked>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-input-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">出生日期</label>\n" +
-                    "                        <div class=\"layui-input-block\">\n" +
-                    "                            <input type=\"text\" name=\"email\" lay-verify=\"email\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">政策外</label>\n" +
-                    "                        <div class=\"layui-input-block\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"已缴\" title=\"内\">\n" +
-                    "                            <input type=\"radio\" name=\"sex\" value=\"未缴\" title=\"外\" checked>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>");
-                $("#spouse").append("<div class=\"layui-form-item\">\n" +
-                    "                    <fieldset class=\"layui-elem-field layui-field-title\" style=\"margin-top: 20px;\">\n" +
-                    "                        <legend>配偶信息</legend>\n" +
-                    "                    </fieldset>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <label class=\"layui-form-label\">配偶姓名</label>\n" +
-                    "                    <div class=\"layui-input-block\">\n" +
-                    "                        <input type=\"text\" name=\"spouseName\" placeholder=\"请输入姓名\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <label class=\"layui-form-label\">配偶身份号码</label>\n" +
-                    "                    <div class=\"layui-input-block\">\n" +
-                    "                        <input type=\"text\" name=\"spouseInCard\" required  lay-verify=\"required\" placeholder=\"请输入姓名\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <label class=\"layui-form-label\">现居住详细地址</label>\n" +
-                    "                    <div class=\"layui-input-inline\">\n" +
-                    "                        <select name=\"quiz1\">\n" +
-                    "                            <option value=\"\">请选择省</option>\n" +
-                    "                        </select>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-input-inline\">\n" +
-                    "                        <select name=\"quiz2\">\n" +
-                    "                            <option value=\"\">请选择市</option>\n" +
-                    "                        </select>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-input-inline\">\n" +
-                    "                        <select name=\"spouseCountyCode\">\n" +
-                    "                            <option value=\"\">请选择县/区</option>\n" +
-                    "                        </select>\n" +
-                    "                    </div>\n" +
-                    "                    <div class=\"layui-input-inline\">\n" +
-                    "                        <input type=\"text\" name=\"spouseAddress\" placeholder=\"详细地址\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">从业状况</label>\n" +
-                    "                        <div class=\"layui-input-inline\">\n" +
-                    "                            <select name=\"spouseEmploymentStateId\">\n" +
-                    "                                <option value=\"\">请选择从业状况</option>\n" +
-                    "                            </select>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">工作单位</label>\n" +
-                    "                        <div class=\"layui-input-inline\">\n" +
-                    "                            <input type=\"text\" name=\"spouseWorkUnit\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "                <div class=\"layui-form-item\">\n" +
-                    "                    <div class=\"layui-inline\">\n" +
-                    "                        <label class=\"layui-form-label\">本人联系电话</label>\n" +
-                    "                        <div class=\"layui-input-inline\">\n" +
-                    "                            <input type=\"text\" name=\"spousePhone\" autocomplete=\"off\" class=\"layui-input\">\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>")
+            if(data.value==602){
+                $("#planning").css('display','block');
+                $("#spouse").css('display','block');
             }else {
-                $("#spouse").empty();
-                $("#planning").empty();
+                $("#spouse").css('display','none');
+                $("#planning").css('display','none');
             }; //得到被选中的值
         });
 
+        form.on('select(healthy)',function (data) {
+            if (data.value==1803){
+                $("#disabilityCode").css('display','inline-block');
+            }else {
+                $("#disabilityCode").css('display','none');
+            }
+        })
+
+        form.on('select(province)',function (data) {
+            $.getJSON('/getCity',{'provinceCode':data.value},function (res) {
+                $("#city").empty();
+                for(var i=0;i<res.length;i++){
+                    $("#city").append("<option value='"+res[i].cityCode+"'>"+res[i].cityName+"</option>")
+                }
+                form.render('select');
+            });
+        })
+
+        form.on('select(countyNow)',function (data) {
+            $.getJSON('/getTown',{'countyCode':data.value},function (res) {
+                $("#townNow").empty();
+                for(var i=0;i<res.length;i++){
+                    $("#townNow").append("<option value='"+res[i].townCode+"'>"+res[i].townName+"</option>")
+                }
+                form.render('select');
+            });
+        })
+
+        form.on('select(countyUnit)',function (data) {
+            $.getJSON('/getTown',{'countyCode':data.value},function (res) {
+                $("#townUnit").empty();
+                for(var i=0;i<res.length;i++){
+                    $("#townUnit").append("<option value='"+res[i].townCode+"'>"+res[i].townName+"</option>")
+                }
+                form.render('select');
+            });
+        })
+
+        form.on('select(countyHouse)',function (data) {
+            $.getJSON('/getTown',{'countyCode':data.value},function (res) {
+                $("#townHouse").empty();
+                for(var i=0;i<res.length;i++){
+                    $("#townHouse").append("<option value='"+res[i].townCode+"'>"+res[i].townName+"</option>")
+                }
+                form.render('select');
+            });
+        })
+
+        $("#idcard").blur(function () {
+            var IDNumber = $("#idcard").val();
+            var strYear = IDNumber.substring(6,10);
+            var strMonth = IDNumber.substring(10,12);
+            var strDay = IDNumber.substring(12,14);
+            var birth = strYear+"-"+strMonth+"-"+strDay;
+            $("#birth").val(birth);
+        })
     });
 </script>
 </html>
