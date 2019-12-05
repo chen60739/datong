@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.datong.dao.SpouseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.SpouseInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="spouse_name" jdbcType="VARCHAR" property="spouseName" />
+    <result column="spouse_id_card" jdbcType="CHAR" property="spouseIdCard" />
+    <result column="spouse_county_code" jdbcType="INTEGER" property="spouseCountyCode" />
+    <result column="spouse_address" jdbcType="VARCHAR" property="spouseAddress" />
+    <result column="spouse_employment_state_id" jdbcType="INTEGER" property="spouseEmploymentStateId" />
+    <result column="spouse_work_unit" jdbcType="VARCHAR" property="spouseWorkUnit" />
+    <result column="spouse_phone" jdbcType="CHAR" property="spousePhone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, p_id, spouse_name, spouse_id_card, spouse_county_code, spouse_address,
+    spouse_employment_state_id, spouse_work_unit, spouse_phone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spouse_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from spouse_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.datong.model.SpouseInfo">
+    insert into spouse_info (p_id, spouse_name,
+      spouse_id_card, spouse_county_code, spouse_address,
+      spouse_employment_state_id, spouse_work_unit, spouse_phone
+      )
+    values ( #{pId,jdbcType=INTEGER}, #{spouseName,jdbcType=VARCHAR},
+      #{spouseIdCard,jdbcType=CHAR}, #{spouseCountyCode,jdbcType=INTEGER},
+      #{spouseAddress,jdbcType=VARCHAR}, #{spouseEmploymentStateId,jdbcType=INTEGER},
+      #{spouseWorkUnit,jdbcType=VARCHAR}, #{spousePhone,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.datong.model.SpouseInfo">
+    insert into spouse_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="spouseName != null">
+        spouse_name,
+      </if>
+      <if test="spouseIdCard != null">
+        spouse_id_card,
+      </if>
+      <if test="spouseCountyCode != null">
+        spouse_county_code,
+      </if>
+      <if test="spouseAddress != null">
+        spouse_address,
+      </if>
+      <if test="spouseEmploymentStateId != null">
+        spouse_employment_state_id,
+      </if>
+      <if test="spouseEorkUnit != null">
+        spouse_work_unit,
+      </if>
+      <if test="spousePhone != null">
+        spouse_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="spouseName != null">
+        #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCard != null">
+        #{spouseIdCard,jdbcType=CHAR},
+      </if>
+      <if test="spouseCountyCode != null">
+        #{spouseCountyCode,jdbcType=INTEGER},
+      </if>
+      <if test="spouseAddress != null">
+        #{spouseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseEmploymentStateId != null">
+        #{spouseEmploymentStateId,jdbcType=INTEGER},
+      </if>
+      <if test="spouseWorkUnit != null">
+        #{spouseWorkUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="spousePhone != null">
+        #{spousePhone,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.SpouseInfo">
+    update spouse_info
+    <set>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="spouseName != null">
+        spouse_name = #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCard != null">
+        spouse_id_card = #{spouseIdCard,jdbcType=CHAR},
+      </if>
+      <if test="spouseCountyCode != null">
+        spouse_county_code = #{spouseCountyCode,jdbcType=INTEGER},
+      </if>
+      <if test="spouseAddress != null">
+        spouse_address = #{spouseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseEmploymentStateId != null">
+        spouse_employment_state_id = #{spouseEmploymentStateId,jdbcType=INTEGER},
+      </if>
+      <if test="spouseWorkUnit != null">
+        spouse_work_unit = #{spouseWorkUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="spousePhone != null">
+        spouse_phone = #{spousePhone,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.SpouseInfo">
+    update spouse_info
+    set p_id = #{pId,jdbcType=INTEGER},
+      spouse_name = #{spouseName,jdbcType=VARCHAR},
+      spouse_id_card = #{spouseIdCard,jdbcType=CHAR},
+      spouse_county_code = #{spouseCountyCode,jdbcType=INTEGER},
+      spouse_address = #{spouseAddress,jdbcType=VARCHAR},
+      spouse_employment_state_id = #{spouseEmploymentStateId,jdbcType=INTEGER},
+      spouse_work_unit = #{spouseWorkUnit,jdbcType=VARCHAR},
+      spouse_phone = #{spousePhone,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

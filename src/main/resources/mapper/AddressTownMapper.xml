@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.datong.dao.AddressTownMapper">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.AddressTown">
+    <id column="town_id" jdbcType="INTEGER" property="townId" />
+    <result column="town_code" jdbcType="VARCHAR" property="townCode" />
+    <result column="town_name" jdbcType="VARCHAR" property="townName" />
+    <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    town_id, town_code, town_name, county_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from address_town
+    where town_id = #{townId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from address_town
+    where town_id = #{townId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.datong.model.AddressTown">
+    insert into address_town (town_id, town_code, town_name, 
+      county_code)
+    values (#{townId,jdbcType=INTEGER}, #{townCode,jdbcType=VARCHAR}, #{townName,jdbcType=VARCHAR}, 
+      #{countyCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.datong.model.AddressTown">
+    insert into address_town
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="townId != null">
+        town_id,
+      </if>
+      <if test="townCode != null">
+        town_code,
+      </if>
+      <if test="townName != null">
+        town_name,
+      </if>
+      <if test="countyCode != null">
+        county_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="townId != null">
+        #{townId,jdbcType=INTEGER},
+      </if>
+      <if test="townCode != null">
+        #{townCode,jdbcType=VARCHAR},
+      </if>
+      <if test="townName != null">
+        #{townName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null">
+        #{countyCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.AddressTown">
+    update address_town
+    <set>
+      <if test="townCode != null">
+        town_code = #{townCode,jdbcType=VARCHAR},
+      </if>
+      <if test="townName != null">
+        town_name = #{townName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null">
+        county_code = #{countyCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where town_id = #{townId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.AddressTown">
+    update address_town
+    set town_code = #{townCode,jdbcType=VARCHAR},
+      town_name = #{townName,jdbcType=VARCHAR},
+      county_code = #{countyCode,jdbcType=VARCHAR}
+    where town_id = #{townId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByCountyCode" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from address_town
+    where county_code = #{townId,jdbcType=VARCHAR}
+  </select>
+</mapper>

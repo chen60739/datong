@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.datong.dao.ResidentialInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.ResidentialInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="residential_town_code" jdbcType="VARCHAR" property="residentialTownCode" />
+    <result column="residential_addres" jdbcType="VARCHAR" property="residentialAddres" />
+    <result column="living_style_id" jdbcType="INTEGER" property="livingStyleId" />
+    <result column="reason_for_residence_id" jdbcType="INTEGER" property="reasonForResidenceId" />
+    <result column="house_type_id" jdbcType="INTEGER" property="houseTypeId" />
+    <result column="house_gener" jdbcType="INTEGER" property="houseGener" />
+    <result column="house_use" jdbcType="INTEGER" property="houseUse" />
+    <result column="message_person" jdbcType="VARCHAR" property="messagePerson" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, p_id, residential_town_code, residential_addres, living_style_id, reason_for_residence_id, 
+    house_type_id, house_gener, house_use, message_person
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from residential_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from residential_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.datong.model.ResidentialInfo">
+    insert into residential_info (id, p_id, residential_town_code, 
+      residential_addres, living_style_id, reason_for_residence_id, 
+      house_type_id, house_gener, house_use, 
+      message_person)
+    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{residentialTownCode,jdbcType=VARCHAR}, 
+      #{residentialAddres,jdbcType=VARCHAR}, #{livingStyleId,jdbcType=INTEGER}, #{reasonForResidenceId,jdbcType=INTEGER}, 
+      #{houseTypeId,jdbcType=INTEGER}, #{houseGener,jdbcType=INTEGER}, #{houseUse,jdbcType=INTEGER}, 
+      #{messagePerson,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.datong.model.ResidentialInfo">
+    insert into residential_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="residentialTownCode != null">
+        residential_town_code,
+      </if>
+      <if test="residentialAddres != null">
+        residential_addres,
+      </if>
+      <if test="livingStyleId != null">
+        living_style_id,
+      </if>
+      <if test="reasonForResidenceId != null">
+        reason_for_residence_id,
+      </if>
+      <if test="houseTypeId != null">
+        house_type_id,
+      </if>
+      <if test="houseGener != null">
+        house_gener,
+      </if>
+      <if test="houseUse != null">
+        house_use,
+      </if>
+      <if test="messagePerson != null">
+        message_person,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="residentialTownCode != null">
+        #{residentialTownCode,jdbcType=VARCHAR},
+      </if>
+      <if test="residentialAddres != null">
+        #{residentialAddres,jdbcType=VARCHAR},
+      </if>
+      <if test="livingStyleId != null">
+        #{livingStyleId,jdbcType=INTEGER},
+      </if>
+      <if test="reasonForResidenceId != null">
+        #{reasonForResidenceId,jdbcType=INTEGER},
+      </if>
+      <if test="houseTypeId != null">
+        #{houseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="houseGener != null">
+        #{houseGener,jdbcType=INTEGER},
+      </if>
+      <if test="houseUse != null">
+        #{houseUse,jdbcType=INTEGER},
+      </if>
+      <if test="messagePerson != null">
+        #{messagePerson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.ResidentialInfo">
+    update residential_info
+    <set>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="residentialTownCode != null">
+        residential_town_code = #{residentialTownCode,jdbcType=VARCHAR},
+      </if>
+      <if test="residentialAddres != null">
+        residential_addres = #{residentialAddres,jdbcType=VARCHAR},
+      </if>
+      <if test="livingStyleId != null">
+        living_style_id = #{livingStyleId,jdbcType=INTEGER},
+      </if>
+      <if test="reasonForResidenceId != null">
+        reason_for_residence_id = #{reasonForResidenceId,jdbcType=INTEGER},
+      </if>
+      <if test="houseTypeId != null">
+        house_type_id = #{houseTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="houseGener != null">
+        house_gener = #{houseGener,jdbcType=INTEGER},
+      </if>
+      <if test="houseUse != null">
+        house_use = #{houseUse,jdbcType=INTEGER},
+      </if>
+      <if test="messagePerson != null">
+        message_person = #{messagePerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.ResidentialInfo">
+    update residential_info
+    set p_id = #{pId,jdbcType=INTEGER},
+      residential_town_code = #{residentialTownCode,jdbcType=VARCHAR},
+      residential_addres = #{residentialAddres,jdbcType=VARCHAR},
+      living_style_id = #{livingStyleId,jdbcType=INTEGER},
+      reason_for_residence_id = #{reasonForResidenceId,jdbcType=INTEGER},
+      house_type_id = #{houseTypeId,jdbcType=INTEGER},
+      house_gener = #{houseGener,jdbcType=INTEGER},
+      house_use = #{houseUse,jdbcType=INTEGER},
+      message_person = #{messagePerson,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
