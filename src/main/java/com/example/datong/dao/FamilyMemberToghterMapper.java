@@ -1,6 +1,6 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.FamilyMemberToghter;
+import com.example.datong.model.FamilyMemberToghter;
 
 public interface FamilyMemberToghterMapper {
     int deleteByPrimaryKey(Integer id);

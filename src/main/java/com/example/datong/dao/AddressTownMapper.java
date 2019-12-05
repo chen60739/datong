@@ -1,7 +1,11 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.AddressTown;
+import com.example.datong.model.AddressTown;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+@Mapper
 public interface AddressTownMapper {
     int deleteByPrimaryKey(Integer townId);
 
@@ -14,4 +18,6 @@ public interface AddressTownMapper {
     int updateByPrimaryKeySelective(AddressTown record);
 
     int updateByPrimaryKey(AddressTown record);
+
+    List<AddressTown> selectByCountyCode(String countyCode);
 }
