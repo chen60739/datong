@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>信息统计管理</title>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div class="layui-body">
+<div id="main" style="width: 600px;height:400px;"></div>
+<input type="hidden" th:value="${provinces}" id="provinces"/>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var rs=$("#provinces").val();
+        var ccc =rs.substring(1,rs.length-1);
+        var str = ccc.split(', ');
+        var ss=[[${rs}]];
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '流动信息人口信息统计'
+            },
+            tooltip: {},
+            legend: {
+                data:['省份']
+            },
+            xAxis: {
+                data: str
+            },
+            yAxis: {},
+            series: [{
+                name: '省份',
+                type: 'bar',
+                data: ss
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    })
+    // 基于准备好的dom，初始化echarts实例
+
+
+</script>
+</body>
+</html>
