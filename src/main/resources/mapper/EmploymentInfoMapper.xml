@@ -8,7 +8,7 @@
     <result column="contract_year" jdbcType="INTEGER" property="contractYear" />
     <result column="positional_title_id" jdbcType="INTEGER" property="positionalTitleId" />
     <result column="skill_id" jdbcType="INTEGER" property="skillId" />
-    <result column="occupation" jdbcType="INTEGER" property="occupation" />
+    <result column="occupation" jdbcType="VARCHAR" property="occupation" />
   </resultMap>
   <sql id="Base_Column_List">
     id, p_id, company_id, contract_year, positional_title_id, skill_id, occupation
@@ -29,7 +29,7 @@
       occupation)
     values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
       #{contractYear,jdbcType=INTEGER}, #{positionalTitleId,jdbcType=INTEGER}, #{skillId,jdbcType=INTEGER}, 
-      #{occupation,jdbcType=INTEGER})
+      #{occupation,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.datong.model.EmploymentInfo">
     insert into employment_info
@@ -76,7 +76,7 @@
         #{skillId,jdbcType=INTEGER},
       </if>
       <if test="occupation != null">
-        #{occupation,jdbcType=INTEGER},
+        #{occupation,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -99,7 +99,7 @@
         skill_id = #{skillId,jdbcType=INTEGER},
       </if>
       <if test="occupation != null">
-        occupation = #{occupation,jdbcType=INTEGER},
+        occupation = #{occupation,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -111,7 +111,7 @@
       contract_year = #{contractYear,jdbcType=INTEGER},
       positional_title_id = #{positionalTitleId,jdbcType=INTEGER},
       skill_id = #{skillId,jdbcType=INTEGER},
-      occupation = #{occupation,jdbcType=INTEGER}
+      occupation = #{occupation,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
