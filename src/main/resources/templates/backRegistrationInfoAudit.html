@@ -7,8 +7,10 @@
     <meta name="renderer" content="webkit">
     <link rel="stylesheet" href="plugs/layui/css/layui.css">
     <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+    <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
     <script src="/plugs/layui/layui.js"></script>
     <script type="text/javascript" src="plugs/layui/xadmin.js"></script>
+
 </head>
 <body class="layui-layout-body">
     <div class="layui-body">
@@ -21,8 +23,6 @@
                 </div>
             </div>
             <button type="button" class="layui-btn">搜索</button>
-            <button type="button" class="layui-btn">通过审核</button>
-            <button type="button" class="layui-btn">不通过</button>
         </div>
         <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
         <table class="layui-hide" id="test"></table>
@@ -35,16 +35,27 @@
 
     });
 </script>
+
 </body>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看详情</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" >查看详情</a>
 </script>
+<script type="text/html" id="toolbarDemo">
+    <button class="layui-btn">
+        <i class="layui-icon" lay-event="pass" >通过审核</i>
+    </button>
+    <button class="layui-btn">
+    <i class="layui-icon" lay-event="noPass" >不通过</i>
+    </button>
+</script>
+
 <script type="text/javascript"  th:inline="none">
     layui.use('table', function(){
         var table = layui.table;
         //方法级渲染
         table.render({
             elem: '#LAY_table_user'
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,url: '/backFindFloatInfo'
             ,cols: [[
                 {checkbox: true, fixed: true}
@@ -85,9 +96,68 @@
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
+        //头工具栏事件
+        table.on('toolbar(user)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'pass'://通过按钮
+                    var tate = checkStatus.data;
+                   // layer.alert(JSON.stringify(tate.id));
+                    var id=tate[0].id;//获取的id
+                    $.ajax({
+                        type:'get',
+                        url:'/toPass',
+                        data:{'id':id},
+                        success:function (data) {
+                            if(data==1){
+                                layer.msg('通过');
+                            }else{
+                                layer.msg('操作失败');
+                            }
+                        }
+                    })
+                    break;
+                case 'noPass'://不通过按钮
+                    var tate = checkStatus.data;
+                    var id=tate[0].id;
+                    layer.open({
+                        type:2,
+                        skin:'demo-class',
+                        title:'不通过',
+                        maxmin:true,
+                        shadeClose:true,
+                        area:['600px','400px'],
+                        content:'register_person?id='+id,//弹框路径+页面自己写，方法路径自己加一下
+                    });
+                    break;
+                //自定义头工具栏右侧图标 - 提示
+
+            };
+        });
+
+
+        //监听行工具事件
+        table.on('tool(user)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'detail'){
+                layer.open({
+                    type: 2,
+                    skin: "demo-class",
+                    title: '详情',
+                    maxmin: true,
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['1000px', '570px'],
+                    content: '/register_person?id='+data.id,//跳转到弹窗的方法和他的id
+                });
+            }
+        });
     });
 
 
+
+</script>
+<script>
 
 </script>
 </html>
