@@ -71,4 +71,17 @@ public class Admin {
     public void setPower(Integer power) {
         this.power = power;
     }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "adminId=" + adminId +
+                ", adminPhone='" + adminPhone + '\'' +
+                ", adminPassword='" + adminPassword + '\'' +
+                ", adminName='" + adminName + '\'' +
+                ", townCode='" + townCode + '\'' +
+                ", countyCode='" + countyCode + '\'' +
+                ", power=" + power +
+                '}';
+    }
 }
