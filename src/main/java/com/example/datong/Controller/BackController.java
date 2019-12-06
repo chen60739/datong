@@ -5,6 +5,7 @@ import com.example.datong.model.FloatingPopulation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
@@ -121,7 +122,10 @@ public class BackController {
 
     //个人注册页面或者回显页面
     @GetMapping("/register_person")
-    public String registerPerson(){ return "register_person";}
+    public String registerPerson(Integer id){
+        System.out.println("进入方法内");
+        System.out.println(id);
+        return "register_person";}
     //流动人口信息跳转页面
     @GetMapping("/back_statis")
     public String toBackStatis(Model model){
@@ -140,4 +144,18 @@ public class BackController {
         model.addAttribute("rs",rs);
         model.addAttribute("provinces",list);
         return "information_statistics"; }
+        //审核通过
+        @GetMapping("/toPass")
+        @ResponseBody
+        public int pass(@RequestParam("id") Integer id){
+        System.out.println(id);
+        int insert=1;
+            return insert;
+        }
+        //不通过
+        @GetMapping("/noPass")
+        @ResponseBody
+        public String noPass(){
+            return null;
+        }
 }
