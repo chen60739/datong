@@ -30,4 +30,13 @@ public class AddressProvince {
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName == null ? null : provinceName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "AddressProvince{" +
+                "provinceId=" + provinceId +
+                ", provinceCode='" + provinceCode + '\'' +
+                ", provinceName='" + provinceName + '\'' +
+                '}';
+    }
 }

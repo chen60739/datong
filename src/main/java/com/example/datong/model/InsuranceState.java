@@ -8,6 +8,14 @@ public class InsuranceState {
     //保险类型id
     private Integer insuranceId;
 
+    public InsuranceState() {
+    }
+
+    public InsuranceState(Integer pId, Integer insuranceId) {
+        this.pId = pId;
+        this.insuranceId = insuranceId;
+    }
+
     public Integer getId() {
         return id;
     }
