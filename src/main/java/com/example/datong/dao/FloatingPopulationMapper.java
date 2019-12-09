@@ -16,4 +16,6 @@ public interface FloatingPopulationMapper {
     int updateByPrimaryKeySelective(FloatingPopulation record);
 
     int updateByPrimaryKey(FloatingPopulation record);
+    //根据省份查询人数
+    int selectCountByProvince(String provinceCode);
 }
