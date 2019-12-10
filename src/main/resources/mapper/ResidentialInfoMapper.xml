@@ -28,11 +28,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.ResidentialInfo">
-    insert into residential_info (id, p_id, residential_town_code, 
+    insert into residential_info (p_id, residential_town_code,
       residential_addres, living_style_id, reason_for_residence_id, 
       house_type_id, house_gener, house_use, 
       message_person)
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{residentialTownCode,jdbcType=VARCHAR}, 
+    values (#{pId,jdbcType=INTEGER}, #{residentialTownCode,jdbcType=VARCHAR},
       #{residentialAddres,jdbcType=VARCHAR}, #{livingStyleId,jdbcType=INTEGER}, #{reasonForResidenceId,jdbcType=INTEGER}, 
       #{houseTypeId,jdbcType=INTEGER}, #{houseGener,jdbcType=INTEGER}, #{houseUse,jdbcType=INTEGER}, 
       #{messagePerson,jdbcType=VARCHAR})

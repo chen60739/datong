@@ -22,9 +22,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.FertilityInfo">
-    insert into fertility_info (id, p_id, child_sex, 
+    insert into fertility_info (p_id, child_sex,
       child_birthday, is_inside)
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{childSex,jdbcType=BIT}, 
+    values (#{pId,jdbcType=INTEGER}, #{childSex,jdbcType=BIT},
       #{childBirthday,jdbcType=DATE}, #{isInside,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.example.datong.model.FertilityInfo">

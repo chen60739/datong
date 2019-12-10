@@ -24,10 +24,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.EmploymentInfo">
-    insert into employment_info (id, p_id, company_id, 
+    insert into employment_info (p_id, company_id,
       contract_year, positional_title_id, skill_id, 
       occupation)
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
+    values (#{pId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER},
       #{contractYear,jdbcType=INTEGER}, #{positionalTitleId,jdbcType=INTEGER}, #{skillId,jdbcType=INTEGER}, 
       #{occupation,jdbcType=VARCHAR})
   </insert>

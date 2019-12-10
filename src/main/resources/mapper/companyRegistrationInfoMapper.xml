@@ -41,13 +41,13 @@
       unit_type_id, unit_address, unit_num, 
       unit_social, industry_category_id, organization_code, 
       legal_person_name, worker_num, gmt_create, 
-      gmt_modified, is_checked)
+      gmt_modified)
     values (#{unitName,jdbcType=VARCHAR}, #{unitPhone,jdbcType=CHAR},
       #{password,jdbcType=VARCHAR}, #{unitCountyCode,jdbcType=VARCHAR}, #{unitTownCode,jdbcType=VARCHAR}, 
       #{unitTypeId,jdbcType=INTEGER}, #{unitAddress,jdbcType=VARCHAR}, #{unitNum,jdbcType=VARCHAR}, 
       #{unitSocial,jdbcType=VARCHAR}, #{industryCategoryId,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, 
       #{legalPersonName,jdbcType=VARCHAR}, #{workerNum,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{isChecked,jdbcType=INTEGER})
+      #{gmtModified,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     insert into company_registration_info

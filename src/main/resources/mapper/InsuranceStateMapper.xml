@@ -20,9 +20,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.InsuranceState">
-    insert into insurance_state (id, p_id, insurance_id
+    insert into insurance_state (p_id, insurance_id
       )
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{insuranceId,jdbcType=INTEGER}
+    values (#{pId,jdbcType=INTEGER}, #{insuranceId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.datong.model.InsuranceState">
