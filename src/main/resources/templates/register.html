@@ -19,7 +19,7 @@
                 <label for="phone" class="layui-form-label">
                     <span class="x-red">*</span>手机号</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="phone" name="phone" required="" lay-verify="phone" autocomplete="off" class="layui-input"></div>
+                    <input type="text" id="phone" name="unitPhone" required="" lay-verify="phone|username" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
                 <label for="password" class="layui-form-label">
@@ -31,7 +31,7 @@
                 <label for="unitName" class="layui-form-label">
                     <span class="x-red">*</span>工作单位</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="unitName" name="unitName" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    <input type="text" id="unitName" name="unitName" lay-verify="required" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
                 <label for="code" class="layui-form-label">
@@ -43,12 +43,12 @@
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="countyCode" id="countyCode" lay-filter="county" lay-verify="required">
+                    <select name="unitCountyCode" id="countyCode" lay-filter="county" lay-verify="required">
                         <option value="">请选择县/区</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="townCode" lay-filter="town" id="town" lay-verify="required">
+                    <select name="unitTownCode" lay-filter="town" id="town" lay-verify="required">
                         <option value="">请选择街道/镇</option>
                     </select>
                 </div>
@@ -72,14 +72,31 @@
             form = layui.form,
             layer = layui.layer;
 
-        //监听提交
-        form.on('submit(demo1)', function(data){
-            //layer.msg(JSON.stringify(data.field));
             form.verify({
-                pwd: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
+                username:function(value) {
+                    var message = '';
+                    $.ajax({
+                        type: "GET",
+                        url: "/checkPhone/?phone="+value,
+                        async: false, //改为同步请求
+                        contentType: 'application/json;charset=UTF-8',
+                        //data: {"phone":value},
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res) {
+
+                            } else {
+                                message = "手机号已存在，请重新输入！"
+                            }
+                        }
+                    });
+                    //需要注意  需要将返回信息写在ajax方法外
+                    if (message !== '') {
+                        return message;
+                    }
+                }
+                ,pwd: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
             });
-            //return false;
-        });
 
         form.on('select(county)', function(data){
             $.getJSON("/getTown",{"countyCode":data.value},function (result) {
@@ -90,16 +107,15 @@
                 form.render("select");
             })
         });
-    })
-</script>
-<script>
-    $(function () {
-        $.getJSON("/getCounty",function (result) {
-            for (var i = 0; i < result.length; i++) {
-                $("#countyCode").append("<option value='"+result[i].countyCode+"'>"+result[i].countyName+"</option>")
-            }
-        })
 
+        $(document).ready(function () {
+            $.getJSON("/getCounty",function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $("#countyCode").append("<option value='"+result[i].countyCode+"'>"+result[i].countyName+"</option>")
+                }
+                form.render();
+            })
+        })
     })
 </script>
 </body>
