@@ -206,14 +206,6 @@ public class FloatingPopulation {
         this.healthy = healthy;
     }
 
-    public String getdisabilityCode() {
-        return disabilityCode;
-    }
-
-    public void setdisabilityCode(String disabilityCode) {
-        this.disabilityCode = disabilityCode == null ? null : disabilityCode.trim();
-    }
-
     public Integer getEmploymentStateId() {
         return employmentStateId;
     }
@@ -283,7 +275,7 @@ public class FloatingPopulation {
     }
 
     public void setDisabilityCode(String disabilityCode) {
-        this.disabilityCode = disabilityCode;
+        this.disabilityCode = disabilityCode==""?null:disabilityCode;
     }
 
     public Boolean getDel() {
