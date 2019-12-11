@@ -8,9 +8,9 @@ import com.example.datong.model.AddressTown;
 import java.util.List;
 
 public interface AddressService {
-
+    //通过城市编码获取县级
     List<AddressCounty> getCountyByCityCode(String cityCode);
-
+    //通过县级获取镇
     List<AddressTown> getTownByCountyCode(String countyCode);
 
     List<AddressProvince> getProvice();
