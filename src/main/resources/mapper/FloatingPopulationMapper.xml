@@ -30,6 +30,36 @@
     <result column="is_checked" jdbcType="INTEGER" property="isChecked" />
     <result column="check_reason_id" jdbcType="INTEGER" property="checkReasonId"/>
     <result column="company_id" jdbcType="INTEGER" property="companyId"/>
+    <association property="addressCitys" javaType="com.example.datong.model.AddressCity">
+      <id column="city_id" jdbcType="INTEGER" property="cityId"/>
+      <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+      <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+      <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
+    </association>
+    <association property="residentialInfo" javaType="com.example.datong.model.ResidentialInfo">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="p_id" jdbcType="INTEGER" property="pId" />
+      <result column="residential_town_code" jdbcType="VARCHAR" property="residentialTownCode" />
+      <result column="residential_addres" jdbcType="VARCHAR" property="residentialAddres" />
+      <result column="living_style_id" jdbcType="INTEGER" property="livingStyleId" />
+      <result column="reason_for_residence_id" jdbcType="INTEGER" property="reasonForResidenceId" />
+      <result column="house_type_id" jdbcType="INTEGER" property="houseTypeId" />
+      <result column="house_gener" jdbcType="INTEGER" property="houseGener" />
+      <result column="house_use" jdbcType="INTEGER" property="houseUse" />
+      <result column="message_person" jdbcType="VARCHAR" property="messagePerson" />
+    </association>
+    <association property="addressTown" javaType="com.example.datong.model.AddressTown">
+      <id column="town_id" jdbcType="INTEGER" property="townId" />
+      <result column="town_code" jdbcType="VARCHAR" property="townCode" />
+      <result column="town_name" jdbcType="VARCHAR" property="townName" />
+      <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
+    </association>
+    <association property="addressCounty" javaType="com.example.datong.model.AddressCounty">
+      <id column="county_id" jdbcType="INTEGER" property="countyId" />
+      <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
+      <result column="county_name" jdbcType="VARCHAR" property="countyName" />
+      <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     id, name, name_used_before, sex,photo, id_card, fixed_phone, household_city_code, phone,
@@ -42,6 +72,24 @@
     <include refid="Base_Column_List" />
     from floating_population
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--我写的关联语句-->
+  <select id="selectCountByProvince" resultType="int">
+    select count(*) from floating_population f,address_city c ,residential_info r,address_town t
+    where f.household_city_code=c.city_code and r.p_id=f.id and r.residential_town_code=t.town_code
+    <if test="county != null and  county!= ''" >
+       and t.county_code=#{county}
+    </if>
+    <if test="town != null and  town!= ''" >
+     and t.town_code=#{town}
+    </if>
+    <if test="time1 != null and  time1!= ''" >
+      and f.gmt_create between #{time1} and #{time2}
+    </if>
+    <if test="provinceCode != null and  provinceCode!= ''" >
+      and c.province_code=#{provinceCode}
+    </if>
+
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from floating_population
