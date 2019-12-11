@@ -321,7 +321,8 @@
                     </div>
                     <div class="layui-form-item">
                         <input type="hidden" name="familyMember" value="">
-                        <button type="button" id="member" class="layui-btn layui-btn-primary layui-btn-sm">添加一行</button>
+                        <button type="button" id="memberAdd" class="layui-btn layui-btn-primary layui-btn-sm">添加一行</button>
+                        <button type="button" id="memberDel" class="layui-btn layui-btn-primary layui-btn-sm">删除一行</button>
                     </div>
                     <table border="1" style="width: 900px;text-align: center" id="memberTab">
                         <tr style="height: 50px;">
@@ -348,16 +349,17 @@
                             </td>
                             <td>
                                 <input type="radio"  name="memberSex" value="1" title="男">
-                                <input type="radio" name="memberSex" value="0" title="女" checked>
+                                <input type="radio" name="memberSex" value="0" title="女">
                             </td>
                             <td>
-                                <input type="text" class="layui-input" id="birth" value="123" placeholder="出生日期">
+                                <input type="text" class="layui-input" id="birth" placeholder="出生日期">
                             </td>
                             <td> <input type="radio" name="hasVaccinate" value="1" title="是">
-                                <input type="radio" name="hasVaccinate" value="0" title="否" checked></td>
+                                <input type="radio" name="hasVaccinate" value="0" title="否">
+                            </td>
                             <td>
                                 <input type="radio" name="isLocal" value="1" title="是">
-                                <input type="radio" name="isLocal" value="0" title="否" checked>
+                                <input type="radio" name="isLocal" value="0" title="否">
                             </td>
                         </tr>
                     </table>
@@ -901,7 +903,13 @@
             data.field.insuranceIds=arr_box.join(",");
             data.field.familyMember=member.join(",");
             $.post("/addPerson",data.field,function (res) {
-                alert("yes");
+                layer.open({
+                    content: '添加成功',
+                    yes: function(index){
+                        location.href=res;
+                        layer.close(index); //如果设定了yes回调，需进行手工关闭
+                    }
+                });
 
             })
             return false;
@@ -914,7 +922,7 @@
         });
 
         var count = 0;
-        $(document).on('click','#member',function(){
+        $(document).on('click','#memberAdd',function(){
             var option = '<option value="0">关系</option>';
             $.getJSON('/getRelation',function (res) {
                 for (var i = 0; i < res.length; i++) {
@@ -933,22 +941,29 @@
                 "                        </td>\n" +
                 "                        <td>\n" +
                 "                            <input type=\"radio\" name='memberSex"+count+"' value=\"1\" title=\"男\">\n" +
-                "                            <input type=\"radio\" name='memberSex"+count+"' value=\"0\" title=\"女\" checked>\n" +
+                "                            <input type=\"radio\" name='memberSex"+count+"' value=\"0\" title=\"女\">\n" +
                 "                        </td>\n" +
                 "                        <td>\n" +
                 "                            <input type=\"text\" class=\"layui-input\" id=\"birth\" placeholder=\"出生日期\">\n" +
                 "                        </td>\n" +
                 "                        <td> <input type=\"radio\" name='hasVaccinate"+count+"' value=\"1\" title=\"是\">\n" +
-                "                            <input type=\"radio\" name='hasVaccinate"+count+"' value=\"0\" title=\"否\" checked></td>\n" +
+                "                            <input type=\"radio\" name='hasVaccinate"+count+"' value=\"0\" title=\"否\"></td>\n" +
                 "                        <td>\n" +
                 "                            <input type=\"radio\" name='isLocal"+count+"' value=\"1\" title=\"是\">\n" +
-                "                            <input type=\"radio\" name='isLocal"+count+"' value=\"0\" title=\"否\" checked>\n" +
+                "                            <input type=\"radio\" name='isLocal"+count+"' value=\"0\" title=\"否\">\n" +
                 "                        </td>\n" +
                 "                    </tr>");
             form.render();
             count+=1;
             })
         });
+
+        $(document).on('click','#memberDel',function () {
+             var a = $("#memberTab").find("tr");
+             if (a.length>1){
+                 $("#memberTab").find("tr:last").remove();
+             }
+        })
 
         form.on('select(marital)', function(data){
             if(data.value==602){

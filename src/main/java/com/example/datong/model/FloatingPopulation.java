@@ -117,7 +117,7 @@ public class FloatingPopulation {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public String getNameUsedBefore() {
@@ -125,7 +125,7 @@ public class FloatingPopulation {
     }
 
     public void setNameUsedBefore(String nameUsedBefore) {
-        this.nameUsedBefore = nameUsedBefore;
+        this.nameUsedBefore = nameUsedBefore == null ? null : nameUsedBefore.trim();
     }
 
     public Boolean getSex() {
@@ -136,20 +136,12 @@ public class FloatingPopulation {
         this.sex = sex;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     public String getIdCard() {
         return idCard;
     }
 
     public void setIdCard(String idCard) {
-        this.idCard = idCard;
+        this.idCard = idCard == null ? null : idCard.trim();
     }
 
     public String getFixedPhone() {
@@ -157,7 +149,7 @@ public class FloatingPopulation {
     }
 
     public void setFixedPhone(String fixedPhone) {
-        this.fixedPhone = fixedPhone;
+        this.fixedPhone = fixedPhone == null ? null : fixedPhone.trim();
     }
 
     public String getHouseholdCityCode() {
@@ -165,7 +157,7 @@ public class FloatingPopulation {
     }
 
     public void setHouseholdCityCode(String householdCityCode) {
-        this.householdCityCode = householdCityCode;
+        this.householdCityCode = householdCityCode == null ? null : householdCityCode.trim();
     }
 
     public String getPhone() {
@@ -173,7 +165,7 @@ public class FloatingPopulation {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public Integer getNationId() {
@@ -248,14 +240,6 @@ public class FloatingPopulation {
         this.healthy = healthy;
     }
 
-    public String getDisabilityCode() {
-        return disabilityCode;
-    }
-
-    public void setDisabilityCode(String disabilityCode) {
-        this.disabilityCode = disabilityCode;
-    }
-
     public Integer getEmploymentStateId() {
         return employmentStateId;
     }
@@ -270,14 +254,6 @@ public class FloatingPopulation {
 
     public void setMaritalStateId(Integer maritalStateId) {
         this.maritalStateId = maritalStateId;
-    }
-
-    public Boolean getDel() {
-        return isDel;
-    }
-
-    public void setDel(Boolean del) {
-        isDel = del;
     }
 
     public Boolean getState() {
@@ -310,6 +286,30 @@ public class FloatingPopulation {
 
     public void setIsChecked(Integer isChecked) {
         this.isChecked = isChecked;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getDisabilityCode() {
+        return disabilityCode;
+    }
+
+    public void setDisabilityCode(String disabilityCode) {
+        this.disabilityCode = disabilityCode==""?null:disabilityCode;
+    }
+
+    public Boolean getDel() {
+        return isDel;
+    }
+
+    public void setDel(Boolean del) {
+        isDel = del;
     }
 
     public Integer getCheckReasonId() {
