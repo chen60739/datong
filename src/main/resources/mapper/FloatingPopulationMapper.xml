@@ -95,11 +95,14 @@
     delete from floating_population
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.model.FloatingPopulation">
+  <insert id="insert" parameterType="com.example.datong.model.FloatingPopulation" useGeneratedKeys="true" keyProperty="id">
+    <selectKey keyProperty="id" order="AFTER" resultType="integer">
+      select LAST_INSERT_ID();
+    </selectKey>
     insert into floating_population (name, name_used_before, sex, photo, id_card,
     fixed_phone, household_city_code, phone, nation_id, come_time, education_level_id,
     political_outlook_id, faith_id, height, weight, blood_type_id, healthy,
-    disability_code, employment_state_id, marital_state_id, is_del, gmt_create,
+    disability_code, employment_state_id, marital_state_id, gmt_create,
     gmt_modified,check_reason_id,company_id
       )
     values (#{name,jdbcType=VARCHAR}, #{nameUsedBefore,jdbcType=VARCHAR},
@@ -109,8 +112,8 @@
       #{educationLevelId,jdbcType=INTEGER}, #{politicalOutlookId,jdbcType=INTEGER},
       #{faithId,jdbcType=INTEGER}, #{height,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE},
       #{bloodTypeId,jdbcType=INTEGER}, #{healthy,jdbcType=INTEGER},
-      #{disability_code,jdbcType=VARCHAR}, #{employmentStateId,jdbcType=INTEGER},
-      #{maritalStateId,jdbcType=INTEGER}, #{isDel,jdbcType=BIT},
+      #{disabilityCode,jdbcType=VARCHAR}, #{employmentStateId,jdbcType=INTEGER},
+      #{maritalStateId,jdbcType=INTEGER},
       #{gmtCreate,jdbcType=TIMESTAMP},#{gmtModified,jdbcType=TIMESTAMP},
       #{checkReasonId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}
       )
@@ -378,4 +381,20 @@
       is_checked = #{isChecked,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="selectChecking" resultMap="BaseResultMap">
+    SELECT f.id,f.`name`,f.phone,f.gmt_create FROM floating_population as f
+    WHERE is_checked=#{stateCode} and f.company_id=#{unitId}
+  </select>
+
+  <select id="selectChecked" resultMap="BaseResultMap">
+    SELECT f.id,f.`name`,f.phone,f.gmt_create FROM floating_population as f
+    WHERE is_checked=2102
+  </select>
+
+  <select id="selectNotCheckedCount" resultType="integer">
+    SELECT COUNT(*) FROM floating_population as f
+    WHERE is_checked=2101 and f.company_id=#{unitId}
+  </select>
 </mapper>

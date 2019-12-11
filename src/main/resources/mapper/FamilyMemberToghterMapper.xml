@@ -25,10 +25,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.FamilyMemberToghter">
-    insert into family_member_toghter (id, p_id, member_name, 
+    insert into family_member_toghter (p_id, member_name,
       member_sex, member_id_card, relation_id, 
       has_vaccinate, is_local)
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+    values (#{pId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR},
       #{memberSex,jdbcType=BIT}, #{memberIdCard,jdbcType=CHAR}, #{relationId,jdbcType=INTEGER}, 
       #{hasVaccinate,jdbcType=BIT}, #{isLocal,jdbcType=BIT})
   </insert>
