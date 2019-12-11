@@ -1,4 +1,4 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 public class AddressTown {
     private Integer townId;
@@ -39,5 +39,15 @@ public class AddressTown {
 
     public void setCountyCode(String countyCode) {
         this.countyCode = countyCode == null ? null : countyCode.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "AddressTown{" +
+                "townId=" + townId +
+                ", townCode='" + townCode + '\'' +
+                ", townName='" + townName + '\'' +
+                ", countyCode='" + countyCode + '\'' +
+                '}';
     }
 }

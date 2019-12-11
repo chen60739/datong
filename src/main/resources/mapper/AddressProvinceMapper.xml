@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.AddressProvinceMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.AddressProvince">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.AddressProvince">
     <id column="province_id" jdbcType="INTEGER" property="provinceId" />
     <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
     <result column="province_name" jdbcType="VARCHAR" property="provinceName" />
@@ -19,13 +19,13 @@
     delete from address_province
     where province_id = #{provinceId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.AddressProvince">
+  <insert id="insert" parameterType="com.example.datong.model.AddressProvince">
     insert into address_province (province_id, province_code, province_name
       )
     values (#{provinceId,jdbcType=INTEGER}, #{provinceCode,jdbcType=VARCHAR}, #{provinceName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.AddressProvince">
+  <insert id="insertSelective" parameterType="com.example.datong.model.AddressProvince">
     insert into address_province
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="provinceId != null">
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.AddressProvince">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.AddressProvince">
     update address_province
     <set>
       <if test="provinceCode != null">
@@ -62,10 +62,14 @@
     </set>
     where province_id = #{provinceId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.AddressProvince">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.AddressProvince">
     update address_province
     set province_code = #{provinceCode,jdbcType=VARCHAR},
       province_name = #{provinceName,jdbcType=VARCHAR}
     where province_id = #{provinceId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from address_province
+  </select>
 </mapper>

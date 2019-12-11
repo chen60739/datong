@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.InsuranceStateMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.InsuranceState">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.InsuranceState">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="p_id" jdbcType="INTEGER" property="pId" />
     <result column="insurance_id" jdbcType="INTEGER" property="insuranceId" />
@@ -19,13 +19,13 @@
     delete from insurance_state
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.InsuranceState">
-    insert into insurance_state (id, p_id, insurance_id
+  <insert id="insert" parameterType="com.example.datong.model.InsuranceState">
+    insert into insurance_state (p_id, insurance_id
       )
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{insuranceId,jdbcType=INTEGER}
+    values (#{pId,jdbcType=INTEGER}, #{insuranceId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.InsuranceState">
+  <insert id="insertSelective" parameterType="com.example.datong.model.InsuranceState">
     insert into insurance_state
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.InsuranceState">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.InsuranceState">
     update insurance_state
     <set>
       <if test="pId != null">
@@ -62,7 +62,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.InsuranceState">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.InsuranceState">
     update insurance_state
     set p_id = #{pId,jdbcType=INTEGER},
       insurance_id = #{insuranceId,jdbcType=INTEGER}

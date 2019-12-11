@@ -1,4 +1,4 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 
 public class AddressCity {
@@ -42,4 +42,13 @@ public class AddressCity {
         this.provinceCode = provinceCode == null ? null : provinceCode.trim();
     }
 
+    @Override
+    public String toString() {
+        return "AddressCity{" +
+                "cityId=" + cityId +
+                ", cityCode='" + cityCode + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", provinceCode='" + provinceCode + '\'' +
+                '}';
+    }
 }

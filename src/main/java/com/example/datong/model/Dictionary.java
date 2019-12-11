@@ -1,4 +1,4 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 public class Dictionary {
     private Integer dictionaryId;
@@ -29,5 +29,14 @@ public class Dictionary {
 
     public void setTopId(Integer topId) {
         this.topId = topId;
+    }
+
+    @Override
+    public String toString() {
+        return "Dictionary{" +
+                "dictionaryId=" + dictionaryId +
+                ", dictionaryName='" + dictionaryName + '\'' +
+                ", topId=" + topId +
+                '}';
     }
 }

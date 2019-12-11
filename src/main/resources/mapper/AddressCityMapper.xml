@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.AddressCityMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.AddressCity">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.AddressCity">
     <id column="city_id" jdbcType="INTEGER" property="cityId" />
     <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
     <result column="city_name" jdbcType="VARCHAR" property="cityName" />
@@ -20,13 +20,13 @@
     delete from address_city
     where city_id = #{cityId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.AddressCity">
+  <insert id="insert" parameterType="com.example.datong.model.AddressCity">
     insert into address_city (city_id, city_code, city_name, 
       province_code)
     values (#{cityId,jdbcType=INTEGER}, #{cityCode,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, 
       #{provinceCode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.AddressCity">
+  <insert id="insertSelective" parameterType="com.example.datong.model.AddressCity">
     insert into address_city
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cityId != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.AddressCity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.AddressCity">
     update address_city
     <set>
       <if test="cityCode != null">
@@ -72,11 +72,15 @@
     </set>
     where city_id = #{cityId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.AddressCity">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.AddressCity">
     update address_city
     set city_code = #{cityCode,jdbcType=VARCHAR},
       city_name = #{cityName,jdbcType=VARCHAR},
       province_code = #{provinceCode,jdbcType=VARCHAR}
     where city_id = #{cityId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByProvinceCode" resultMap="BaseResultMap" parameterType="string">
+    SELECT * FROM address_city WHERE province_code=#{provinceCode}
+  </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 /*
 计划生育信息类
  */
@@ -141,5 +141,25 @@ public class FamilyPlanningInfo {
 
     public void setIsLevy(Boolean isLevy) {
         this.isLevy = isLevy;
+    }
+
+    @Override
+    public String toString() {
+        return "FamilyPlanningInfo{" +
+                "id=" + id +
+                ", pId='" + pId + '\'' +
+                ", isTogether=" + isTogether +
+                ", hasProve=" + hasProve +
+                ", number='" + number + '\'' +
+                ", isChecked=" + isChecked +
+                ", measure='" + measure + '\'' +
+                ", pregnancyInfoId=" + pregnancyInfoId +
+                ", boyNum=" + boyNum +
+                ", girlNum=" + girlNum +
+                ", insideNum=" + insideNum +
+                ", outsideNum=" + outsideNum +
+                ", hasCertificate=" + hasCertificate +
+                ", isLevy=" + isLevy +
+                '}';
     }
 }

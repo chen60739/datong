@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.FamilyMemberToghterMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.FamilyMemberToghter">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.FamilyMemberToghter">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="p_id" jdbcType="INTEGER" property="pId" />
     <result column="member_name" jdbcType="VARCHAR" property="memberName" />
@@ -24,15 +24,15 @@
     delete from family_member_toghter
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.FamilyMemberToghter">
-    insert into family_member_toghter (id, p_id, member_name, 
+  <insert id="insert" parameterType="com.example.datong.model.FamilyMemberToghter">
+    insert into family_member_toghter (p_id, member_name,
       member_sex, member_id_card, relation_id, 
       has_vaccinate, is_local)
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+    values (#{pId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR},
       #{memberSex,jdbcType=BIT}, #{memberIdCard,jdbcType=CHAR}, #{relationId,jdbcType=INTEGER}, 
       #{hasVaccinate,jdbcType=BIT}, #{isLocal,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.FamilyMemberToghter">
+  <insert id="insertSelective" parameterType="com.example.datong.model.FamilyMemberToghter">
     insert into family_member_toghter
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.FamilyMemberToghter">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.FamilyMemberToghter">
     update family_member_toghter
     <set>
       <if test="pId != null">
@@ -114,7 +114,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.FamilyMemberToghter">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.FamilyMemberToghter">
     update family_member_toghter
     set p_id = #{pId,jdbcType=INTEGER},
       member_name = #{memberName,jdbcType=VARCHAR},

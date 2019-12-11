@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.FertilityInfoMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.FertilityInfo">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.FertilityInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="p_id" jdbcType="INTEGER" property="pId" />
     <result column="child_sex" jdbcType="BIT" property="childSex" />
@@ -21,13 +21,13 @@
     delete from fertility_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.FertilityInfo">
-    insert into fertility_info (id, p_id, child_sex, 
+  <insert id="insert" parameterType="com.example.datong.model.FertilityInfo">
+    insert into fertility_info (p_id, child_sex,
       child_birthday, is_inside)
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{childSex,jdbcType=BIT}, 
+    values (#{pId,jdbcType=INTEGER}, #{childSex,jdbcType=BIT},
       #{childBirthday,jdbcType=DATE}, #{isInside,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.FertilityInfo">
+  <insert id="insertSelective" parameterType="com.example.datong.model.FertilityInfo">
     insert into fertility_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.FertilityInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.FertilityInfo">
     update fertility_info
     <set>
       <if test="pId != null">
@@ -82,7 +82,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.FertilityInfo">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.FertilityInfo">
     update fertility_info
     set p_id = #{pId,jdbcType=INTEGER},
       child_sex = #{childSex,jdbcType=BIT},

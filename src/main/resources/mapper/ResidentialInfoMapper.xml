@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.ResidentialInfoMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.ResidentialInfo">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.ResidentialInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="p_id" jdbcType="INTEGER" property="pId" />
-    <result column="town_code" jdbcType="VARCHAR" property="townCode" />
-    <result column="addres" jdbcType="VARCHAR" property="addres" />
+    <result column="residential_town_code" jdbcType="VARCHAR" property="residentialTownCode" />
+    <result column="residential_addres" jdbcType="VARCHAR" property="residentialAddres" />
     <result column="living_style_id" jdbcType="INTEGER" property="livingStyleId" />
     <result column="reason_for_residence_id" jdbcType="INTEGER" property="reasonForResidenceId" />
     <result column="house_type_id" jdbcType="INTEGER" property="houseTypeId" />
@@ -14,8 +14,8 @@
     <result column="message_person" jdbcType="VARCHAR" property="messagePerson" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, p_id, town_code, addres, living_style_id, reason_for_residence_id, house_type_id, 
-    house_gener, house_use, message_person
+    id, p_id, residential_town_code, residential_addres, living_style_id, reason_for_residence_id, 
+    house_type_id, house_gener, house_use, message_person
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,17 +27,17 @@
     delete from residential_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.ResidentialInfo">
-    insert into residential_info (id, p_id, town_code, 
-      addres, living_style_id, reason_for_residence_id, 
+  <insert id="insert" parameterType="com.example.datong.model.ResidentialInfo">
+    insert into residential_info (p_id, residential_town_code,
+      residential_addres, living_style_id, reason_for_residence_id, 
       house_type_id, house_gener, house_use, 
       message_person)
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{townCode,jdbcType=VARCHAR}, 
-      #{addres,jdbcType=VARCHAR}, #{livingStyleId,jdbcType=INTEGER}, #{reasonForResidenceId,jdbcType=INTEGER}, 
+    values (#{pId,jdbcType=INTEGER}, #{residentialTownCode,jdbcType=VARCHAR},
+      #{residentialAddres,jdbcType=VARCHAR}, #{livingStyleId,jdbcType=INTEGER}, #{reasonForResidenceId,jdbcType=INTEGER}, 
       #{houseTypeId,jdbcType=INTEGER}, #{houseGener,jdbcType=INTEGER}, #{houseUse,jdbcType=INTEGER}, 
       #{messagePerson,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.ResidentialInfo">
+  <insert id="insertSelective" parameterType="com.example.datong.model.ResidentialInfo">
     insert into residential_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -46,11 +46,11 @@
       <if test="pId != null">
         p_id,
       </if>
-      <if test="townCode != null">
-        town_code,
+      <if test="residentialTownCode != null">
+        residential_town_code,
       </if>
-      <if test="addres != null">
-        addres,
+      <if test="residentialAddres != null">
+        residential_addres,
       </if>
       <if test="livingStyleId != null">
         living_style_id,
@@ -78,11 +78,11 @@
       <if test="pId != null">
         #{pId,jdbcType=INTEGER},
       </if>
-      <if test="townCode != null">
-        #{townCode,jdbcType=VARCHAR},
+      <if test="residentialTownCode != null">
+        #{residentialTownCode,jdbcType=VARCHAR},
       </if>
-      <if test="addres != null">
-        #{addres,jdbcType=VARCHAR},
+      <if test="residentialAddres != null">
+        #{residentialAddres,jdbcType=VARCHAR},
       </if>
       <if test="livingStyleId != null">
         #{livingStyleId,jdbcType=INTEGER},
@@ -104,17 +104,17 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.ResidentialInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.ResidentialInfo">
     update residential_info
     <set>
       <if test="pId != null">
         p_id = #{pId,jdbcType=INTEGER},
       </if>
-      <if test="townCode != null">
-        town_code = #{townCode,jdbcType=VARCHAR},
+      <if test="residentialTownCode != null">
+        residential_town_code = #{residentialTownCode,jdbcType=VARCHAR},
       </if>
-      <if test="addres != null">
-        addres = #{addres,jdbcType=VARCHAR},
+      <if test="residentialAddres != null">
+        residential_addres = #{residentialAddres,jdbcType=VARCHAR},
       </if>
       <if test="livingStyleId != null">
         living_style_id = #{livingStyleId,jdbcType=INTEGER},
@@ -137,11 +137,11 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.ResidentialInfo">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.ResidentialInfo">
     update residential_info
     set p_id = #{pId,jdbcType=INTEGER},
-      town_code = #{townCode,jdbcType=VARCHAR},
-      addres = #{addres,jdbcType=VARCHAR},
+      residential_town_code = #{residentialTownCode,jdbcType=VARCHAR},
+      residential_addres = #{residentialAddres,jdbcType=VARCHAR},
       living_style_id = #{livingStyleId,jdbcType=INTEGER},
       reason_for_residence_id = #{reasonForResidenceId,jdbcType=INTEGER},
       house_type_id = #{houseTypeId,jdbcType=INTEGER},

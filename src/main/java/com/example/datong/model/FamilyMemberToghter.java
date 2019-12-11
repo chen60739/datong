@@ -1,4 +1,4 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 public class FamilyMemberToghter {
     private Integer id;
@@ -79,5 +79,19 @@ public class FamilyMemberToghter {
 
     public void setIsLocal(Boolean isLocal) {
         this.isLocal = isLocal;
+    }
+
+    @Override
+    public String toString() {
+        return "FamilyMemberToghter{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", memberName='" + memberName + '\'' +
+                ", memberSex=" + memberSex +
+                ", memberIdCard='" + memberIdCard + '\'' +
+                ", relationId=" + relationId +
+                ", hasVaccinate=" + hasVaccinate +
+                ", isLocal=" + isLocal +
+                '}';
     }
 }

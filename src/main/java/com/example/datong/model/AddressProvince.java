@@ -1,4 +1,4 @@
-package com.example.datong.pojo;
+package com.example.datong.model;
 
 public class AddressProvince {
     private Integer provinceId;
@@ -29,5 +29,14 @@ public class AddressProvince {
 
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName == null ? null : provinceName.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "AddressProvince{" +
+                "provinceId=" + provinceId +
+                ", provinceCode='" + provinceCode + '\'' +
+                ", provinceName='" + provinceName + '\'' +
+                '}';
     }
 }

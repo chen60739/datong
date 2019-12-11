@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.SpouseInfoMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.SpouseInfo">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.SpouseInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="p_id" jdbcType="INTEGER" property="pId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="id_card" jdbcType="CHAR" property="idCard" />
-    <result column="county_code" jdbcType="INTEGER" property="countyCode" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="employment_state_id" jdbcType="INTEGER" property="employmentStateId" />
-    <result column="work_unit" jdbcType="VARCHAR" property="workUnit" />
-    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="spouse_name" jdbcType="VARCHAR" property="spouseName" />
+    <result column="spouse_id_card" jdbcType="CHAR" property="spouseIdCard" />
+    <result column="spouse_county_code" jdbcType="INTEGER" property="spouseCountyCode" />
+    <result column="spouse_address" jdbcType="VARCHAR" property="spouseAddress" />
+    <result column="spouse_employment_state_id" jdbcType="INTEGER" property="spouseEmploymentStateId" />
+    <result column="spouse_work_unit" jdbcType="VARCHAR" property="spouseWorkUnit" />
+    <result column="spouse_phone" jdbcType="CHAR" property="spousePhone" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, p_id, name, id_card, county_code, address, employment_state_id, work_unit, phone
+    id, p_id, spouse_name, spouse_id_card, spouse_county_code, spouse_address,
+    spouse_employment_state_id, spouse_work_unit, spouse_phone
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,17 +26,18 @@
     delete from spouse_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.SpouseInfo">
-    insert into spouse_info (id, p_id, name, 
-      id_card, county_code, address, 
-      employment_state_id, work_unit, phone
+  <insert id="insert" parameterType="com.example.datong.model.SpouseInfo">
+    insert into spouse_info (p_id, spouse_name,
+      spouse_id_card, spouse_county_code, spouse_address,
+      spouse_employment_state_id, spouse_work_unit, spouse_phone
       )
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{idCard,jdbcType=CHAR}, #{countyCode,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
-      #{employmentStateId,jdbcType=INTEGER}, #{workUnit,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}
+    values ( #{pId,jdbcType=INTEGER}, #{spouseName,jdbcType=VARCHAR},
+      #{spouseIdCard,jdbcType=CHAR}, #{spouseCountyCode,jdbcType=INTEGER},
+      #{spouseAddress,jdbcType=VARCHAR}, #{spouseEmploymentStateId,jdbcType=INTEGER},
+      #{spouseWorkUnit,jdbcType=VARCHAR}, #{spousePhone,jdbcType=CHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.SpouseInfo">
+  <insert id="insertSelective" parameterType="com.example.datong.model.SpouseInfo">
     insert into spouse_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -44,26 +46,26 @@
       <if test="pId != null">
         p_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="spouseName != null">
+        spouse_name,
       </if>
-      <if test="idCard != null">
-        id_card,
+      <if test="spouseIdCard != null">
+        spouse_id_card,
       </if>
-      <if test="countyCode != null">
-        county_code,
+      <if test="spouseCountyCode != null">
+        spouse_county_code,
       </if>
-      <if test="address != null">
-        address,
+      <if test="spouseAddress != null">
+        spouse_address,
       </if>
-      <if test="employmentStateId != null">
-        employment_state_id,
+      <if test="spouseEmploymentStateId != null">
+        spouse_employment_state_id,
       </if>
-      <if test="workUnit != null">
-        work_unit,
+      <if test="spouseEorkUnit != null">
+        spouse_work_unit,
       </if>
-      <if test="phone != null">
-        phone,
+      <if test="spousePhone != null">
+        spouse_phone,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -73,69 +75,69 @@
       <if test="pId != null">
         #{pId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="spouseName != null">
+        #{spouseName,jdbcType=VARCHAR},
       </if>
-      <if test="idCard != null">
-        #{idCard,jdbcType=CHAR},
+      <if test="spouseIdCard != null">
+        #{spouseIdCard,jdbcType=CHAR},
       </if>
-      <if test="countyCode != null">
-        #{countyCode,jdbcType=INTEGER},
+      <if test="spouseCountyCode != null">
+        #{spouseCountyCode,jdbcType=INTEGER},
       </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
+      <if test="spouseAddress != null">
+        #{spouseAddress,jdbcType=VARCHAR},
       </if>
-      <if test="employmentStateId != null">
-        #{employmentStateId,jdbcType=INTEGER},
+      <if test="spouseEmploymentStateId != null">
+        #{spouseEmploymentStateId,jdbcType=INTEGER},
       </if>
-      <if test="workUnit != null">
-        #{workUnit,jdbcType=VARCHAR},
+      <if test="spouseWorkUnit != null">
+        #{spouseWorkUnit,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null">
-        #{phone,jdbcType=CHAR},
+      <if test="spousePhone != null">
+        #{spousePhone,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.SpouseInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.SpouseInfo">
     update spouse_info
     <set>
       <if test="pId != null">
         p_id = #{pId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="spouseName != null">
+        spouse_name = #{spouseName,jdbcType=VARCHAR},
       </if>
-      <if test="idCard != null">
-        id_card = #{idCard,jdbcType=CHAR},
+      <if test="spouseIdCard != null">
+        spouse_id_card = #{spouseIdCard,jdbcType=CHAR},
       </if>
-      <if test="countyCode != null">
-        county_code = #{countyCode,jdbcType=INTEGER},
+      <if test="spouseCountyCode != null">
+        spouse_county_code = #{spouseCountyCode,jdbcType=INTEGER},
       </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
+      <if test="spouseAddress != null">
+        spouse_address = #{spouseAddress,jdbcType=VARCHAR},
       </if>
-      <if test="employmentStateId != null">
-        employment_state_id = #{employmentStateId,jdbcType=INTEGER},
+      <if test="spouseEmploymentStateId != null">
+        spouse_employment_state_id = #{spouseEmploymentStateId,jdbcType=INTEGER},
       </if>
-      <if test="workUnit != null">
-        work_unit = #{workUnit,jdbcType=VARCHAR},
+      <if test="spouseWorkUnit != null">
+        spouse_work_unit = #{spouseWorkUnit,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=CHAR},
+      <if test="spousePhone != null">
+        spouse_phone = #{spousePhone,jdbcType=CHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.SpouseInfo">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.SpouseInfo">
     update spouse_info
     set p_id = #{pId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      id_card = #{idCard,jdbcType=CHAR},
-      county_code = #{countyCode,jdbcType=INTEGER},
-      address = #{address,jdbcType=VARCHAR},
-      employment_state_id = #{employmentStateId,jdbcType=INTEGER},
-      work_unit = #{workUnit,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=CHAR}
+      spouse_name = #{spouseName,jdbcType=VARCHAR},
+      spouse_id_card = #{spouseIdCard,jdbcType=CHAR},
+      spouse_county_code = #{spouseCountyCode,jdbcType=INTEGER},
+      spouse_address = #{spouseAddress,jdbcType=VARCHAR},
+      spouse_employment_state_id = #{spouseEmploymentStateId,jdbcType=INTEGER},
+      spouse_work_unit = #{spouseWorkUnit,jdbcType=VARCHAR},
+      spouse_phone = #{spousePhone,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
