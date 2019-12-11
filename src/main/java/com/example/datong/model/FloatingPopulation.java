@@ -240,14 +240,6 @@ public class FloatingPopulation {
         this.healthy = healthy;
     }
 
-    public String getDisabilityCode() {
-        return disabilityCode;
-    }
-
-    public void setDisabilityCode(String disabilityCode) {
-        this.disabilityCode = disabilityCode;
-    }
-
     public Integer getEmploymentStateId() {
         return employmentStateId;
     }
@@ -262,14 +254,6 @@ public class FloatingPopulation {
 
     public void setMaritalStateId(Integer maritalStateId) {
         this.maritalStateId = maritalStateId;
-    }
-
-    public Boolean getDel() {
-        return isDel;
-    }
-
-    public void setDel(Boolean del) {
-        isDel = del;
     }
 
     public Boolean getState() {
