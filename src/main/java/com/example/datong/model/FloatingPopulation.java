@@ -62,12 +62,46 @@ public class FloatingPopulation {
     //公司id
     private Integer companyId;
 
-    public Integer getCompanyId() {
-        return companyId;
+    //关联开始
+    //市区关联
+    private  AddressCity addressCitys;
+    //居住表关联
+    private  ResidentialInfo residentialInfo;
+    //镇级表
+    private  AddressTown addressTown;
+    //县级表
+    private AddressCounty addressCounty;
+
+    public AddressCounty getAddressCounty() {
+        return addressCounty;
     }
 
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
+    public void setAddressCounty(AddressCounty addressCounty) {
+        this.addressCounty = addressCounty;
+    }
+
+    public ResidentialInfo getResidentialInfo() {
+        return residentialInfo;
+    }
+
+    public void setResidentialInfo(ResidentialInfo residentialInfo) {
+        this.residentialInfo = residentialInfo;
+    }
+
+    public AddressTown getAddressTown() {
+        return addressTown;
+    }
+
+    public void setAddressTown(AddressTown addressTown) {
+        this.addressTown = addressTown;
+    }
+
+    public AddressCity getAddressCitys() {
+        return addressCitys;
+    }
+
+    public void setAddressCitys(AddressCity addressCitys) {
+        this.addressCitys = addressCitys;
     }
 
     public Integer getId() {
@@ -206,6 +240,14 @@ public class FloatingPopulation {
         this.healthy = healthy;
     }
 
+    public String getDisabilityCode() {
+        return disabilityCode;
+    }
+
+    public void setDisabilityCode(String disabilityCode) {
+        this.disabilityCode = disabilityCode;
+    }
+
     public Integer getEmploymentStateId() {
         return employmentStateId;
     }
@@ -222,12 +264,12 @@ public class FloatingPopulation {
         this.maritalStateId = maritalStateId;
     }
 
-    public Boolean getIsDel() {
+    public Boolean getDel() {
         return isDel;
     }
 
-    public void setIsDel(Boolean isDel) {
-        this.isDel = isDel;
+    public void setDel(Boolean del) {
+        isDel = del;
     }
 
     public Boolean getState() {
@@ -294,6 +336,14 @@ public class FloatingPopulation {
         this.checkReasonId = checkReasonId;
     }
 
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
     @Override
     public String toString() {
         return "FloatingPopulation{" +
@@ -326,5 +376,8 @@ public class FloatingPopulation {
                 ", checkReasonId=" + checkReasonId +
                 ", companyId=" + companyId +
                 '}';
+    }
+
+    public FloatingPopulation() {
     }
 }
