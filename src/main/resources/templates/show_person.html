@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息添加</title>
+    <link rel="stylesheet" href="/plugs/layui/css/layui.css">
+    <script src="/plugs/layui/layui.js"></script>
+</head>
+
+<body >
+<div>
+    <ul class="layui-nav" >
+        <li class="layui-nav-item layui-this">
+            <a href="javascript:;">个人中心</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">审核中</a></dd>
+                <dd><a href="">未通过</a></dd>
+                <dd><a href="">已通过</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+
+<div align="center"><h1>大同市流动人口信息详情</h1></div>
+<div style="float: top;margin-top: 20px">
+<div style="float: left;padding-left: 50px">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-xs11">
+                    <div class="grid-demo">
+                        <div class="layui-form-item">
+                            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                                <legend>个人信息</legend>
+                            </fieldset>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="name" th:value="${people.name}" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">曾用名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="nameUsedBefore" th:value="${people.nameUsedBefore}" placeholder="请输入曾用名" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-upload">
+                                    <button type="button" class="layui-btn" id="test1">上传图片</button>
+                                    <div class="layui-upload-list">
+                                        <img class="layui-upload-img" id="photo" th:src="@{${people.photo}}" >
+                                        <p id="demoText"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" th:if="${people.sex ne null}" th:field="${people.sex}" name="sex" value="1" title="男" lay-verify="otherReq">
+                            <input type="radio" th:if="${people.sex ne null}" th:field="${people.sex}" name="sex" value="0" title="女"  lay-verify="otherReq">
+                        </div>
+                    </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline",...>
+                                <label class="layui-form-label">来本地时间</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="comeTime" th:value="${#dates.format(people.comeTime, 'yyyy-MM-dd')}" class="layui-input" id="date" required  lay-verify="required">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身份证号</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="idCard" th:value="${people.idCard}" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">民族</label>
+                                <div class="layui-input-inline">
+                                    <select name="nationId" >
+                                        <option th:each="nation : ${dictionary}" th:if="${nation.topId} eq '100'" th:field="${people.nationId}" th:text="${nation.dictionaryName}" th:value="${nation.dictionaryId}">请选择民族</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">户籍</label>
+                            <div class="layui-input-inline">
+                                <select name="peopleP" id="province" lay-filter="changeProvince">
+                                    <option th:each="provinces : ${provinces}"  th:selected="${prov eq provinces.provinceCode}" th:text="${provinces.provinceName}" th:value="${provinces.provinceCode}">请选择省</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="householdCityCode" id="peopleCity">
+                                    <option th:each="city : ${cities}" th:if="${city.provinceCode  eq  prov}" th:selected="${people.householdCityCode eq city.cityCode}"   th:text="${city.cityName}" th:value="${city.cityCode}">请选择市</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">现居住地址</label>
+                            <div class="layui-input-inline">
+                                <select name="quiz1" id="">
+<!--                                    <option th:each="provinces : ${provinces}"  th:selected="${address.provinceCode eq provinces.provinceCode}"  th:text="${provinces.provinceName}" th:value="${provinces.provinceCode}">请选择省</option>-->
+                                <option title="山西省" value="140000">山西省</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="quiz2">
+<!--                                    <option th:each="city : ${cities}"   th:selected="${address.addressCityList[0].cityCode eq city.cityCode}"  th:text="${city.cityName}" th:value="${city.cityCode}">请选择市</option>-->
+                                        <option title="大同市" value="140200">大同市</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="peopleCO" lay-filter="changeTown">
+                                    <option th:each="counties : ${counties}" th:if="${counties.cityCode eq '140200'}" th:selected="${address.addressCountyList[0].countyCode eq counties.countyCode}"  th:text="${counties.countyName}" th:value="${counties.countyCode}">请选择县/区</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="peopleTown"  id="peopleTown">
+                                    <option th:each="towns : ${towns}" th:if="${towns.countyCode eq address.addressCountyList[0].countyCode}" th:selected="${address.addressTownList[0].townCode eq towns.townCode}"  th:text="${towns.townName}" th:value="${towns.townCode}">请选择乡/镇</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <input type="text" th:value="${people.residentialInfo.residentialAddres}" name="residentialAddres" required  lay-verify="required" placeholder="详细地址" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <legend>本人联系方式</legend>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">固定电话</label>
+                                <div class="layui-input-inline">
+                                    <input type="tel" th:value="${people.fixedPhone}" name="fixedPhone" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">移动电话</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" th:value="${people.phone}" name="phone" lay-verify="phone" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">文化程度</label>
+                                <div class="layui-input-inline">
+                                    <select name="educationLevelId">
+                                        <option th:each="educationLevel : ${dictionary}" th:if="${educationLevel.topId} eq '500'" th:field="${people.nationId}" th:text="${educationLevel.dictionaryName}" th:value="${educationLevel.dictionaryId}">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">政治面貌</label>
+                                <div class="layui-input-inline">
+                                    <select name="politicalOutlookId">
+                                        <option th:each="politicalOutlook : ${dictionary}" th:if="${politicalOutlook.topId} eq '200'" th:field="${people.nationId}" th:text="${politicalOutlook.dictionaryName}" th:value="${politicalOutlook.dictionaryId}">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">宗教信仰</label>
+                                <div class="layui-input-inline">
+                                    <select name="faithId">
+                                        <option th:each="faith : ${dictionary}" th:if="${faith.topId} eq '300'" th:field="${people.nationId}" th:text="${faith.dictionaryName}" th:value="${faith.dictionaryId}">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <legend>身体状况</legend>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身高</label>
+                                <div class="layui-input-inline">
+                                    <input type="tel" th:value="${people.height}" name="height" required lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                                <label class="layui-form-label">cm</label>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">体重</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" th:value="${people.weight}" name="weight" required lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                                <label class="layui-form-label">公斤</label>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">血型</label>
+                                <div class="layui-input-inline">
+                                    <select name="bloodTypeId">
+                                        <option th:each="bloodType : ${dictionary}" th:if="${bloodType.topId} eq '400'" th:field="${people.nationId}" th:text="${bloodType.dictionaryName}" th:value="${bloodType.dictionaryId}">请选择血型</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">健康状况</label>
+                                <div class="layui-input-inline">
+                                    <select name="healthy">
+                                        <option th:each="healthy : ${dictionary}" th:if="${healthy.topId} eq '1800'" th:field="${people.nationId}" th:text="${healthy.dictionaryName}" th:value="${healthy.dictionaryId}">请选择健康状况</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">从业状况</label>
+                                <div class="layui-input-inline">
+                                    <select name="employmentStateId">
+                                        <option th:each="employmentState : ${dictionary}" th:if="${employmentState.topId} eq '1000'" th:field="${people.nationId}" th:text="${employmentState.dictionaryName}" th:value="${employmentState.dictionaryId}">请选择从业状况</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">婚姻状况</label>
+                                <div class="layui-input-inline">
+                                    <select name="maritalStateId" lay-verify="required" lay-filter="marital">
+                                        <option th:each="maritalState : ${dictionary}" th:if="${maritalState.topId} eq '600'" th:field="${people.maritalStateId}" th:text="${maritalState.dictionaryName}" th:value="${maritalState.dictionaryId}">请选择婚姻状况</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+
+<!--            <div class="layui-col-xs11" id="spouse" >-->
+<!--                <div class="layui-form-item">-->
+<!--                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">-->
+<!--                        <legend>配偶信息</legend>-->
+<!--                    </fieldset>-->
+<!--                </div>-->
+<!--                <input type="hidden" id="spsp" value="${spouseInfo}">-->
+<!--                <div class="layui-form-item">-->
+<!--                    <label class="layui-form-label">配偶姓名</label>-->
+<!--                    <div class="layui-input-block">-->
+<!--                        <input type="text" th:if="${spouseInfo.spouseName} ne null" th:value="${spouseInfo.getSpouseName()}" name="spouseName" placeholder="请输入姓名" autocomplete="off" class="layui-input">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <label class="layui-form-label">配偶身份号码</label>-->
+<!--                    <div class="layui-input-block">-->
+<!--                        <input type="text" th:if="${spouseInfo.spouseIdCard } ne null" th:value="${spouseInfo.getSpouseIdCard()}" name="spouseInCard" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <label class="layui-form-label">现居住详细地址</label>-->
+<!--                    <div class="layui-input-inline">-->
+<!--                        <select name="quiz1" id="spouseP" lay-filter="changeSpouseProvince" th:if="${spouseInfoAddress.provinceCode} ne null">-->
+<!--                            <option  th:each="provinces : ${provinces}" th:selected="${spouseInfoAddress.provinceCode eq provinces.provinceCode}"  th:text="${provinces.provinceName}" th:value="${provinces.provinceCode}">请选择省</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="layui-input-inline">-->
+<!--                        <select name="quiz2" id="spouseC" lay-filter="changeSpouseCity" th:if="${spouseInfoAddress.addressCityList[0].cityCode} ne null">-->
+<!--                            <option  th:each="city : ${cities}" th:if="${city.provinceCode eq spouseInfoAddress.provinceCode}" th:selected="${spouseInfoAddress.addressCityList[0].cityCode eq city.cityCode}"  th:text="${city.cityName}" th:value="${city.cityCode}">请选择市</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="layui-input-inline">-->
+<!--                        <select name="spouseCountyCode" id="spouseT"  th:if="${spouseInfoAddress.addressCountyList[0].countyCode } ne null">-->
+<!--                            <option th:each="counties : ${counties}" th:if="${counties.cityCode eq spouseInfoAddress.addressCityList[0].cityCode}" th:selected="${spouseInfoAddress.addressCountyList[0].countyCode eq counties.countyCode}"  th:text="${counties.countyName}" th:value="${counties.countyCode}">请选择县/区</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="layui-input-inline">-->
+<!--                        <input type="text" th:if="${spouseInfo.spouseAddress} ne null" th:value="${spouseInfo.spouseAddress}" name="spouseAddress" placeholder="详细地址" autocomplete="off" class="layui-input">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">从业状况</label>-->
+<!--                        <div class="layui-input-inline">-->
+<!--                            <select name="spouseEmploymentStateId" th:if="${spouseInfo.spouseEmploymentStateId} ne null">-->
+<!--                                <option  th:each="spouseEmploymentState : ${dictionary}" th:if="${spouseEmploymentState.topId} eq '1000'" th:field="${spouseInfo.spouseEmploymentStateId}" th:text="${spouseEmploymentState.dictionaryName}" th:value="${spouseEmploymentState.dictionaryId}">请选择从业状况</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">工作单位</label>-->
+<!--                        <div class="layui-input-inline">-->
+<!--                            <input type="text" th:if="${spouseInfo.spouseWorkUnit} ne null" th:value="${spouseInfo.spouseWorkUnit}" name="spouseWorkUnit" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">本人联系电话</label>-->
+<!--                        <div class="layui-input-inline">-->
+<!--                            <input type="text" th:if="${spouseInfo.spousePhone} ne null" th:value="${spouseInfo.spousePhone}" name="spousePhone" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="layui-col-xs11">
+                <div class="layui-form-item">
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                        <legend>同住家庭成员</legend>
+                    </fieldset>
+                </div>
+                <div class="layui-form-item">
+                    <button type="button" id="member" class="layui-btn layui-btn-primary layui-btn-sm">添加一行</button>
+                </div>
+                <table border="1" style="width: 900px;text-align: center" id="memberTab">
+                    <tr style="height: 50px;">
+                        <td style="width: 100px;">关系</td>
+                        <td>身份号码</td>
+                        <td style="width: 100px;">姓名</td>
+                        <td>性别</td>
+                        <td style="width: 90px;">出生日期</td>
+                        <td>有误预防接种证</td>
+                        <td>是否在本市就学</td>
+                    </tr>
+                    <tr th:each="family: ${familyMember}">
+                        <td>
+                            <select name="relationId">
+                                <option th:each="relation : ${dictionary}" th:if="${relation.topId} eq '1500'" th:selected="${family.getRelationId() eq  relation.dictionaryId}" th:text="${relation.dictionaryName}" th:value="${relation.dictionaryId}">关系</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input th:value="${family.memberIdCard}" class="layui-input" name="memberIdCard" placeholder="身份证号"/>
+                        </td>
+                        <td>
+                            <input th:value="${family.memberName} " class="layui-input" name="memberName" placeholder="姓名"/>
+                        </td>
+                        <td>
+                            <input type="radio" th:if="${family.getMemberSex() ne null}" th:attr ="checked=${family.getMemberSex()}" name="memberSex" value="1" title="男" lay-verify="otherReq">
+                            <input type="radio" th:if="${family.getMemberSex() ne null}" th:attr ="checked=${family.getMemberSex()}" name="memberSex" value="0" title="女" checked lay-verify="otherReq">
+                        </td>
+                        <td>
+                            <input type="date"  class="layui-input" id="pdate" placeholder="出生日期">
+                        </td>
+                        <td>
+                            <input type="radio"   th:if="${family.getHasVaccinate() ne null}" th:attr ="checked=${family.getHasVaccinate()}" name="hasVaccinate" value="1" title="是" lay-verify="otherReq">
+                            <input type="radio"  th:if="${family.getHasVaccinate() ne null}" th:attr ="checked=${family.getHasVaccinate()}" name="hasVaccinate" value="0" title="否" checked lay-verify="otherReq">
+                        </td>
+                        <td>
+                            <input type="radio"  th:if="${family.getIsLocal() ne null}" th:attr ="checked=${family.getIsLocal()}" name="isLocal" value="1" title="是" lay-verify="otherReq">
+                            <input type="radio" th:if="${family.getIsLocal() ne null}"   th:attr ="checked=${family.getIsLocal()}" name="isLocal" value="0" title="否" checked lay-verify="otherReq">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+<!--            <div class="layui-col-xs11" id="planning" >-->
+<!--                <div class="layui-form-item">-->
+<!--                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">-->
+<!--                        <legend>计生信息</legend>-->
+<!--                    </fieldset>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <div class="layui-inline">-->
+<!--                    <label class="layui-form-label">夫妻同行</label>-->
+<!--                    <div class="layui-input-block">-->
+<!--                        <input th:if="${familyPlanningInfo.isTogether ne null}"  th:field="${familyPlanningInfo.isTogether}" type="radio" name="isTogether" value="1" title="是">-->
+<!--                        <input th:if="${familyPlanningInfo.isTogether ne null}"  th:field="${familyPlanningInfo.isTogether}" type="radio" name="isTogether" value="0" title="否" checked>-->
+<!--                    </div>-->
+<!--                    </div>-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">婚育证明</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input th:if="${familyPlanningInfo.hasProve ne null}"  th:field="${familyPlanningInfo.hasProve}" type="radio" name="hasProve" value="1" title="有">-->
+<!--                            <input th:if="${familyPlanningInfo.hasProve ne null}"  th:field="${familyPlanningInfo.hasProve}" type="radio" name="hasProve" value="0" title="无" checked>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">婚育证编号</label>-->
+<!--                        <div class="layui-input-inline">-->
+<!--                            <input type="tel" th:value="${familyPlanningInfo.number}" name="number" lay-verify="required|phone" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">是否验证</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input th:if="${familyPlanningInfo.isChecked ne null}"  th:field="${familyPlanningInfo.isChecked}" type="radio" name="sex" value="1" title="是">-->
+<!--                            <input  th:if="${familyPlanningInfo.isChecked ne null}"  th:field="${familyPlanningInfo.isChecked}" type="radio" name="sex" value="0" title="否" checked>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <legend>生育情况</legend>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">生育子女数</label><label class="layui-form-label">男</label>-->
+<!--                        <div class="layui-input-inline">-->
+<!--                            <input type="tel" th:value="${familyPlanningInfo.boyNum}" name="boyNum" lay-verify="required|phone" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                        <label class="layui-form-label">人</label>-->
+<!--                    </div>-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">女</label>-->
+<!--                        <div class="layui-input-inline">-->
+<!--                            <input type="text" th:value="${familyPlanningInfo.girlNum}" name="girlNum" lay-verify="email" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                        <label class="layui-form-label">人</label>-->
+<!--                    </div>-->
+<!--                    </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">政策内</label>-->
+<!--                        <div class="layui-input-inline">-->
+<!--                            <input type="text" th:value="${familyPlanningInfo.insideNum}" name="email" lay-verify="email" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                        <label class="layui-form-label">孩</label>-->
+<!--                    </div>-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">政策外</label>-->
+<!--                        <div class="layui-input-inline">-->
+<!--                            <input type="text" th:value="${familyPlanningInfo.outsideNum}" name="email" lay-verify="email" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                        <label class="layui-form-label">孩</label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">生育子女证</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input th:if="${familyPlanningInfo.hasCertificate ne null}"  th:field="${familyPlanningInfo.hasCertificate}" type="radio" name="hasCertificate" value="1" title="有">-->
+<!--                            <input th:if="${familyPlanningInfo.hasCertificate ne null}"  th:field="${familyPlanningInfo.hasCertificate}" type="radio" name="hasCertificate" value="0" title="无" checked>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">社会抚养费</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input th:if="${familyPlanningInfo.isLevy ne null}"  th:field="${familyPlanningInfo.isLevy}" type="radio" name="isLevy" value="1" title="已缴">-->
+<!--                            <input th:if="${familyPlanningInfo.isLevy ne null}"  th:field="${familyPlanningInfo.isLevy}" type="radio" name="isLevy" value="0" title="未缴" checked>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="layui-form-item">-->
+<!--                <label class="layui-form-label">怀孕避孕情况</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <select name="pregnancyInfoId">-->
+<!--                        <option th:each="pregnancyInfo : ${dictionary}" th:if="${pregnancyInfo.topId} eq '2000'" th:field="${familyPlanningInfo.pregnancyInfoId}" th:text="${pregnancyInfo.dictionaryName}" th:value="${pregnancyInfo.dictionaryId}">请选择问题</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <label class="layui-form-label">措施时间</label>-->
+<!--                    <div class="layui-input-block">-->
+<!--                        <input th:value="${familyPlanningInfo.measure}" type="text" name="measure" lay-verify="email" autocomplete="off" class="layui-input">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--                <div class="layui-form-item" th:each="fertilityInfos:${fertilityInfos}">-->
+<!--                    <label class="layui-form-label">当年生育子女</label>-->
+<!--                    <div class="layui-input-inline">-->
+<!--                        <input  th:attr ="checked=${fertilityInfos.getChildSex()}" type="radio" name="childSex" value="1" title="男">-->
+<!--                        <input  th:attr ="checked=${fertilityInfos.getChildSex()}" type="radio" name="childSex" value="0" title="女" >-->
+<!--                    </div>-->
+<!--                    <div class="layui-input-inline">-->
+<!--                        <label class="layui-form-label">出生日期</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input  th:value="${#dates.format(fertilityInfos.childBirthday,'yyyy-MM-dd')}" type="date" name="childBirthday" lay-verify="date" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="layui-inline">-->
+<!--                        <label class="layui-form-label">政策内外</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input  th:attr ="checked=${fertilityInfos.getInside()}" type="radio" name="isInside" value="1" title="内">-->
+<!--                            <input  th:attr ="checked=${fertilityInfos.getInside()}" type="radio" name="isInside" value="0" title="外" >-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="layui-col-xs11">
+                <div class="layui-form-item">
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                        <legend>就业信息</legend>
+                    </fieldset>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">单位名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" th:value="${employmentInfo.company.unitName}" name="unitName" required lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">单位类型</label>
+                        <div class="layui-input-inline">
+                            <select name="unitTypeId">
+                                <option th:each="unitType : ${dictionary}" th:if="${unitType.topId} eq '1700'" th:field="${employmentInfo.company.unitTypeId}" th:text="${unitType.dictionaryName}" th:value="${unitType.dictionaryId}">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单位地址</label>
+                    <div class="layui-input-inline">
+                        <select name="">
+<!--                            <option th:each="provinces : ${provinces}" th:selected="${employmentAddress.provinceCode eq provinces.provinceCode}"   th:text="${provinces.provinceName}" th:value="${provinces.provinceCode}">请选择省</option>-->
+                            <option value="140000">山西省</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="">
+<!--                            <option th:each="city : ${cities}" th:selected="${employmentAddress.addressCityList[0].cityCode eq city.cityCode}"   th:text="${city.cityName}" th:value="${city.cityCode}">请选择市</option>-->
+                            <option value="140200">大同市</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="unitCountyCode" id="unitCO" lay-filter="changeUnitTown">
+                            <option th:each="counties : ${counties}" th:if="${counties.cityCode eq employmentAddress.addressCityList[0].cityCode}" th:selected="${employmentAddress.addressCountyList[0].countyCode eq counties.countyCode}"  th:text="${counties.countyName}" th:value="${counties.countyCode}">请选择县/区</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="unitTownCode" id="unitT">
+                            <option th:each="towns : ${towns}" th:if="${towns.countyCode eq employmentAddress.addressCountyList[0].countyCode}"  th:selected="${employmentAddress.addressTownList[0].townCode eq towns.townCode}"  th:text="${towns.townName}" th:value="${towns.townCode}">请选择乡/镇</option>
+                        </select>
+
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" th:value="${employmentInfo.company.unitAddress}" name="unitAddress" required  lay-verify="required" placeholder="详细地址" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">组织机构代码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" th:value="${employmentInfo.company.organizationCode}" name="organizationCode" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">法人代表</label>
+                        <div class="layui-input-inline">
+                            <input type="text" th:value="${employmentInfo.company.legalPersonName}" name="legalPersonName" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">联系电话</label>
+                        <div class="layui-input-inline">
+                            <input type="text" th:value="${employmentInfo.company.unitPhone}" name="unitPhone" lay-verify="phone" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">劳动合同</label>
+                    <div class="layui-input-inline">
+                        <input type="text" th:value="${employmentInfo.contractYear}" name="contractYear" lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item" >
+                    <label class="layui-form-label">保险</label>
+                    <div class="layui-input-inline" >
+                        <input th:each="hobbies : ${dictionary}" th:checked="${#lists.contains(insuranceStates, hobbies.dictionaryId)}"   th:if="${hobbies.topId} eq '900'" type="checkbox" name="hobbies"   th:title="${hobbies.dictionaryName}" th:value="${hobbies.dictionaryId}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">社会社保号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" th:value="${employmentInfo.company.unitSocial}" name="unitSocial" lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">单位编号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" th:value="${employmentInfo.company.unitNum}" name="unitNum" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">用工人数</label>
+                        <div class="layui-input-inline">
+                            <input type="text" th:value="${employmentInfo.company.workerNum}" name="workerNum" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">行业类别</label>
+                        <div class="layui-input-inline">
+                            <select name="industryCategoryId">
+<!--                                <option th:each="industryCategory : ${dictionary}" th:if="${industryCategory.topId} eq '2000'" th:field="${employmentInfo.company.industryCategoryId}" th:text="${industryCategory.dictionaryName}" th:value="${industryCategory.dictionaryId}">请选择</option>-->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">职称</label>
+                        <div class="layui-input-inline">
+                            <select name="positionalTitleId">
+                                <option th:each="positionalTitle : ${dictionary}" th:if="${positionalTitle.topId} eq '700'" th:field="${employmentInfo.positionalTitleId}" th:text="${positionalTitle.dictionaryName}" th:value="${positionalTitle.dictionaryId}">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">职业技能等级</label>
+                        <div class="layui-input-inline">
+                            <select name="skillId">
+                                <option th:each="skill : ${dictionary}" th:if="${skill.topId} eq '800'" th:field="${employmentInfo.skillId}" th:text="${skill.dictionaryName}" th:value="${skill.dictionaryId}">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">职业</label>
+                        <div class="layui-input-inline">
+                            <input type="text" th:value="${employmentInfo.occupation}" name="occupation" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-col-xs11">
+                <div class="layui-form-item">
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                        <legend>居住信息</legend>
+                    </fieldset>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">居住方式</label>
+                        <div class="layui-input-inline">
+                            <select name="livingStyleId">
+                                <option th:each="livingStyle : ${dictionary}" th:if="${livingStyle.topId} eq '1600'"  th:field="${residentialInfo.livingStyleId}" th:text="${livingStyle.dictionaryName}" th:value="${livingStyle.dictionaryId}">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">居住事由</label>
+                        <div class="layui-input-inline">
+                            <select name="reasonForResidenceId">
+                                <option th:each="reasonForResidence : ${dictionary}" th:field="${residentialInfo.reasonForResidenceId}" th:if="${reasonForResidence.topId} eq '1100'"  th:text="${reasonForResidence.dictionaryName}" th:value="${reasonForResidence.dictionaryId}">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">房屋类别</label>
+                        <div class="layui-input-inline">
+                            <select name="houseType">
+                                <option th:each="houseType : ${dictionary}" th:if="${houseType.topId} eq '1200'" th:field="${residentialInfo.houseTypeId}" th:text="${houseType.dictionaryName}" th:value="${houseType.dictionaryId}">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房屋地址</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz1">
+<!--                            <option th:each="provinces : ${provinces}" th:selected="${residentialAddress.provinceCode eq provinces.provinceCode}"  th:text="${provinces.provinceName}" th:value="${provinces.provinceCode}">请选择省</option>-->
+                        <option value="140000">山西省</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="quiz2">
+<!--                            <option th:each="city : ${cities}"  th:selected="${residentialAddress.addressCityList[0].cityCode  eq city.cityCode}" th:text="${city.cityName}" th:value="${city.cityCode}">请选择市</option>-->
+                            <option value="140200">大同市</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select id="residentialCO" name="residentialCO"  lay-filter="changeResidentialTown">
+                            <option th:each="counties : ${counties}" th:if="${counties.cityCode eq residentialAddress.addressCityList[0].cityCode}" th:selected="${residentialAddress.addressCountyList[0].countyCode  eq counties.countyCode}"  th:text="${counties.countyName}" th:value="${counties.countyCode}">请选择县/区</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="residentialTownCode" id="residentialTown">
+                            <option th:each="towns : ${towns}"  th:if="${towns.countyCode eq residentialAddress.addressCountyList[0].countyCode}" th:selected="${residentialAddress.addressTownList[0].townCode  eq towns.townCode}"  th:text="${towns.townName}" th:value="${towns.townCode}">请选择乡/镇</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" th:value="${residentialInfo.residentialAddres}" name="residentialAddres" required  lay-verify="required" placeholder="详细地址" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-form-item">
+                        <legend>出租人情况</legend>
+                    </div>
+                    <div class="layui-input-block">
+                        <table class="layui" id="test2" border="1" style="height: 80px;width: 600px;">
+                            <tr>
+                                <th>出租人类型</th>
+                                <th>姓名</th>
+                                <th>联系电话</th>
+                                <th style="width: 160px">身份证号</th>
+                                <th>是否签订治安责任书</th>
+                            </tr>
+                            <tr >
+                                <td>
+                                    <select id="lessorType"  name="lessorType" >
+                                        <option  th:selected="${residentialInfo.lessorInfo.lessorType eq '1' } " title="房东"   value="1">房东</option>
+                                        <option  th:selected="${residentialInfo.lessorInfo.lessorType eq  '0'}"  title="代理人" value="0">代理人</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input  th:value="${residentialInfo.lessorInfo.lessorName}" name="lessorName" class="layui-input">
+                                </td>
+                                <td>
+                                    <input th:value="${residentialInfo.lessorInfo.lessorPhone}" name="lessorPhone" class="layui-input">
+                                </td>
+                                <td>
+                                    <input th:value="${residentialInfo.lessorInfo.lessorIdCard}" name="lessorIdCard" class="layui-input">
+                                </td>
+                                <td>
+                                    <input th:attr ="checked=${residentialInfo.lessorInfo.getIsSign()}" type="radio" name="isSign" value="1" title="是">
+                                    <input th:attr ="checked=${residentialInfo.lessorInfo.getIsSign()}" type="radio" name="isSign" value="0" title="否">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">房屋类型</label>
+                        <div class="layui-input-inline">
+                            <select name="houseGener">
+                                <option th:each="houseGener : ${dictionary}" th:if="${houseGener.topId} eq '1300'" th:field="${residentialInfo.houseGener}" th:text="${houseGener.dictionaryName}" th:value="${houseGener.dictionaryId}">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">房屋用途</label>
+                        <div class="layui-input-inline">
+                            <select name="houseUse">
+                                <option th:each="houseUse : ${dictionary}" th:if="${houseUse.topId} eq '1400'" th:field="${residentialInfo.houseUse}" th:text="${houseUse.dictionaryName}" th:value="${houseUse.dictionaryId}">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">信息采集员</label>
+                        <div class="layui-input-inline">
+                            <input type="text" th:value="${residentialInfo.messagePerson}" name="messagePerson" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['form', 'layedit', 'laydate','element','upload'], function(){
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate,
+            element = layui.element,
+            upload = layui.upload,
+            $ = layui.jquery;
+            form.render();
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/upload/'
+            ,size: 200
+            ,accept: 'jpg'
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#picture').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+
+        //日期
+        laydate.render({
+            elem: '.date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+        laydate.render({
+            elem: '#pdate'
+        });
+        form.on('select(changeProvince)', function(data){
+            var code = $('select[name=peopleP]').val();
+            $.post("/changeProvince",{"code":code},function(result){
+                $("#peopleCity").empty();
+                for (var i=0;i < result.length;i++){
+                    $("#peopleCity").append("<option value='"+result[i].cityCode+"'>" + result[i].cityName+ "</option>");
+
+                }
+                form.render('select')
+            })
+        });
+        form.on('select(changeSpouseProvince)', function(data){
+            var code = $("#spouseP").val();
+            $.post("/changeProvince",{"code":code},function(result){
+                $("#spouseC").empty();
+                for (var i=0;i < result.length;i++){
+                    var code2 = result[0].cityCode;
+                    console.log(code2)
+                    $("#spouseC").append("<option value='"+result[i].cityCode+"'>" + result[i].cityName+ "</option>");
+                }
+                $.post("/changeCity",{"code":code2},function(result){
+                    $("#spouseT").empty();
+                    for (var i=0;i < result.length;i++){
+                        $("#spouseT").append("<option value='"+result[i].countyCode+"'>" + result[i].countyName+ "</option>");
+                    }
+                    form.render('select')
+                })
+            })
+        });
+        form.on('select(changeSpouseCity)', function(data){
+            var code = $("#spouseC").val();
+            $.post("/changeCity",{"code":code},function(result){
+                $("#spouseT").empty();
+                for (var i=0;i < result.length;i++){
+                    $("#spouseT").append("<option value='"+result[i].countyCode+"'>" + result[i].countyName+ "</option>");
+                }
+                form.render('select')
+            })
+        });
+        form.on('select(changeTown)', function(data){
+            var code = $('select[name=peopleCO]').val();
+            console.log(code);
+            $.post("/changeTown",{"code":code},function(result){
+                $("#peopleTown").empty();
+                for (var i=0;i < result.length;i++){
+                    $("#peopleTown").append("<option value='"+result[i].townCode+"'>" + result[i].townName+ "</option>");
+                }
+                form.render('select')
+            })
+        });
+        form.on('select(changeResidentialTown)', function(data){
+            var code = $("#residentialCO").val();
+            $.post("/changeTown",{"code":code},function(result){
+                $("#residentialTown").empty();
+                for (var i=0;i < result.length;i++){
+                    $("#residentialTown").append("<option value='"+result[i].townCode+"'>" + result[i].townName+ "</option>");
+                }
+                form.render('select')
+            })
+        });
+        form.on('select(changeUnitTown)', function(data){
+            var code = $("#unitCO").val();
+            $.post("/changeTown",{"code":code},function(result){
+                $("#unitT").empty();
+                for (var i=0;i < result.length;i++){
+                    $("#unitT").append("<option value='"+result[i].townCode+"'>" + result[i].townName+ "</option>");
+                }
+                form.render('select')
+            })
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            otherReq: function(value,item){
+                var $ = layui.$;
+                var verifyName=$(item).attr('name')
+                    , verifyType=$(item).attr('type')
+                    ,formElem=$(item).parents('.layui-form')//获取当前所在的form元素，如果存在的话
+                    ,verifyElem=formElem.find('input[name='+verifyName+']')//获取需要校验的元素
+                    ,isTrue= verifyElem.is(':checked')//是否命中校验
+                    ,focusElem = verifyElem.next().find('i.layui-icon');//焦点元素
+                if(!isTrue || !value){
+                    //定位焦点
+                    focusElem.css(verifyType=='radio'?{"color":"#FF5722"}:{"border-color":"#FF5722"});
+                    //对非输入框设置焦点
+                    focusElem.first().attr("tabIndex","1").css("outline","0").blur(function() {
+                        focusElem.css(verifyType=='radio'?{"color":""}:{"border-color":""});
+                    }).focus();
+                    return '必填项不能为空';
+                }
+            },
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            },
+            pass: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+
+
+        //监听指定开关
+        form.on('switch(switchTest)', function(data){
+            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+        //表单赋值
+        layui.$('#LAY-component-form-setval').on('click', function(){
+            form.val('example', {
+                "username": "贤心" // "name": "value"
+                ,"password": "123456"
+                ,"interest": 1
+                ,"like[write]": true //复选框选中状态
+                ,"close": true //开关状态
+                ,"sex": "女"
+                ,"desc": "我爱 layui"
+            });
+        });
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+        $(document).on('blur',"input[placeholder='身份证号']",function(){
+            var IDNumber = $(this).val();
+            var strYear = IDNumber.substring(6,10);
+            var strMonth = IDNumber.substring(10,12);
+            var strDay = IDNumber.substring(12,14);
+            var birth = strYear+"-"+strMonth+"-"+strDay;
+            $(this).parents("tr").find("#birth").val(birth);
+        })
+        $(document).on('click','#member',function(){
+            $("#memberTab").append("<tr>\n" +
+                "                        <td>\n" +
+                "                            <select name=\"relationId\">\n" +
+                "                                <option value=\"\">关系</option>\n" +
+                "                            </select>\n" +
+                "                        </td>\n" +
+                "                        <td>\n" +
+                "                            <input class=\"layui-input\" name=\"memberIdCard\" placeholder=\"身份证号\"/>\n" +
+                "                        </td>\n" +
+                "                        <td>\n" +
+                "                            <input class=\"layui-input\" name=\"memberName\" placeholder=\"姓名\"/>\n" +
+                "                        </td>\n" +
+                "                        <td>\n" +
+                "                            <input type=\"radio\" name=\"memberSex\" value=\"1\" title=\"男\">\n" +
+                "                            <input type=\"radio\" name=\"memberSex\" value=\"0\" title=\"女\" checked>\n" +
+                "                        </td>\n" +
+                "                        <td>\n" +
+                "                            <input type=\"text\" class=\"layui-input\" id=\"pdate\" placeholder=\"出生日期\">\n" +
+                "                        </td>\n" +
+                "                        <td> <input type=\"radio\" name=\"hasVaccinate\" value=\"1\" title=\"是\">\n" +
+                "                            <input type=\"radio\" name=\"hasVaccinate\" value=\"0\" title=\"否\" checked></td>\n" +
+                "                        <td>\n" +
+                "                            <input type=\"radio\" name=\"isLocal\" value=\"1\" title=\"是\">\n" +
+                "                            <input type=\"radio\" name=\"isLocal\" value=\"0\" title=\"否\" checked>\n" +
+                "                        </td>\n" +
+                "                    </tr>");
+        });
+    });
+</script>
+<script src="/js/jquery.js"></script>
+<script type="text/javascript">
+</script>
+
+</html>

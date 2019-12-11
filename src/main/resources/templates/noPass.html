@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/plugs/layui/css/layui.css">
+    <script src="/plugs/layui/layui.js"></script>
+</head>
+<body>
+	<div>
+		<h1 align="center">不通过原因:</h1>
+	</div>
+	<form id="theForm" method="post" onsubmit="return false" class="layui-form" action="##">
+		<input id="uid" type="hidden" name="adminId" th:value="${id}">
+		<textarea  id="rea" name="reason"   cols="80"   rows="14"   style="OVERFLOW:   hidden"></textarea>
+		<div align="center">
+			<button type="button" onclick="noPassReason()" class="layui-btn layui-btn-normal">发送</button>
+		</div>		
+	</form>
+	<script src="/js/jquery.js"></script>
+	<script type="text/javascript">
+		function noPassReason() {
+			var adminId=$("#uid").val();
+			var reason =$("#rea").val();
+			$.ajax({
+				//几个参数需要注意一下
+				type: "POST",//方法类型
+				dataType: "json",//预期服务器返回的数据类型
+				url: "/noPass" ,//url
+				data: {"adminId":adminId,"reason":reason},
+				success: function (result) {
+					console.log(result);//打印服务端返回的数据(调试用)
+					if (result == 1) {
+						parent.layer.closeAll();
+						window.parent.location.reload();
+					}else{
+						alert("操作失败！")
+					}
+					;
+				}
+			});
+		}
+	</script>
+</body>
+</html>
