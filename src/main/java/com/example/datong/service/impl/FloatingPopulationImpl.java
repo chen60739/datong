@@ -1,14 +1,20 @@
-package com.example.datong.service;
+package com.example.datong.service.impl;
 
 import com.example.datong.dao.*;
 import com.example.datong.dto.NoPassedPerson;
 import com.example.datong.model.*;
+import com.example.datong.service.FloatingPopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class FloatingPopulationImpl implements FloatingPopulationService {
@@ -33,6 +39,41 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
     private ResidentialInfoMapper residentialInfoMapper;
     @Autowired
     private FertilityInfoMapper fertilityInfoMapper;
+    @Resource
+    FloatingPopulationMapper floatingPopulationMapper;
+    @Resource
+    CheckReasonMapper checkReasonMapper;
+
+    @Override
+    public int changePass(Integer id) {
+        return floatingPopulationMapper.updatePass(id);
+    }
+
+    @Override
+    @Transactional
+    public Map<String,Object> changeNoPass(Integer id,CheckReason reason) {
+        HashMap<String ,Object> map=new HashMap<>();
+        CheckReason checkReason = checkReasonMapper.selectOne(id);
+        if(checkReason != null){
+            map.put("error","已存在原因");
+        }else {
+            checkReasonMapper.insertrecord(reason);
+            floatingPopulationMapper.updateNoPass(id);
+            map.put("success","添加成功");
+        }
+        return map;
+
+    }
+
+    @Override
+    public Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2) {
+        HashMap<String,Object> map = new HashMap<>();
+        List<FloatingPopulation> floatingPopulations = floatingPopulationMapper.selectAll( unitName,name, phone,time1,time2);
+        map.put("data",floatingPopulations);
+        map.put("code",0);
+        return map;
+    }
+
 
     @Override
     public List<NoPassedPerson> findNoPassed(Integer unitId) {
