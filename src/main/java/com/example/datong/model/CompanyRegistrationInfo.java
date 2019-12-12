@@ -37,10 +37,37 @@ public class CompanyRegistrationInfo {
     private String workerNum;
     //创建时间
     private Date gmtCreate;
+    private String gmtCreateStr;
     //修改时间
     private Date gmtModified;
+    private String gmtModifiedStr;
     //审核状态
     private Integer isChecked;
+
+    public CompanyRegistrationInfo() {
+    }
+
+    public CompanyRegistrationInfo(Integer unitId, String unitName, String unitPhone, String password, String unitCountyCode, String unitTownCode, Integer unitTypeId, String unitAddress, String unitNum, String unitSocial, String industryCategoryId, String organizationCode, String legalPersonName, String workerNum, Date gmtCreate, String gmtCreateStr, Date gmtModified, String gmtModifiedStr, Integer isChecked) {
+        this.unitId = unitId;
+        this.unitName = unitName;
+        this.unitPhone = unitPhone;
+        this.password = password;
+        this.unitCountyCode = unitCountyCode;
+        this.unitTownCode = unitTownCode;
+        this.unitTypeId = unitTypeId;
+        this.unitAddress = unitAddress;
+        this.unitNum = unitNum;
+        this.unitSocial = unitSocial;
+        this.industryCategoryId = industryCategoryId;
+        this.organizationCode = organizationCode;
+        this.legalPersonName = legalPersonName;
+        this.workerNum = workerNum;
+        this.gmtCreate = gmtCreate;
+        this.gmtCreateStr = gmtCreateStr;
+        this.gmtModified = gmtModified;
+        this.gmtModifiedStr = gmtModifiedStr;
+        this.isChecked = isChecked;
+    }
 
     public Integer getUnitId() {
         return unitId;
@@ -55,7 +82,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitName(String unitName) {
-        this.unitName = unitName == null ? null : unitName.trim();
+        this.unitName = unitName;
     }
 
     public String getUnitPhone() {
@@ -63,7 +90,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitPhone(String unitPhone) {
-        this.unitPhone = unitPhone == null ? null : unitPhone.trim();
+        this.unitPhone = unitPhone;
     }
 
     public String getPassword() {
@@ -71,7 +98,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getUnitCountyCode() {
@@ -79,7 +106,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitCountyCode(String unitCountyCode) {
-        this.unitCountyCode = unitCountyCode == null ? null : unitCountyCode.trim();
+        this.unitCountyCode = unitCountyCode;
     }
 
     public String getUnitTownCode() {
@@ -87,7 +114,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitTownCode(String unitTownCode) {
-        this.unitTownCode = unitTownCode == null ? null : unitTownCode.trim();
+        this.unitTownCode = unitTownCode;
     }
 
     public Integer getUnitTypeId() {
@@ -103,7 +130,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitAddress(String unitAddress) {
-        this.unitAddress = unitAddress == null ? null : unitAddress.trim();
+        this.unitAddress = unitAddress;
     }
 
     public String getUnitNum() {
@@ -111,7 +138,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitNum(String unitNum) {
-        this.unitNum = unitNum == null ? null : unitNum.trim();
+        this.unitNum = unitNum;
     }
 
     public String getUnitSocial() {
@@ -119,7 +146,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitSocial(String unitSocial) {
-        this.unitSocial = unitSocial == null ? null : unitSocial.trim();
+        this.unitSocial = unitSocial;
     }
 
     public String getIndustryCategoryId() {
@@ -127,7 +154,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setIndustryCategoryId(String industryCategoryId) {
-        this.industryCategoryId = industryCategoryId == null ? null : industryCategoryId.trim();
+        this.industryCategoryId = industryCategoryId;
     }
 
     public String getOrganizationCode() {
@@ -135,7 +162,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setOrganizationCode(String organizationCode) {
-        this.organizationCode = organizationCode == null ? null : organizationCode.trim();
+        this.organizationCode = organizationCode;
     }
 
     public String getLegalPersonName() {
@@ -143,7 +170,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setLegalPersonName(String legalPersonName) {
-        this.legalPersonName = legalPersonName == null ? null : legalPersonName.trim();
+        this.legalPersonName = legalPersonName;
     }
 
     public String getWorkerNum() {
@@ -151,7 +178,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setWorkerNum(String workerNum) {
-        this.workerNum = workerNum == null ? null : workerNum.trim();
+        this.workerNum = workerNum;
     }
 
     public Date getGmtCreate() {
@@ -162,12 +189,28 @@ public class CompanyRegistrationInfo {
         this.gmtCreate = gmtCreate;
     }
 
+    public String getGmtCreateStr() {
+        return gmtCreateStr;
+    }
+
+    public void setGmtCreateStr(String gmtCreateStr) {
+        this.gmtCreateStr = gmtCreateStr;
+    }
+
     public Date getGmtModified() {
         return gmtModified;
     }
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public String getGmtModifiedStr() {
+        return gmtModifiedStr;
+    }
+
+    public void setGmtModifiedStr(String gmtModifiedStr) {
+        this.gmtModifiedStr = gmtModifiedStr;
     }
 
     public Integer getIsChecked() {
@@ -196,7 +239,9 @@ public class CompanyRegistrationInfo {
                 ", legalPersonName='" + legalPersonName + '\'' +
                 ", workerNum='" + workerNum + '\'' +
                 ", gmtCreate=" + gmtCreate +
+                ", gmtCreateStr='" + gmtCreateStr + '\'' +
                 ", gmtModified=" + gmtModified +
+                ", gmtModifiedStr='" + gmtModifiedStr + '\'' +
                 ", isChecked=" + isChecked +
                 '}';
     }
