@@ -1,7 +1,8 @@
-package com.example.datong.service;
+package com.example.datong.service.impl;
 
 import com.example.datong.dao.DictionaryMapper;
 import com.example.datong.model.Dictionary;
+import com.example.datong.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

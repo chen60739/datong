@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.FloatingPopulationMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.model.FloatingPopulation">
+  <resultMap id="BaseResultMap" type="com.example.datong.pojo.FloatingPopulation">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="name_used_before" jdbcType="VARCHAR" property="nameUsedBefore" />
@@ -44,7 +44,7 @@
     delete from floating_population
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.model.FloatingPopulation">
+  <insert id="insert" parameterType="com.example.datong.pojo.FloatingPopulation">
     insert into floating_population (id, name, name_used_before, 
       sex, id_card, fixed_phone, household_city_code, 
       phone, nation_id, come_time, 
@@ -64,7 +64,7 @@
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{isChecked,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.model.FloatingPopulation">
+  <insert id="insertSelective" parameterType="com.example.datong.pojo.FloatingPopulation">
     insert into floating_population
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -221,7 +221,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.FloatingPopulation">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.FloatingPopulation">
     update floating_population
     <set>
       <if test="name != null">
@@ -299,7 +299,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.FloatingPopulation">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.FloatingPopulation">
     update floating_population
     set name = #{name,jdbcType=VARCHAR},
       name_used_before = #{nameUsedBefore,jdbcType=VARCHAR},

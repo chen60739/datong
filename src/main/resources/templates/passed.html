@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>审核中</title>
+    <script src="/plugs/layui/layui.js"></script>
+    <link rel="stylesheet" href="/plugs/layui/css/layui.css">
+</head>
+<body>
+<h2 style="padding-top: 20px">已通过的审核信息：</h2>
+<table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+</body>
+<script type="text/javascript" th:inline="none">
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //方法级渲染
+        table.render({
+            elem: '#LAY_table_user'
+            ,url: '/passedData'
+            ,cols: [[
+                {field:'id', width:80, title: '编号', sort: true, fixed: true}
+                ,{field:'name', width:80, title: '姓名', sort: true}
+                ,{field:'phone', width: 120, title: '手机号'}
+                ,{field:'gmtCreate', width:160, title: '填写时间',templet:'<div>{{ layui.util.toDateString(d.createDate, "yyyy-MM-dd HH:mm:ss") }}</div>', sort: true}
+            ]]
+            ,id: 'testReload'
+            ,page: true
+            ,height: 310
+            ,width: 450
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        key: {
+                            id: demoReload.val()
+                        }
+                    }
+                }, 'data');
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+</html>

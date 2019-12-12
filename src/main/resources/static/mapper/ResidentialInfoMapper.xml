@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.ResidentialInfoMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.model.ResidentialInfo">
+  <resultMap id="BaseResultMap" type="com.example.datong.pojo.ResidentialInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="p_id" jdbcType="INTEGER" property="pId" />
     <result column="town_code" jdbcType="VARCHAR" property="townCode" />
@@ -27,7 +27,7 @@
     delete from residential_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.model.ResidentialInfo">
+  <insert id="insert" parameterType="com.example.datong.pojo.ResidentialInfo">
     insert into residential_info (id, p_id, town_code, 
       addres, living_style_id, reason_for_residence_id, 
       house_type_id, house_gener, house_use, 
@@ -37,7 +37,7 @@
       #{houseTypeId,jdbcType=INTEGER}, #{houseGener,jdbcType=INTEGER}, #{houseUse,jdbcType=INTEGER}, 
       #{messagePerson,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.model.ResidentialInfo">
+  <insert id="insertSelective" parameterType="com.example.datong.pojo.ResidentialInfo">
     insert into residential_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.ResidentialInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.ResidentialInfo">
     update residential_info
     <set>
       <if test="pId != null">
@@ -137,7 +137,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.ResidentialInfo">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.ResidentialInfo">
     update residential_info
     set p_id = #{pId,jdbcType=INTEGER},
       town_code = #{townCode,jdbcType=VARCHAR},

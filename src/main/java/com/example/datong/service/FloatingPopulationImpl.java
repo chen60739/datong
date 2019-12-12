@@ -43,7 +43,7 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
     @Override
     public Map<String, Object> findChecking(Integer stateCode,Integer unitId) {
         List<FloatingPopulation> list = populationMapper.selectChecking(stateCode,unitId);
-        int count = populationMapper.selectNotCheckedCount(unitId);
+        int count = populationMapper.selectCheckingCount(stateCode,unitId);
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);
         map.put("count",count);

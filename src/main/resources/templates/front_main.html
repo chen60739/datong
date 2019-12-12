@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/plugs/layui/layui.js"></script>
+    <link rel="stylesheet" href="/plugs/layui/css/layui.css">
+    <script type="text/javascript" src="plugs/layui/xadmin.js"></script>
+    <link rel="stylesheet" href="css/xadmin.css">
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <ul class="layui-nav" >
+            <li class="layui-nav-item layui-this">
+                <a href="javascript:;"><span th:text="${session.user.unitName}"></span>个人中心</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a onclick="xadmin.add_tab('信息录入','personInfoPage')">
+                            <cite>信息录入</cite>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a onclick="xadmin.add_tab('审核中','audit')">
+                            <cite>审核中</cite>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a onclick="xadmin.add_tab('已通过','passed')">
+                            <cite>已通过</cite>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a onclick="xadmin.add_tab('未通过','noPassed')">
+                            <cite>未通过</cite>
+                        </a>
+                    </dd>
+                    <dd><a href="/exit">退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="page-content" style="position:absolute;left: 50px;">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;" >
+            <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+                <ul class="layui-tab-title">
+                    <li class="home">
+                        <i class="layui-icon">&#xe68e;</i>我的桌面
+                    </li>
+                </ul>
+                <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                    <dl>
+                        <dd data-type="this">关闭当前</dd>
+                        <dd data-type="other">关闭其它</dd>
+                        <dd data-type="all">关闭全部</dd>
+                    </dl>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" style="position: absolute;top: 60px;">
+                    </div>
+                </div>
+                <div id="tab_show" ></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+    layui.use(['form', 'layedit', 'laydate','element','upload'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate,
+                element = layui.element,
+                upload = layui.upload,
+                $ = layui.jquery;
+        })
+</script>
+</html>

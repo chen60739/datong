@@ -1,9 +1,10 @@
-package com.example.datong.service;
+package com.example.datong.service.impl;
 
 import com.example.datong.dao.CompanyRegistrationInfoMapper;
 import com.example.datong.message.Result;
 import com.example.datong.message.ResultCode;
 import com.example.datong.model.CompanyRegistrationInfo;
+import com.example.datong.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
