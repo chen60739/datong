@@ -1,6 +1,8 @@
 package com.example.datong.dao;
 
-import com.example.datong.pojo.AddressCounty;
+
+import com.example.datong.model.AddressCounty;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
