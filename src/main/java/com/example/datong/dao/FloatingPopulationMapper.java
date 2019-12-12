@@ -36,4 +36,12 @@ public interface FloatingPopulationMapper {
     List<NoPassedPerson> selectNoPassed(Integer unitId);
 
     int selectNoPassedCount(Integer unitId);
+
+    //查询个人登记信息审核
+    List<FloatingPopulation> selectAll(@Param("unitName") String unitName, @Param("name") String name, @Param("phone") String phone,@Param("time1") String time1,@Param("time2") String time2);
+
+    //修改个人信息登入审核状态--审核通过
+    int updatePass(Integer id);
+    int updateNoPass(Integer id);
+
 }
