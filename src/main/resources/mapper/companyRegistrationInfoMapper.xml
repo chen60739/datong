@@ -12,7 +12,7 @@
     <result column="unit_address" jdbcType="VARCHAR" property="unitAddress" />
     <result column="unit_num" jdbcType="VARCHAR" property="unitNum" />
     <result column="unit_social" jdbcType="VARCHAR" property="unitSocial" />
-    <result column="industry_category_id" jdbcType="VARCHAR" property="industryCategoryId" />
+    <result column="industry_category_id" jdbcType="INTEGER" property="industryCategoryId" />
     <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
     <result column="legal_person_name" jdbcType="VARCHAR" property="legalPersonName" />
     <result column="worker_num" jdbcType="VARCHAR" property="workerNum" />
@@ -21,7 +21,7 @@
     <result column="is_checked" jdbcType="INTEGER" property="isChecked" />
   </resultMap>
   <sql id="Base_Column_List">
-    unit_id, unit_name, unit_phone, password, unit_county_code, unit_town_code, unit_type_id, 
+    unit_id, unit_name, unit_phone, password, unit_county_code, unit_town_code, unit_type_id,
     unit_address, unit_num, unit_social, industry_category_id, organization_code, legal_person_name, 
     worker_num, gmt_create, gmt_modified, is_checked
   </sql>
