@@ -25,7 +25,7 @@
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.LessorInfo">
     insert into lessor_info (p_id, lessor_type,
-      lessor_name, lessor_phone, lessor_id_card, 
+      lessor_name, lessor_phone, lessor_id_card,
       is_sign)
     values (#{pId,jdbcType=INTEGER}, #{lessorType,jdbcType=BIT},
       #{lessorName,jdbcType=VARCHAR}, #{lessorPhone,jdbcType=CHAR}, #{lessorIdCard,jdbcType=CHAR}, 

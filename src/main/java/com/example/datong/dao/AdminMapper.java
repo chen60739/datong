@@ -3,7 +3,6 @@ package com.example.datong.dao;
 import com.example.datong.model.Admin;
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer adminId);
 
@@ -16,4 +15,13 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    //登录
+    Admin selectOne(String adminPhone,String adminPassword);
+
+    Admin selectOne1(String adminPhone);
+
+
+
+
 }

@@ -14,7 +14,7 @@
     <result column="message_person" jdbcType="VARCHAR" property="messagePerson" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, p_id, residential_town_code, residential_addres, living_style_id, reason_for_residence_id, 
+    id, p_id, residential_town_code, residential_addres, living_style_id, reason_for_residence_id,
     house_type_id, house_gener, house_use, message_person
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -29,11 +29,11 @@
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.ResidentialInfo">
     insert into residential_info (p_id, residential_town_code,
-      residential_addres, living_style_id, reason_for_residence_id, 
-      house_type_id, house_gener, house_use, 
+      residential_addres, living_style_id, reason_for_residence_id,
+      house_type_id, house_gener, house_use,
       message_person)
     values (#{pId,jdbcType=INTEGER}, #{residentialTownCode,jdbcType=VARCHAR},
-      #{residentialAddres,jdbcType=VARCHAR}, #{livingStyleId,jdbcType=INTEGER}, #{reasonForResidenceId,jdbcType=INTEGER}, 
+      #{residentialAddres,jdbcType=VARCHAR}, #{livingStyleId,jdbcType=INTEGER}, #{reasonForResidenceId,jdbcType=INTEGER},
       #{houseTypeId,jdbcType=INTEGER}, #{houseGener,jdbcType=INTEGER}, #{houseUse,jdbcType=INTEGER}, 
       #{messagePerson,jdbcType=VARCHAR})
   </insert>

@@ -63,7 +63,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, name, name_used_before, sex,photo, id_card, fixed_phone, household_city_code, phone,
-    nation_id, come_time, education_level_id, political_outlook_id, faith_id, height, 
+    nation_id, come_time, education_level_id, political_outlook_id, faith_id, height,
     weight, blood_type_id, healthy, disability_code, employment_state_id, marital_state_id, is_del,
     state, gmt_create, gmt_modified, is_checked,check_reason_id,company_id
   </sql>

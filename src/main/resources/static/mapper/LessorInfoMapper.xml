@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.LessorInfoMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.LessorInfo">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.LessorInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="p_id" jdbcType="INTEGER" property="pId" />
     <result column="lessor_type" jdbcType="BIT" property="lessorType" />
@@ -23,7 +23,7 @@
     delete from lessor_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.LessorInfo">
+  <insert id="insert" parameterType="com.example.datong.model.LessorInfo">
     insert into lessor_info (id, p_id, lessor_type, 
       lessor_name, lessor_phone, lessor_id_card, 
       is_sign)
@@ -31,7 +31,7 @@
       #{lessorName,jdbcType=VARCHAR}, #{lessorPhone,jdbcType=CHAR}, #{lessorIdCard,jdbcType=CHAR}, 
       #{isSign,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.LessorInfo">
+  <insert id="insertSelective" parameterType="com.example.datong.model.LessorInfo">
     insert into lessor_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.LessorInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.LessorInfo">
     update lessor_info
     <set>
       <if test="pId != null">
@@ -104,7 +104,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.LessorInfo">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.LessorInfo">
     update lessor_info
     set p_id = #{pId,jdbcType=INTEGER},
       lessor_type = #{lessorType,jdbcType=BIT},

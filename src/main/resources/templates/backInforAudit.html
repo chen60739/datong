@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
     <script src="/plugs/layui/layui.js"></script>
     <script type="text/javascript" src="/plugs/layui/xadmin.js"></script>
-    <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
 </head>
 <body class="layui-layout-body">
     <div class="layui-body">
@@ -20,12 +19,17 @@
                  <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
                 </div>
             </div>
-            <button type="button" class="layui-btn">搜索</button>
+            <button type="button" class="layui-btn" id="search">搜索</button>
+            <button type="button" class="layui-btn">通过审核</button>
+            <button type="button" class="layui-btn">不通过</button>
         </div>
         <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
         <table class="layui-hide" id="test"></table>
     </div>
+<script>
 
+
+</script>
 <script>
     //JavaScript代码区域
     layui.use('element', function(){
@@ -35,15 +39,7 @@
 </script>
 </body>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" >查看详情</a>
-</script>
-<script type="text/html" id="toolbarDemo">
-    <button class="layui-btn">
-        <i class="layui-icon" lay-event="pass" >通过审核</i>
-    </button>
-    <button class="layui-btn">
-        <i class="layui-icon" lay-event="noPass" >不通过</i>
-    </button>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看详情</a>
 </script>
 <script type="text/javascript"  th:inline="none">
     layui.use('table', function(){
@@ -52,8 +48,7 @@
         //方法级渲染
         table.render({
             elem: '#LAY_table_user'
-            ,toolbar:'#toolbarDemo'
-            ,url: '/back_register_info'
+            ,url: 'findAllCompany'
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'unitId', width:80, title: '编号', sort: true, fixed: true}
@@ -91,59 +86,19 @@
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
-        //头工具栏事件
-        table.on('toolbar(user)', function(obj){
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch(obj.event){
-                case 'pass'://通过按钮
-                    var tate = checkStatus.data;
-                    // layer.alert(JSON.stringify(tate.id));
-                    var id=tate[0].unitId;//获取的id
-                    $.ajax({
-                        type:'get',
-                        url:'/toPass',
-                        data:{'id':id},
-                        success:function (data) {
-                                layer.msg('通过');
-
-                        }
-                    });
-                    break;
-                case 'noPass'://不通过按钮
-                    var tate = checkStatus.data;
-                    var id=tate[0].unitId;//获取的公司id
-                    layer.open({
-                        type:2,
-                        skin:'demo-class',
-                        title:'不通过原因',
-                        maxmin:true,
-                        shadeClose:true,
-                        area:['600px','400px'],
-                        content:'register_person?id='+id,//弹框路径
-                    });
-                    break;
-                //自定义头工具栏右侧图标 - 提示
-
-            };
-        });
-
-
-        //监听行工具事件
-        table.on('tool(user)', function(obj){
-            var data = obj.data;
-            //console.log(obj)
-            if(obj.event === 'detail'){
-                layer.open({
-                    type: 2,
-                    skin: "demo-class",
-                    title: '详情',
-                    maxmin: true,
-                    shadeClose: true, //点击遮罩关闭层
-                    area: ['1000px', '570px'],
-                    content: '/back_register?id='+data.id,//跳转到弹窗的方法和他的id
-                });
-            }
-        });
+        $("#search").click(function(){
+            var unitName =$(".layui-input").val();
+            console.log(unitName)
+            table.reload('testReload', {
+                method: 'post'
+                , where: {
+                    'unitName': unitName,
+                }
+                , page: {
+                    curr: 1
+                }
+            });
+        })
     });
 
 

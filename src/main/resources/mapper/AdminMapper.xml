@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.AdminMapper">
+
   <resultMap id="BaseResultMap" type="com.example.datong.model.Admin">
     <id column="admin_id" jdbcType="INTEGER" property="adminId" />
     <result column="admin_phone" jdbcType="CHAR" property="adminPhone" />
@@ -14,7 +15,7 @@
     admin_id, admin_phone, admin_password, admin_name, town_code, county_code, power
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from admin
     where admin_id = #{adminId,jdbcType=INTEGER}
@@ -114,4 +115,13 @@
       power = #{power,jdbcType=INTEGER}
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
+
+  <!--登录-->
+  <select id="selectOne" resultMap="BaseResultMap">
+      select * from admin where admin_phone=#{param1} and admin_password=#{param2}
+  </select>
+  <select id="selectOne1" resultMap="BaseResultMap">
+        select * from admin where admin_phone=#{param1}
+    </select>
+
 </mapper>

@@ -1,4 +1,4 @@
-package com.example.datong.Controller;
+package com.example.datong.controller;
 
 import com.example.datong.model.CompanyRegistrationInfo;
 import com.example.datong.model.FloatingPopulation;

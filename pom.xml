@@ -73,25 +73,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
 
-            <plugin>
-                    <groupId>org.mybatis.generator</groupId>
-                    <artifactId>mybatis-generator-maven-plugin</artifactId>
-                    <configuration>
-                        <configurationFile>F:\ideapro\datong\src\main\resources\mybatis-generator.xml</configurationFile>
-                        <overwrite>true</overwrite>
-                        <verbose>true</verbose>
-                    </configuration>
-                <dependencies>
-                    <!--此处添加一个mysql-connector-java依赖可以防止找不到jdbc Driver-->
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>8.0.18</version>
-                        <scope>runtime</scope>
-                    </dependency>
-                </dependencies>
+                <configuration>
+                    <fork>true</fork>
+                    <!--增加jvm参数  控制台打印乱码-->
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>

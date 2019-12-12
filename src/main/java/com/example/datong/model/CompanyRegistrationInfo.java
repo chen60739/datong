@@ -3,9 +3,13 @@ package com.example.datong.model;
 
 import java.util.Date;
 
+/**
+ * 公司注册登录类
+ */
 public class CompanyRegistrationInfo {
-    private Integer unitId;
 
+    private Integer unitId;
+    //公司名称
     private String unitName;
 
     private String unitPhone;
@@ -17,25 +21,25 @@ public class CompanyRegistrationInfo {
     private String unitTownCode;
 
     private Integer unitTypeId;
-
+    //详细地址
     private String unitAddress;
-
+    //单位编号
     private String unitNum;
-
+    //单位社保号
     private String unitSocial;
-
+    //行业类别
     private String industryCategoryId;
-
+    //组织机构代码
     private String organizationCode;
-
+    //法人代表
     private String legalPersonName;
-
+    //用工人数
     private String workerNum;
-
+    //创建时间
     private Date gmtCreate;
-
+    //修改时间
     private Date gmtModified;
-
+    //审核状态
     private Integer isChecked;
 
     public Integer getUnitId() {

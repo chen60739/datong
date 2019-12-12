@@ -22,7 +22,7 @@
                  <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
                 </div>
             </div>
-            <button type="button" class="layui-btn">搜索</button>
+            <button type="button" class="layui-btn" id="search">搜索</button>
         </div>
         <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
         <table class="layui-hide" id="test"></table>
@@ -56,17 +56,22 @@
         table.render({
             elem: '#LAY_table_user'
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            ,url: '/backFindFloatInfo'
+            ,url: 'findAllFloatingPopulation'
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'id', width:80, title: '编号', sort: true, fixed: true}
-                ,{field:'companyId', width:160, title: '单位名称'}
+                ,{field:'companyId', width:160, title: '单位名称',
+                    templet:function (res) {
+                        return '<span>'+res.companyRegistrationInfo.unitName+'</span>'}}
                 ,{field:'name', width:100, title: '姓名'}
                 ,{field:'phone', width:120, title: '联系方式', sort: true}
-                ,{field:'gmtCreate', width:100, title: '提交时间'}
+                ,{field:'gmtCreateStr', width:100, title: '提交时间'}
                 ,{fixed: 'right', width:100, align:'center', toolbar: '#barDemo', title: '详情'}
                 ,{field:'auditor', width: 100, title: '审核员'}
-                ,{field:'isChecked', width:100, title: '审核状态', sort: true}
+                ,{field:'isChecked', width:100, title: '审核状态', sort: true,
+                    templet:function(res){
+                        return '<span>'+res.dictionary.dictionaryName+'</span>'
+                    }}
             ]]
             ,id: 'testReload'
             ,page: true
@@ -96,6 +101,18 @@
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
+        $("#search").click(function(){
+            var name =$(".layui-input").val();
+            table.reload('testReload', {
+                method: 'post'
+                , where: {
+                    'name': name,
+                }
+                , page: {
+                    curr: 1
+                }
+            });
+        })
         //头工具栏事件
         table.on('toolbar(user)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id);
@@ -106,11 +123,13 @@
                     var id=tate[0].id;//获取的id
                     $.ajax({
                         type:'get',
-                        url:'/toPass',
+                        url:'changePass',
                         data:{'id':id},
                         success:function (data) {
                             if(data==1){
                                 layer.msg('通过');
+                                window.parent.location.reload();
+
                             }else{
                                 layer.msg('操作失败');
                             }
@@ -127,8 +146,22 @@
                         maxmin:true,
                         shadeClose:true,
                         area:['600px','400px'],
-                        content:'register_person?id='+id,//弹框路径+页面自己写，方法路径自己加一下
+                        content:'nopass?id='+id,//弹框路径+页面自己写，方法路径自己加一下
                     });
+                    /*$.ajax({
+                        type:'get',
+                        url:'changeNoPass',
+                        data:{'id':id},
+                        success:function (data) {
+                            if(data==1){
+                                layer.msg('不通过');
+                                window.parent.location.reload();
+                            }else{
+                                layer.msg('操作失败');
+                            }
+                        }
+                    })*/
+
                     break;
                 //自定义头工具栏右侧图标 - 提示
 

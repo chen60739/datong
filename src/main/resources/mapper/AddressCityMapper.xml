@@ -79,7 +79,7 @@
       province_code = #{provinceCode,jdbcType=VARCHAR}
     where city_id = #{cityId,jdbcType=INTEGER}
   </update>
-  
+
   <select id="selectByProvinceCode" resultMap="BaseResultMap" parameterType="string">
     SELECT * FROM address_city WHERE province_code=#{provinceCode}
   </select>

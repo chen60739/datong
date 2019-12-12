@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.AddressCountyMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.pojo.AddressCounty">
+  <resultMap id="BaseResultMap" type="com.example.datong.model.AddressCounty">
     <id column="county_id" jdbcType="INTEGER" property="countyId" />
     <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
     <result column="county_name" jdbcType="VARCHAR" property="countyName" />
@@ -20,13 +20,13 @@
     delete from address_county
     where county_id = #{countyId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.pojo.AddressCounty">
+  <insert id="insert" parameterType="com.example.datong.model.AddressCounty">
     insert into address_county (county_id, county_code, county_name, 
       city_code)
     values (#{countyId,jdbcType=INTEGER}, #{countyCode,jdbcType=VARCHAR}, #{countyName,jdbcType=VARCHAR}, 
       #{cityCode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.pojo.AddressCounty">
+  <insert id="insertSelective" parameterType="com.example.datong.model.AddressCounty">
     insert into address_county
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="countyId != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.AddressCounty">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.AddressCounty">
     update address_county
     <set>
       <if test="countyCode != null">
@@ -72,7 +72,7 @@
     </set>
     where county_id = #{countyId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.AddressCounty">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.AddressCounty">
     update address_county
     set county_code = #{countyCode,jdbcType=VARCHAR},
       county_name = #{countyName,jdbcType=VARCHAR},
