@@ -11,7 +11,7 @@
 }
 .login-bg{
     /*background: #eeeeee url() 0 0 no-repeat;*/
-    background:url(static/plugs/layui/images/face/bg.png) no-repeat center;
+    background:url(/plugs/layui/images/face/bg.png) no-repeat center;
     background-size: cover;
     overflow: hidden;
 }
@@ -43,7 +43,7 @@
     font-size: 16px;
 }
 .login #darkbannerwrap {
-    background: url("static/plugs/layui/images/face/aiwrap.png");
+    background: url("/plugs/layui/images/face/aiwrap.png");
     width: 18px;
     height: 10px;
     margin: 0 0 20px -58px;

@@ -1,4 +1,4 @@
-package com.example.datong.service;
+package com.example.datong.service.impl;
 
 import com.example.datong.dao.AddressCityMapper;
 import com.example.datong.dao.AddressCountyMapper;
@@ -8,13 +8,14 @@ import com.example.datong.model.AddressCity;
 import com.example.datong.model.AddressCounty;
 import com.example.datong.model.AddressProvince;
 import com.example.datong.model.AddressTown;
+import com.example.datong.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AddressImpl implements AddressService{
+public class AddressImpl implements AddressService {
 
     @Autowired
     private AddressProvinceMapper provinceMapper;

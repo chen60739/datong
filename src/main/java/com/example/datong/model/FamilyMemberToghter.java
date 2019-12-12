@@ -38,7 +38,7 @@ public class FamilyMemberToghter {
     }
 
     public void setMemberName(String memberName) {
-        this.memberName = memberName == null ? null : memberName.trim();
+        this.memberName = memberName == "" ? null : memberName.trim();
     }
 
     public Boolean getMemberSex() {

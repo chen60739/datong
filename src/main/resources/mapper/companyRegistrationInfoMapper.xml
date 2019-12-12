@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="com.example.datong.model.CompanyRegistrationInfo">
     <id column="unit_id" jdbcType="INTEGER" property="unitId" />
     <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
-    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="unit_phone" jdbcType="CHAR" property="unitPhone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
-    <result column="town_code" jdbcType="VARCHAR" property="townCode" />
+    <result column="unit_county_code" jdbcType="VARCHAR" property="unitCountyCode" />
+    <result column="unit_town_code" jdbcType="VARCHAR" property="unitTownCode" />
     <result column="unit_type_id" jdbcType="INTEGER" property="unitTypeId" />
     <result column="unit_address" jdbcType="VARCHAR" property="unitAddress" />
     <result column="unit_num" jdbcType="VARCHAR" property="unitNum" />
@@ -27,8 +27,8 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    unit_id, unit_name, phone, password, county_code, town_code, unit_type_id, unit_address, 
-    unit_num, unit_social, industry_category_id, organization_code, legal_person_name, 
+    unit_id, unit_name, unit_phone, password, unit_county_code, unit_town_code, unit_type_id,
+    unit_address, unit_num, unit_social, industry_category_id, organization_code, legal_person_name,
     worker_num, gmt_create, gmt_modified, is_checked
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -42,18 +42,18 @@
     where unit_id = #{unitId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.CompanyRegistrationInfo">
-    insert into company_registration_info (unit_id, unit_name, phone, 
-      password, county_code, town_code, 
+    insert into company_registration_info (unit_name, unit_phone,
+      password, unit_county_code, unit_town_code, 
       unit_type_id, unit_address, unit_num, 
       unit_social, industry_category_id, organization_code, 
       legal_person_name, worker_num, gmt_create, 
-      gmt_modified, is_checked)
-    values (#{unitId,jdbcType=INTEGER}, #{unitName,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
-      #{password,jdbcType=VARCHAR}, #{countyCode,jdbcType=VARCHAR}, #{townCode,jdbcType=VARCHAR}, 
+      gmt_modified)
+    values (#{unitName,jdbcType=VARCHAR}, #{unitPhone,jdbcType=CHAR},
+      #{password,jdbcType=VARCHAR}, #{unitCountyCode,jdbcType=VARCHAR}, #{unitTownCode,jdbcType=VARCHAR}, 
       #{unitTypeId,jdbcType=INTEGER}, #{unitAddress,jdbcType=VARCHAR}, #{unitNum,jdbcType=VARCHAR}, 
       #{unitSocial,jdbcType=VARCHAR}, #{industryCategoryId,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, 
       #{legalPersonName,jdbcType=VARCHAR}, #{workerNum,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{isChecked,jdbcType=INTEGER})
+      #{gmtModified,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     insert into company_registration_info
@@ -64,17 +64,17 @@
       <if test="unitName != null">
         unit_name,
       </if>
-      <if test="phone != null">
-        phone,
+      <if test="unitPhone != null">
+        unit_phone,
       </if>
       <if test="password != null">
         password,
       </if>
-      <if test="countyCode != null">
-        county_code,
+      <if test="unitCountyCode != null">
+        unit_county_code,
       </if>
-      <if test="townCode != null">
-        town_code,
+      <if test="unitTownCode != null">
+        unit_town_code,
       </if>
       <if test="unitTypeId != null">
         unit_type_id,
@@ -221,10 +221,10 @@
   <update id="updateByPrimaryKey" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     update company_registration_info
     set unit_name = #{unitName,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=CHAR},
+      unit_phone = #{unitPhone,jdbcType=CHAR},
       password = #{password,jdbcType=VARCHAR},
-      county_code = #{countyCode,jdbcType=VARCHAR},
-      town_code = #{townCode,jdbcType=VARCHAR},
+      unit_county_code = #{unitCountyCode,jdbcType=VARCHAR},
+      unit_town_code = #{unitTownCode,jdbcType=VARCHAR},
       unit_type_id = #{unitTypeId,jdbcType=INTEGER},
       unit_address = #{unitAddress,jdbcType=VARCHAR},
       unit_num = #{unitNum,jdbcType=VARCHAR},
@@ -245,9 +245,14 @@
         <if test="unitName != null and unitName !=''">
           AND  company_registration_info.unit_name LIKE CONCAT("%",#{unitName},"%")
         </if>
-        <if test="phone !=null and phone !=''">
-          AND company_registration_info.phone like CONCAT("%",#{phone},"%")
+        <if test="unitPhone !=null and unitPhone !=''">
+          AND company_registration_info.unit_phone like CONCAT("%",#{unitPhone},"%")
         </if>
 
+  <select id="findByPhone" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_registration_info
+    where unit_phone = #{phone,jdbcType=VARCHAR}
   </select>
 </mapper>

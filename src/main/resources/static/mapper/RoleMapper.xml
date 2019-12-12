@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.datong.dao.RoleMapper">
-  <resultMap id="BaseResultMap" type="com.example.datong.model.Role">
+  <resultMap id="BaseResultMap" type="com.example.datong.pojo.Role">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="power_id" jdbcType="INTEGER" property="powerId" />
     <result column="menu" jdbcType="VARCHAR" property="menu" />
@@ -19,13 +19,13 @@
     delete from role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.model.Role">
+  <insert id="insert" parameterType="com.example.datong.pojo.Role">
     insert into role (id, power_id, menu
       )
     values (#{id,jdbcType=INTEGER}, #{powerId,jdbcType=INTEGER}, #{menu,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.datong.model.Role">
+  <insert id="insertSelective" parameterType="com.example.datong.pojo.Role">
     insert into role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.model.Role">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.datong.pojo.Role">
     update role
     <set>
       <if test="powerId != null">
@@ -62,7 +62,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.datong.model.Role">
+  <update id="updateByPrimaryKey" parameterType="com.example.datong.pojo.Role">
     update role
     set power_id = #{powerId,jdbcType=INTEGER},
       menu = #{menu,jdbcType=VARCHAR}

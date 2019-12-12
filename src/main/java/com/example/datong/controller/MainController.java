@@ -150,14 +150,16 @@ public class MainController {
         return map;
     }
 
+    /**
+     * 未通过审核列表
+     * @param request
+     * @return
+     */
     @RequestMapping("/noPassedData")
     @ResponseBody
     public Map<String, Object> noPassedData(HttpServletRequest request){
         CompanyRegistrationInfo company = (CompanyRegistrationInfo) request.getSession().getAttribute("user");
-        List<NoPassedPerson> noPassed = floatingPopulationService.findNoPassed(company.getUnitId());
-        Map<String,Object> map = new HashMap<>();
-        map.put("code",0);
-        map.put("data",noPassed);
+        Map<String, Object> map = floatingPopulationService.findNoPassed(company.getUnitId());
         return map;
     }
 
