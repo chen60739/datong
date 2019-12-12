@@ -27,11 +27,15 @@ public class AdminController {
             session.setAttribute("admin",login);
             return "back.html";
         }
-        return "index.html";
+        return "back_login";
     }
-    @RequestMapping("back_index")
-    public  String back_index(){
-        return "back_index";
+    @RequestMapping("back_login")
+    public  String back_login(){
+        return "back_login";
+    }
+    @RequestMapping("back_register")
+    public  String back_register(){
+        return "back_register";
     }
 
 
@@ -42,9 +46,6 @@ public class AdminController {
      */
     @RequestMapping("back_register")
     public String register(Admin record) {
-        Admin admin=new Admin();
-        admin.setAdminPhone(record.getAdminPhone());
-        admin.setAdminPassword(record.getAdminPassword());
         Admin login = adminService.login1(record.getAdminPhone());
         if (login !=null  && login.getAdminPhone().equals(record.getAdminPhone())){
             System.out.println("注册失败");
