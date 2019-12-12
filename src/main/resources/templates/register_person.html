@@ -336,30 +336,31 @@
                         </tr>
                         <tr>
                             <td>
-                                <select name="relationId" id="relationId">
+                                <select name="relationId" lay-verify="required" id="relationId">
                                     <option value="">关系</option>
                                     <option th:each="relation:${dictionary.relation}" th:value="${relation.dictionaryId}" th:text="${relation.dictionaryName}"></option>
                                 </select>
                             </td>
                             <td>
-                                <input class="layui-input" id="idcard" placeholder="身份证号"/>
+                                <input class="layui-input" id="idcard" lay-verify='required|identity' placeholder="身份证号"/>
                             </td>
                             <td>
-                                <input class="layui-input" id="mName"  placeholder="姓名"/>
+                                <input class="layui-input" id="mName" lay-verify='required'  placeholder="姓名"/>
                             </td>
                             <td>
-                                <input type="radio"  name="memberSex" value="1" title="男">
-                                <input type="radio" name="memberSex" value="0" title="女">
+                                <input type="radio" name="memberSex" lay-verify='otherReq' value="1" title="男">
+                                <input type="radio" name="memberSex" lay-verify='otherReq' value="0" title="女">
                             </td>
                             <td>
                                 <input type="text" class="layui-input" id="birth" placeholder="出生日期">
                             </td>
-                            <td> <input type="radio" name="hasVaccinate" value="1" title="是">
-                                <input type="radio" name="hasVaccinate" value="0" title="否">
+                            <td>
+                                <input type="radio" name="hasVaccinate" lay-verify='otherReq' value="1" title="是">
+                                <input type="radio" name="hasVaccinate" lay-verify='otherReq' value="0" title="否">
                             </td>
                             <td>
-                                <input type="radio" name="isLocal" value="1" title="是">
-                                <input type="radio" name="isLocal" value="0" title="否">
+                                <input type="radio" name="isLocal" lay-verify='otherReq' value="1" title="是">
+                                <input type="radio" name="isLocal" lay-verify='otherReq' value="0" title="否">
                             </td>
                         </tr>
                     </table>
@@ -726,8 +727,8 @@
                                         <input name="lessorIdCard"  lay-verify="required|identity" class="layui-input">
                                     </td>
                                     <td>
-                                        <input type="radio" name="isSign" value="1" title="是">
-                                        <input type="radio" name="isSign" value="0" title="否" checked>
+                                        <input type="radio" lay-verify="otherReq" name="isSign" value="1" title="是">
+                                        <input type="radio" lay-verify="otherReq" name="isSign" value="0" title="否" checked>
                                     </td>
                                 </tr>
                             </table>
@@ -923,34 +924,34 @@
 
         var count = 0;
         $(document).on('click','#memberAdd',function(){
-            var option = '<option value="0">关系</option>';
+            var option = '<option value="">关系</option>';
             $.getJSON('/getRelation',function (res) {
                 for (var i = 0; i < res.length; i++) {
                     option += "<option value='"+res[i].dictionaryId+"'>"+res[i].dictionaryName+"</option>";
                 }
             $("#memberTab").append("<tr>\n" +
                 "                        <td>\n" +
-                "                            <select id='relationId' name='relationId'>\n" +option+
+                "                            <select id='relationId' lay-verify='required' name='relationId'>\n" +option+
                 "                            </select>\n" +
                 "                        </td>\n" +
                 "                        <td>\n" +
-                "                            <input class=\"layui-input\" type='text'  id='idcard'   placeholder='身份证号'/>\n" +
+                "                            <input class=\"layui-input\" type='text' lay-verify='required|identity'  id='idcard'   placeholder='身份证号'/>\n" +
                 "                        </td>\n" +
                 "                        <td>\n" +
-                "                            <input class=\"layui-input\" id='mName'  placeholder=\"姓名\"/>\n" +
+                "                            <input class=\"layui-input\" id='mName' lay-verify='required'  placeholder=\"姓名\"/>\n" +
                 "                        </td>\n" +
                 "                        <td>\n" +
-                "                            <input type=\"radio\" name='memberSex"+count+"' value=\"1\" title=\"男\">\n" +
-                "                            <input type=\"radio\" name='memberSex"+count+"' value=\"0\" title=\"女\">\n" +
+                "                            <input type=\"radio\" name='memberSex"+count+"' lay-verify='otherReq' value=\"1\" title=\"男\">\n" +
+                "                            <input type=\"radio\" name='memberSex"+count+"' lay-verify='otherReq' value=\"0\" title=\"女\">\n" +
                 "                        </td>\n" +
                 "                        <td>\n" +
                 "                            <input type=\"text\" class=\"layui-input\" id=\"birth\" placeholder=\"出生日期\">\n" +
                 "                        </td>\n" +
-                "                        <td> <input type=\"radio\" name='hasVaccinate"+count+"' value=\"1\" title=\"是\">\n" +
-                "                            <input type=\"radio\" name='hasVaccinate"+count+"' value=\"0\" title=\"否\"></td>\n" +
+                "                        <td><input type=\"radio\" name='hasVaccinate"+count+"' lay-verify='otherReq' value=\"1\" title=\"是\">\n" +
+                "                            <input type=\"radio\" name='hasVaccinate"+count+"' lay-verify='otherReq' value=\"0\" title=\"否\"></td>\n" +
                 "                        <td>\n" +
-                "                            <input type=\"radio\" name='isLocal"+count+"' value=\"1\" title=\"是\">\n" +
-                "                            <input type=\"radio\" name='isLocal"+count+"' value=\"0\" title=\"否\">\n" +
+                "                            <input type=\"radio\" name='isLocal"+count+"' lay-verify='otherReq' value=\"1\" title=\"是\">\n" +
+                "                            <input type=\"radio\" name='isLocal"+count+"' lay-verify='otherReq' value=\"0\" title=\"否\">\n" +
                 "                        </td>\n" +
                 "                    </tr>");
             form.render();
