@@ -19,8 +19,6 @@ public interface FloatingPopulationService {
 
     Map<String, Object> findChecking(Integer stateCode,Integer unitId);
 
-
-
     List<NoPassedPerson> findNoPassed(Integer unitId);
 
     //查询登记信息审核
@@ -30,6 +28,5 @@ public interface FloatingPopulationService {
     int changePass(Integer id);
     Map<String,Object> changeNoPass(Integer id, CheckReason reason);
 
-    Map<String, Object> findNoPassed(Integer unitId);
 
 }
