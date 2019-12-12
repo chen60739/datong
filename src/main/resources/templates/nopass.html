@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="plugs/layui/css/layui.css">
+    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+    <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
+    <script src="/plugs/layui/layui.js"></script>
+    <script type="text/javascript" src="plugs/layui/xadmin.js"></script>
+</head>
+<body>
+    <label>不通过原因</label>
+    <div class="layui-input-block">
+        <input type="hidden" th:value="${id}" id="id">
+        <textarea name="desc" placeholder="请输入不通过原因" class="layui-textarea" cols="15" rows="10"></textarea>
+    </div>
+    <input type="button" value="保存"onclick="save()">
+</body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+   function save(){
+       var reason=$(".layui-textarea").val();
+       var id=$("#id").val();
+       $.ajax({
+           type:'get',
+           url:'changeNoPass',
+           data:{'reason':reason,'accountId':id,'id':id},
+           success:function (data) {
+               console.log(data);
+               if(data.success){
+                   layer.msg('不通过');
+                   parent.layer.closeAll();
+                   window.parent.location.reload();
+               }else{
+                   layer.msg('当前已是未通过');
+               }
+           }
+       })
+   }
+</script>
+</html>
