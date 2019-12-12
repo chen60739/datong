@@ -19,7 +19,8 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="is_checked" jdbcType="INTEGER" property="isChecked" />
-
+  </resultMap>
+  <resultMap id="super" type="com.example.datong.dto.SuperCompanyRegistrationInfo">
     <association property="dictionary" javaType="com.example.datong.model.Dictionary">
       <id column="top_id" property="topId"/>
       <result column="dictionary_name" property="dictionaryName"/>
@@ -239,7 +240,7 @@
     where unit_id = #{unitId,jdbcType=INTEGER}
   </update>
   <!--注册信息审核查询-->
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="super">
         SELECT  * FROM company_registration_info,dictionary
         WHERE company_registration_info.is_checked=dictionary.dictionary_id
         <if test="unitName != null and unitName !=''">
@@ -250,7 +251,7 @@
         </if>
   </select>
 
-  <select id="findByPhone" parameterType="string" resultMap="BaseResultMap">
+  <select id="findByPhone" parameterType="string" resultMap="super">
     select
     <include refid="Base_Column_List" />
     from company_registration_info
