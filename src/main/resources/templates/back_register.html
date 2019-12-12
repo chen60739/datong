@@ -5,63 +5,65 @@
     <title>后台注册</title>
     <link rel="stylesheet" href="/plugs/layui/css/layui.css">
     <script src="/plugs/layui/layui.js"></script>
+    <!--<script type="text/javascript" src="../js/jquery1.11.3-jquery.min.js"></script>-->
 </head>
 <body>
 <div class="layui-col-xs6 layui-col-md12">
     <div style="width: 900px;height:50px;text-align: center;float: left;margin-left: 200px;margin-top: 20px" >
-    <div>
-        <h1>后台账号注册</h1>
-    </div>
-    <div style="float: top;margin-top: 20px">
-        <form method="post" class="layui-form">
-            <div class="layui-form-item">
-                <label for="phone" class="layui-form-label">
-                    <span class="x-red">*</span>手机号</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="phone" name="phone" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label for="password" class="layui-form-label">
-                    <span class="x-red">*</span>密码</label>
-                <div class="layui-input-inline">
-                    <input type="password" id="password" name="password" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label for="unitName" class="layui-form-label">
-                    <span class="x-red">*</span>工作单位</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="unitName" name="unitName" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
-                <div class="layui-input-inline">
-                    <select name="">
-                        <option value="140200">等级</option>
-                    </select>
+        <div>
+            <h1>后台账号注册</h1>
+        </div>
+        <div style="float: top;margin-top: 20px">
+            <form method="post" class="layui-form" action="back_register">
+                <div class="layui-form-item">
+                    <label for="phone" class="layui-form-label">
+                        <span class="x-red">*</span>手机号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="phone" name="adminPhone" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="code" class="layui-form-label">
-                <span class="x-red">*</span>所在地
-                </label>
-                <div class="layui-input-inline">
-                    <select name="">
-                        <option value="140200">大同市</option>
-                    </select>
+                <div class="layui-form-item">
+                    <label for="password" class="layui-form-label">
+                        <span class="x-red">*</span>密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="password" name="adminPassword" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                 </div>
-                <div class="layui-input-inline">
-                    <select name="countyCode">
-                        <option value="">请选择县/区</option>
-                    </select>
+                <div class="layui-form-item">
+                    <label for="unitName" class="layui-form-label">
+                        <span class="x-red">*</span>工作单位</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="unitName" name="adminName" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    <div class="layui-input-inline">
+                        <select name="">
+                            <option value="140200">等级</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="layui-input-inline">
-                    <select name="townCode">
-                        <option value="">请选择街道/镇</option>
-                    </select>
+                <div class="layui-form-item">
+                    <label for="code" class="layui-form-label">
+                        <span class="x-red">*</span>所在地
+                    </label>
+                    <div class="layui-input-inline">
+                        <select name="">
+                            <option value="140200">大同市</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="countyCode">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="townCode">
+                            <option value="">请选择街道/镇</option>
+                        </select>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" id="submit">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+                        </div>
+                    </div>
                 </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
             </form>
         </div>
     </div>
@@ -72,11 +74,28 @@
     //Demo
     layui.use('form', function(){
         var form = layui.form;
-
         //监听提交
         form.on('submit(demo1)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return false;
+            //layer.msg(JSON.stringify(data.field));
+            /* var phone = data.field.phone;
+              var password = data.field.password;
+              var unitName = data.field.unitName;*/
+            /*data:{adminPhone:data.adminPhone,adminPassword:data.adminPassword,adminName:data.adminName},*/
+            // data:"phone="+phone+"&password"+password+"&unitName"+unitName,
+            /*{"adminPhone":phone,"adminPassword":password,"adminName":unitName
+        }*/
+            /*$.ajax({
+                type:"POST",
+                url:"/register",
+                dataType:"json",
+                data:{
+                    adminPhone:phone
+                },
+                success:function (data) {
+                    alert(data)
+                }
+            })*/
+            //return false;
         });
     });
 </script>

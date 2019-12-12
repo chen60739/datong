@@ -11,44 +11,44 @@
     <script type="text/javascript" src="/plugs/layui/xadmin.js"></script>
 </head>
 <body class="layui-layout-body">
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">
-            <div class="layui-inline">
-                <label class="layui-form-label">从</label>
-                <div class="layui-input-inline">
-                    <!--查询框，按照时间范围查询-->   <input name="Create_time1" class="layui-input" id="time1" type="date" autocomplete="off" lay-verify="">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">到</label>
-                <div class="layui-input-inline">
-                    <!--查询框，按照时间范围查询-->   <input name="Create_time2" class="layui-input" id="time2" type="date" autocomplete="off" lay-verify="">
-                </div>
-            </div>
-        </div>
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
         <div class="layui-inline">
-            <label class="layui-form-label1">公司：</label>
-            <div class="layui-input-inline" >
-                <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" id="unit" type="text" autocomplete="off" lay-verify="">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label2" >姓名：</label>
+            <label class="layui-form-label">从</label>
             <div class="layui-input-inline">
-                <!--查询框，按照员工姓名的查询-->   <input name="name" class="layui-input" id="name" type="text" autocomplete="off" lay-verify="">
+                <!--查询框，按照时间范围查询-->   <input name="Create_time1" class="layui-input" id="time1" type="date" autocomplete="off" lay-verify="">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label3" >手机号：</label>
+            <label class="layui-form-label">到</label>
             <div class="layui-input-inline">
-                <!--查询框，按照手机号查询-->   <input name="phone" class="layui-input" id="phone" type="text" autocomplete="off" lay-verify="">
+                <!--查询框，按照时间范围查询-->   <input name="Create_time2" class="layui-input" id="time2" type="date" autocomplete="off" lay-verify="">
             </div>
         </div>
-        <button type="button" class="layui-btn" id="search">搜索</button>
-        <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
-        <table class="layui-hide" id="test"></table>
     </div>
+    <div class="layui-inline">
+        <label class="layui-form-label1">公司：</label>
+        <div class="layui-input-inline" >
+            <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" id="unit" type="text" autocomplete="off" lay-verify="">
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label2" >姓名：</label>
+        <div class="layui-input-inline">
+            <!--查询框，按照员工姓名的查询-->   <input name="name" class="layui-input" id="name" type="text" autocomplete="off" lay-verify="">
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label3" >手机号：</label>
+        <div class="layui-input-inline">
+            <!--查询框，按照手机号查询-->   <input name="phone" class="layui-input" id="phone" type="text" autocomplete="off" lay-verify="">
+        </div>
+    </div>
+    <button type="button" class="layui-btn" id="search">搜索</button>
+    <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+    <table class="layui-hide" id="test"></table>
+</div>
 <script>
     //JavaScript代码区域
     layui.use('element', function(){
@@ -76,7 +76,7 @@
                         return '<span>'+res.companyRegistrationInfo.unitName+'</span>'}}
                 ,{field:'name', width:80, title: '姓名'}
                 ,{field:'phone', width:120, title: '手机', sort: true}
-                ,{field:'gmtCreateStr', width:100, title: '提交时间'}
+                ,{field:'gmtCreate', width:100, title: '提交时间',templet:'<div>{{ Format(gmtCreate,"yyyy-MM-dd")}}</div>'}
                 ,{fixed: 'right', width:110, align:'center', toolbar: '#barDemo', title: '详情'}
             ]]
             ,id: 'testReload'
