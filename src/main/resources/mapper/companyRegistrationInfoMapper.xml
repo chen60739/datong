@@ -251,7 +251,7 @@
         </if>
   </select>
 
-  <select id="findByPhone" parameterType="string" resultMap="super">
+  <select id="findByPhone" parameterType="string" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from company_registration_info
