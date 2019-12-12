@@ -23,11 +23,11 @@ public class AdminController {
         }
         return "back_login";
     }
-    @RequestMapping("back_login")
+    @RequestMapping("back_loginPage")
     public  String back_login(){
         return "back_login";
     }
-    @RequestMapping("back_register")
+    @RequestMapping("back_registerPage")
     public  String back_register(){
         return "back_register";
     }
