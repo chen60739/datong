@@ -14,10 +14,14 @@ import java.util.*;
 @Controller
 public class BackController {
 
+<<<<<<< HEAD
     /**
      * 后台注册页面
      * @return
      */
+=======
+    /*//后台注册
+>>>>>>> 3aeac1ed293226e478a073104809ea48b2c77970
     @GetMapping("/back_register")
     public String backRegister(){ return "back_register";}
 
@@ -26,12 +30,17 @@ public class BackController {
      * @return
      */
     @GetMapping("/back_login")
+<<<<<<< HEAD
     public String back_login(){ return "back_login";}
 
     /**
      * 布局首页
      * @return
      */
+=======
+    public String back_login(){ return "back_login";}*/
+    //布局首页
+>>>>>>> 3aeac1ed293226e478a073104809ea48b2c77970
     @GetMapping("/back_index")
     public String toBackIndex(){return  "backIndex";}
 
