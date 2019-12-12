@@ -14,7 +14,7 @@ public class AdminController {
     AdminService adminService;
 
     //登录
-    @RequestMapping("login")
+    @RequestMapping("back_login")
     public String login(String adminPhone, String adminPassword, HttpSession session) {
         Admin login = adminService.login(adminPhone, adminPassword);
         if (login != null) {
