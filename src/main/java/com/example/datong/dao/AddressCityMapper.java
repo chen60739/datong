@@ -3,6 +3,8 @@ package com.example.datong.dao;
 
 import com.example.datong.model.AddressCity;
 
+import java.util.List;
+
 public interface AddressCityMapper {
     int deleteByPrimaryKey(Integer cityId);
 
@@ -15,4 +17,6 @@ public interface AddressCityMapper {
     int updateByPrimaryKeySelective(AddressCity record);
 
     int updateByPrimaryKey(AddressCity record);
+
+    List<AddressCity> selectByProvinceCode(String provinceCode);
 }
