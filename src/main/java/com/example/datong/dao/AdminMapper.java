@@ -1,6 +1,7 @@
 package com.example.datong.dao;
 
 import com.example.datong.model.Admin;
+import org.apache.ibatis.annotations.Mapper;
 
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer adminId);

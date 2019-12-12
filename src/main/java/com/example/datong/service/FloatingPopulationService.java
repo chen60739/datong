@@ -6,8 +6,6 @@ import java.text.ParseException;
 import java.util.Map;
 
 public interface FloatingPopulationService {
-    //查询登记信息审核
-    Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2);
     void addPerson(FloatingPopulation floatingPopulation,String time,
                    String childBirthdayStr, String insuranceIds,
                    CompanyRegistrationInfo companyRegistrationInfo,
@@ -23,5 +21,6 @@ public interface FloatingPopulationService {
     int changePass(Integer id);
     Map<String,Object> changeNoPass(Integer id, CheckReason reason);
    // List<NoPassedPerson> findNoPassed(Integer unitId);
+    List<NoPassedPerson> findNoPassed(Integer unitId);
 
 }

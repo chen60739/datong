@@ -80,4 +80,18 @@ public class FamilyMemberToghter {
     public void setIsLocal(Boolean isLocal) {
         this.isLocal = isLocal;
     }
+
+    @Override
+    public String toString() {
+        return "FamilyMemberToghter{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", memberName='" + memberName + '\'' +
+                ", memberSex=" + memberSex +
+                ", memberIdCard='" + memberIdCard + '\'' +
+                ", relationId=" + relationId +
+                ", hasVaccinate=" + hasVaccinate +
+                ", isLocal=" + isLocal +
+                '}';
+    }
 }

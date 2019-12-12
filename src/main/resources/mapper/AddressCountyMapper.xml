@@ -79,4 +79,11 @@
       city_code = #{cityCode,jdbcType=VARCHAR}
     where county_id = #{countyId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByCityCode" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from address_county
+    where city_code = #{cityCode,jdbcType=VARCHAR}
+  </select>
 </mapper>

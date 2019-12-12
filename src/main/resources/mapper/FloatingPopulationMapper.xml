@@ -6,6 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="name_used_before" jdbcType="VARCHAR" property="nameUsedBefore" />
     <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="photo" jdbcType="VARCHAR" property="photo"/>
     <result column="id_card" jdbcType="CHAR" property="idCard" />
     <result column="fixed_phone" jdbcType="VARCHAR" property="fixedPhone" />
     <result column="household_city_code" jdbcType="VARCHAR" property="householdCityCode" />
@@ -19,7 +20,7 @@
     <result column="weight" jdbcType="DOUBLE" property="weight" />
     <result column="blood_type_id" jdbcType="INTEGER" property="bloodTypeId" />
     <result column="healthy" jdbcType="INTEGER" property="healthy" />
-    <result column="h_code" jdbcType="VARCHAR" property="hCode" />
+    <result column="disability_code" jdbcType="VARCHAR" property="disabilityCode" />
     <result column="employment_state_id" jdbcType="INTEGER" property="employmentStateId" />
     <result column="marital_state_id" jdbcType="INTEGER" property="maritalStateId" />
     <result column="is_del" jdbcType="BIT" property="isDel" />
@@ -27,12 +28,44 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="is_checked" jdbcType="INTEGER" property="isChecked" />
+    <result column="check_reason_id" jdbcType="INTEGER" property="checkReasonId"/>
+    <result column="company_id" jdbcType="INTEGER" property="companyId"/>
+    <association property="addressCitys" javaType="com.example.datong.model.AddressCity">
+      <id column="city_id" jdbcType="INTEGER" property="cityId"/>
+      <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+      <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+      <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
+    </association>
+    <association property="residentialInfo" javaType="com.example.datong.model.ResidentialInfo">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="p_id" jdbcType="INTEGER" property="pId" />
+      <result column="residential_town_code" jdbcType="VARCHAR" property="residentialTownCode" />
+      <result column="residential_addres" jdbcType="VARCHAR" property="residentialAddres" />
+      <result column="living_style_id" jdbcType="INTEGER" property="livingStyleId" />
+      <result column="reason_for_residence_id" jdbcType="INTEGER" property="reasonForResidenceId" />
+      <result column="house_type_id" jdbcType="INTEGER" property="houseTypeId" />
+      <result column="house_gener" jdbcType="INTEGER" property="houseGener" />
+      <result column="house_use" jdbcType="INTEGER" property="houseUse" />
+      <result column="message_person" jdbcType="VARCHAR" property="messagePerson" />
+    </association>
+    <association property="addressTown" javaType="com.example.datong.model.AddressTown">
+      <id column="town_id" jdbcType="INTEGER" property="townId" />
+      <result column="town_code" jdbcType="VARCHAR" property="townCode" />
+      <result column="town_name" jdbcType="VARCHAR" property="townName" />
+      <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
+    </association>
+    <association property="addressCounty" javaType="com.example.datong.model.AddressCounty">
+      <id column="county_id" jdbcType="INTEGER" property="countyId" />
+      <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
+      <result column="county_name" jdbcType="VARCHAR" property="countyName" />
+      <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, name_used_before, sex, id_card, fixed_phone, household_city_code, phone, 
-    nation_id, come_time, education_level_id, political_outlook_id, faith_id, height, 
-    weight, blood_type_id, healthy, h_code, employment_state_id, marital_state_id, is_del, 
-    state, gmt_create, gmt_modified, is_checked
+    id, name, name_used_before, sex,photo, id_card, fixed_phone, household_city_code, phone,
+    nation_id, come_time, education_level_id, political_outlook_id, faith_id, height,
+    weight, blood_type_id, healthy, disability_code, employment_state_id, marital_state_id, is_del,
+    state, gmt_create, gmt_modified, is_checked,check_reason_id,company_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -40,28 +73,49 @@
     from floating_population
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <!--我写的关联语句-->
+  <select id="selectCountByProvince" resultType="int">
+    select count(*) from floating_population f,address_city c ,residential_info r,address_town t
+    where f.household_city_code=c.city_code and r.p_id=f.id and r.residential_town_code=t.town_code
+    <if test="county != null and  county!= ''" >
+       and t.county_code=#{county}
+    </if>
+    <if test="town != null and  town!= ''" >
+     and t.town_code=#{town}
+    </if>
+    <if test="time1 != null and  time1!= ''" >
+      and f.gmt_create between #{time1} and #{time2}
+    </if>
+    <if test="provinceCode != null and  provinceCode!= ''" >
+      and c.province_code=#{provinceCode}
+    </if>
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from floating_population
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.model.FloatingPopulation">
-    insert into floating_population (id, name, name_used_before, 
-      sex, id_card, fixed_phone, household_city_code, 
-      phone, nation_id, come_time, 
-      education_level_id, political_outlook_id, faith_id, 
-      height, weight, blood_type_id, 
-      healthy, h_code, employment_state_id, 
-      marital_state_id, is_del, state, 
-      gmt_create, gmt_modified, is_checked
+  <insert id="insert" parameterType="com.example.datong.model.FloatingPopulation" useGeneratedKeys="true" keyProperty="id">
+    <selectKey keyProperty="id" order="AFTER" resultType="integer">
+      select LAST_INSERT_ID();
+    </selectKey>
+    insert into floating_population (name, name_used_before, sex, photo, id_card,
+    fixed_phone, household_city_code, phone, nation_id, come_time, education_level_id,
+    political_outlook_id, faith_id, height, weight, blood_type_id, healthy,
+    disability_code, employment_state_id, marital_state_id, gmt_create,
+    gmt_modified,check_reason_id,company_id
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nameUsedBefore,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=BIT}, #{idCard,jdbcType=CHAR}, #{fixedPhone,jdbcType=VARCHAR}, #{householdCityCode,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=CHAR}, #{nationId,jdbcType=INTEGER}, #{comeTime,jdbcType=DATE}, 
-      #{educationLevelId,jdbcType=INTEGER}, #{politicalOutlookId,jdbcType=INTEGER}, #{faithId,jdbcType=INTEGER}, 
-      #{height,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, #{bloodTypeId,jdbcType=INTEGER}, 
-      #{healthy,jdbcType=INTEGER}, #{hCode,jdbcType=VARCHAR}, #{employmentStateId,jdbcType=INTEGER}, 
-      #{maritalStateId,jdbcType=INTEGER}, #{isDel,jdbcType=BIT}, #{state,jdbcType=BIT}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{isChecked,jdbcType=INTEGER}
+    values (#{name,jdbcType=VARCHAR}, #{nameUsedBefore,jdbcType=VARCHAR},
+      #{sex,jdbcType=BIT}, #{photo,jdbcType=VARCHAR}, #{idCard,jdbcType=CHAR},
+      #{fixedPhone,jdbcType=VARCHAR}, #{householdCityCode,jdbcType=VARCHAR},
+      #{phone,jdbcType=CHAR}, #{nationId,jdbcType=INTEGER}, #{comeTime,jdbcType=DATE},
+      #{educationLevelId,jdbcType=INTEGER}, #{politicalOutlookId,jdbcType=INTEGER},
+      #{faithId,jdbcType=INTEGER}, #{height,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE},
+      #{bloodTypeId,jdbcType=INTEGER}, #{healthy,jdbcType=INTEGER},
+      #{disabilityCode,jdbcType=VARCHAR}, #{employmentStateId,jdbcType=INTEGER},
+      #{maritalStateId,jdbcType=INTEGER},
+      #{gmtCreate,jdbcType=TIMESTAMP},#{gmtModified,jdbcType=TIMESTAMP},
+      #{checkReasonId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.datong.model.FloatingPopulation">
@@ -118,8 +172,8 @@
       <if test="healthy != null">
         healthy,
       </if>
-      <if test="hCode != null">
-        h_code,
+      <if test="disabilityCode != null">
+        disability_code,
       </if>
       <if test="employmentStateId != null">
         employment_state_id,
@@ -195,8 +249,8 @@
       <if test="healthy != null">
         #{healthy,jdbcType=INTEGER},
       </if>
-      <if test="hCode != null">
-        #{hCode,jdbcType=VARCHAR},
+      <if test="disabilityCode != null">
+        #{disabilityCode,jdbcType=VARCHAR},
       </if>
       <if test="employmentStateId != null">
         #{employmentStateId,jdbcType=INTEGER},
@@ -272,8 +326,8 @@
       <if test="healthy != null">
         healthy = #{healthy,jdbcType=INTEGER},
       </if>
-      <if test="hCode != null">
-        h_code = #{hCode,jdbcType=VARCHAR},
+      <if test="disabilityCode != null">
+        disability_code = #{disabilityCode,jdbcType=VARCHAR},
       </if>
       <if test="employmentStateId != null">
         employment_state_id = #{employmentStateId,jdbcType=INTEGER},
@@ -317,7 +371,7 @@
       weight = #{weight,jdbcType=DOUBLE},
       blood_type_id = #{bloodTypeId,jdbcType=INTEGER},
       healthy = #{healthy,jdbcType=INTEGER},
-      h_code = #{hCode,jdbcType=VARCHAR},
+      disability_code = #{disabilityCode,jdbcType=VARCHAR},
       employment_state_id = #{employmentStateId,jdbcType=INTEGER},
       marital_state_id = #{maritalStateId,jdbcType=INTEGER},
       is_del = #{isDel,jdbcType=BIT},
@@ -327,4 +381,20 @@
       is_checked = #{isChecked,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="selectChecking" resultMap="BaseResultMap">
+    SELECT f.id,f.`name`,f.phone,f.gmt_create FROM floating_population as f
+    WHERE is_checked=#{stateCode} and f.company_id=#{unitId}
+  </select>
+
+  <select id="selectChecked" resultMap="BaseResultMap">
+    SELECT f.id,f.`name`,f.phone,f.gmt_create FROM floating_population as f
+    WHERE is_checked=2102
+  </select>
+
+  <select id="selectNotCheckedCount" resultType="integer">
+    SELECT COUNT(*) FROM floating_population as f
+    WHERE is_checked=2101 and f.company_id=#{unitId}
+  </select>
 </mapper>

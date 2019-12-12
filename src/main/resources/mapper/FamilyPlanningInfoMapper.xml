@@ -3,7 +3,7 @@
 <mapper namespace="com.example.datong.dao.FamilyPlanningInfoMapper">
   <resultMap id="BaseResultMap" type="com.example.datong.model.FamilyPlanningInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="p_id" jdbcType="VARCHAR" property="pId" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
     <result column="is_together" jdbcType="BIT" property="isTogether" />
     <result column="has_prove" jdbcType="BIT" property="hasProve" />
     <result column="number" jdbcType="VARCHAR" property="number" />
@@ -32,12 +32,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.FamilyPlanningInfo">
-    insert into family_planning_info (id, p_id, is_together, 
+    insert into family_planning_info (p_id, is_together,
       has_prove, number, is_checked, 
       measure, pregnancy_info_id, boy_num, 
       girl_num, inside_num, outside_num, 
       has_certificate, is_levy)
-    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=VARCHAR}, #{isTogether,jdbcType=BIT}, 
+    values (#{pId,jdbcType=INTEGER}, #{isTogether,jdbcType=BIT},
       #{hasProve,jdbcType=BIT}, #{number,jdbcType=VARCHAR}, #{isChecked,jdbcType=BIT}, 
       #{measure,jdbcType=VARCHAR}, #{pregnancyInfoId,jdbcType=INTEGER}, #{boyNum,jdbcType=INTEGER}, 
       #{girlNum,jdbcType=INTEGER}, #{insideNum,jdbcType=INTEGER}, #{outsideNum,jdbcType=INTEGER}, 
@@ -138,7 +138,7 @@
     update family_planning_info
     <set>
       <if test="pId != null">
-        p_id = #{pId,jdbcType=VARCHAR},
+        p_id = #{pId,jdbcType=INTEGER},
       </if>
       <if test="isTogether != null">
         is_together = #{isTogether,jdbcType=BIT},
@@ -181,7 +181,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.datong.model.FamilyPlanningInfo">
     update family_planning_info
-    set p_id = #{pId,jdbcType=VARCHAR},
+    set p_id = #{pId,jdbcType=INTEGER},
       is_together = #{isTogether,jdbcType=BIT},
       has_prove = #{hasProve,jdbcType=BIT},
       number = #{number,jdbcType=VARCHAR},

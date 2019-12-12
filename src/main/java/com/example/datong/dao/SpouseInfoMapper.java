@@ -1,7 +1,9 @@
 package com.example.datong.dao;
 
 import com.example.datong.model.SpouseInfo;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface SpouseInfoMapper {
     int deleteByPrimaryKey(Integer id);
 

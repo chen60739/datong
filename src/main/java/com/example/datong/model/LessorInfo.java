@@ -73,4 +73,17 @@ public class LessorInfo {
     public void setIsSign(Boolean isSign) {
         this.isSign = isSign;
     }
+
+    @Override
+    public String toString() {
+        return "LessorInfo{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", lessorType=" + lessorType +
+                ", lessorName='" + lessorName + '\'' +
+                ", lessorPhone='" + lessorPhone + '\'' +
+                ", lessorIdCard='" + lessorIdCard + '\'' +
+                ", isSign=" + isSign +
+                '}';
+    }
 }

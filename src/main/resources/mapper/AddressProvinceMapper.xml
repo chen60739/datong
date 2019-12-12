@@ -68,4 +68,8 @@
       province_name = #{provinceName,jdbcType=VARCHAR}
     where province_id = #{provinceId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from address_province
+  </select>
 </mapper>

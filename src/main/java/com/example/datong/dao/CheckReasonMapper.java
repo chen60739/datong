@@ -1,7 +1,9 @@
 package com.example.datong.dao;
 
 import com.example.datong.model.CheckReason;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface CheckReasonMapper {
     int deleteByPrimaryKey(Integer id);
 

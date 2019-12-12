@@ -1,7 +1,9 @@
 package com.example.datong.dao;
 
 import com.example.datong.model.Role;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
 

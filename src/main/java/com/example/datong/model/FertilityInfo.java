@@ -52,4 +52,15 @@ public class FertilityInfo {
     public void setIsInside(Boolean isInside) {
         this.isInside = isInside;
     }
+
+    @Override
+    public String toString() {
+        return "FertilityInfo{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", childSex=" + childSex +
+                ", childBirthday=" + childBirthday +
+                ", isInside=" + isInside +
+                '}';
+    }
 }

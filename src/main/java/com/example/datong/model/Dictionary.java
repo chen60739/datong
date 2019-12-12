@@ -30,4 +30,13 @@ public class Dictionary {
     public void setTopId(Integer topId) {
         this.topId = topId;
     }
+
+    @Override
+    public String toString() {
+        return "Dictionary{" +
+                "dictionaryId=" + dictionaryId +
+                ", dictionaryName='" + dictionaryName + '\'' +
+                ", topId=" + topId +
+                '}';
+    }
 }

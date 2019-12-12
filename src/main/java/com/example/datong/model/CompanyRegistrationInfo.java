@@ -1,5 +1,6 @@
 package com.example.datong.model;
 
+
 import java.util.Date;
 
 /**
@@ -10,15 +11,15 @@ public class CompanyRegistrationInfo {
     private Integer unitId;
     //公司名称
     private String unitName;
-    //联系电话
-    private String phone;
-    //密码
+
+    private String unitPhone;
+
     private String password;
-    //区编码
-    private String countyCode;
-    //镇编码
-    private String townCode;
-    //单位类型
+
+    private String unitCountyCode;
+
+    private String unitTownCode;
+
     private Integer unitTypeId;
     //详细地址
     private String unitAddress;
@@ -57,12 +58,12 @@ public class CompanyRegistrationInfo {
         this.unitName = unitName == null ? null : unitName.trim();
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUnitPhone() {
+        return unitPhone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+    public void setUnitPhone(String unitPhone) {
+        this.unitPhone = unitPhone == null ? null : unitPhone.trim();
     }
 
     public String getPassword() {
@@ -73,20 +74,20 @@ public class CompanyRegistrationInfo {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getCountyCode() {
-        return countyCode;
+    public String getUnitCountyCode() {
+        return unitCountyCode;
     }
 
-    public void setCountyCode(String countyCode) {
-        this.countyCode = countyCode == null ? null : countyCode.trim();
+    public void setUnitCountyCode(String unitCountyCode) {
+        this.unitCountyCode = unitCountyCode == null ? null : unitCountyCode.trim();
     }
 
-    public String getTownCode() {
-        return townCode;
+    public String getUnitTownCode() {
+        return unitTownCode;
     }
 
-    public void setTownCode(String townCode) {
-        this.townCode = townCode == null ? null : townCode.trim();
+    public void setUnitTownCode(String unitTownCode) {
+        this.unitTownCode = unitTownCode == null ? null : unitTownCode.trim();
     }
 
     public Integer getUnitTypeId() {
@@ -152,6 +153,7 @@ public class CompanyRegistrationInfo {
     public void setWorkerNum(String workerNum) {
         this.workerNum = workerNum == null ? null : workerNum.trim();
     }
+
     public Date getGmtCreate() {
         return gmtCreate;
     }
@@ -181,10 +183,10 @@ public class CompanyRegistrationInfo {
         return "CompanyRegistrationInfo{" +
                 "unitId=" + unitId +
                 ", unitName='" + unitName + '\'' +
-                ", phone='" + phone + '\'' +
+                ", unitPhone='" + unitPhone + '\'' +
                 ", password='" + password + '\'' +
-                ", countyCode='" + countyCode + '\'' +
-                ", townCode='" + townCode + '\'' +
+                ", unitCountyCode='" + unitCountyCode + '\'' +
+                ", unitTownCode='" + unitTownCode + '\'' +
                 ", unitTypeId=" + unitTypeId +
                 ", unitAddress='" + unitAddress + '\'' +
                 ", unitNum='" + unitNum + '\'' +

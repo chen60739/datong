@@ -3,7 +3,7 @@ package com.example.datong.model;
 public class CheckReason {
     private Integer id;
 
-    private Integer accountId;
+    private Integer adminId;
 
     private String reason;
 
@@ -15,12 +15,12 @@ public class CheckReason {
         this.id = id;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Integer getadminId() {
+        return adminId;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setadminId(Integer adminId) {
+        this.adminId = adminId;
     }
 
     public String getReason() {
@@ -29,5 +29,14 @@ public class CheckReason {
 
     public void setReason(String reason) {
         this.reason = reason == null ? null : reason.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "CheckReason{" +
+                "id=" + id +
+                ", adminId=" + adminId +
+                ", reason='" + reason + '\'' +
+                '}';
     }
 }

@@ -53,16 +53,16 @@
                 {checkbox: true, fixed: true}
                 ,{field:'unitId', width:80, title: '编号', sort: true, fixed: true}
                 ,{field:'unitName', width:160, title: '单位名称'}
-                ,{field:'phone', width:120, title: '手机', sort: true}
-                ,{field:'gmtCreateStr', width:100, title: '提交时间'}
+                ,{field:'unitPhone', width:120, title: '手机', sort: true}
+                ,{field:'gmtCreate', width:100, title: '提交时间'}
                 ,{fixed: 'right', width:110, align:'center', toolbar: '#barDemo', title: '详情'}
-                ,{field:'isCheckeds', width:100, title: '审核状态', sort: true}
+                ,{field:'isChecked', width:100, title: '审核状态', sort: true}
             ]]
             ,id: 'testReload'
             ,page: true
             ,height: 310
             ,width: 726
-    });
+        });
 
         var $ = layui.$, active = {
             reload: function(){

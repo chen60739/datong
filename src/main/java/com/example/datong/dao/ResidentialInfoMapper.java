@@ -1,7 +1,10 @@
 package com.example.datong.dao;
 
 import com.example.datong.model.ResidentialInfo;
+import org.apache.ibatis.annotations.Mapper;
 
+
+@Mapper
 public interface ResidentialInfoMapper {
     int deleteByPrimaryKey(Integer id);
 
