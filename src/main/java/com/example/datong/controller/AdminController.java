@@ -4,6 +4,8 @@ import com.example.datong.model.Admin;
 import com.example.datong.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -13,7 +15,13 @@ public class AdminController {
     @Resource
     AdminService adminService;
 
-    //登录
+    /**
+     * 后台登录页面
+     * @param adminPhone
+     * @param adminPassword
+     * @param session
+     * @return
+     */
     @RequestMapping("back_login")
     public String login(String adminPhone, String adminPassword, HttpSession session) {
         Admin login = adminService.login(adminPhone, adminPassword);
@@ -33,17 +41,25 @@ public class AdminController {
     }
 
 
-    //注册
+    /**
+     * 注册
+     * @param record
+     * @return
+     */
     @RequestMapping("back_register")
     public String register(Admin record) {
-        Admin login = adminService.login1(record.getAdminPhone());
-        if (login !=null  && login.getAdminPhone().equals(record.getAdminPhone())){
-            System.out.println("注册失败");
-            return "back_register.html";
-        }else {
-            int register = adminService.register(record);
-            System.out.println("注册成功");
-            return "back_index.html";
+        int register = adminService.register(record);
+        System.out.println("注册成功");
+        return "back_login";
+    }
+
+    @RequestMapping("checkAdminPhone")
+    @ResponseBody
+    public boolean checkAdminPhone(@RequestParam("adminPhone") String adminPhone){
+        Admin admin = adminService.login1(adminPhone);
+        if (admin != null) {
+            return false;
         }
+        return true;
     }
 }

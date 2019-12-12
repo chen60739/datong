@@ -14,32 +14,72 @@ import java.util.*;
 @Controller
 public class BackController {
 
+<<<<<<< HEAD
+    /**
+     * 后台注册页面
+     * @return
+     */
+=======
     /*//后台注册
+>>>>>>> 3aeac1ed293226e478a073104809ea48b2c77970
     @GetMapping("/back_register")
     public String backRegister(){ return "back_register";}
-    //后台登录
+
+    /**
+     * 后台登录页面
+     * @return
+     */
     @GetMapping("/back_login")
+<<<<<<< HEAD
+    public String back_login(){ return "back_login";}
+
+    /**
+     * 布局首页
+     * @return
+     */
+=======
     public String back_login(){ return "back_login";}*/
     //布局首页
+>>>>>>> 3aeac1ed293226e478a073104809ea48b2c77970
     @GetMapping("/back_index")
     public String toBackIndex(){return  "backIndex";}
-    //跳转到注册信息审核
+
+    /**
+     * 跳转到注册信息审核
+     * @return
+     */
     @GetMapping("/back_info_audit")
     public String toBackInfoAudit(){
         return "backInforAudit";
     }
-    //跳转到账户管理
+
+    /**
+     * 跳转到账户管理
+     * @return
+     */
     @GetMapping("/back_account_management")
     public String toBackAccountManagement(){
         return "backAccountManagement";
     }
-    //跳转到登记信息审核
+
+    /**
+     * 跳转到登记信息审核
+     * @return
+     */
     @GetMapping("/back_register_audit")
     public String toBackRegistrationInfoAudit(){ return "backRegistrationInfoAudit";}
-    //跳转到流动人口信息管理页面
+
+    /**
+     * 跳转到流动人口信息管理页面
+     * @return
+     */
     @GetMapping("/back_floatingManagement")
     public String toBackFloatingManagement(){ return "backFloatingManagement";}
-    //获取注册信息去进行审核
+
+    /**
+     * 获取注册信息去进行审核
+     * @return
+     */
     @GetMapping("/back_register_info")
     @ResponseBody
     public HashMap<String,Object> backFindRegisterInfo(){
@@ -59,7 +99,11 @@ public class BackController {
         map.put("data",list);
         return map;
     }
-    //获取账户信息进行管理，一般用于查询用户密码
+
+    /**
+     * 获取账户信息进行管理，一般用于查询用户密码
+     * @return
+     */
     @GetMapping("/back_account_info")
     @ResponseBody
     public HashMap<String,Object> backFindAccountInfo(){
@@ -76,7 +120,11 @@ public class BackController {
         map.put("data",list);
         return map;
     }
-    //登记信息审核
+
+    /**
+     * 登记信息审核
+     * @return
+     */
     @GetMapping("/backFindFloatInfo")
     @ResponseBody
     public Map<String,Object> backFindFloatInfo(){
