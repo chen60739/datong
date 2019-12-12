@@ -10,13 +10,13 @@ public class ResidentialInfo {
     private String residentialAddres;
 
     private Integer livingStyleId;
-
+    //居住事由id
     private Integer reasonForResidenceId;
-
+    //房屋类别id
     private Integer houseTypeId;
-
+    //房屋类型
     private Integer houseGener;
-
+    //房屋用途
     private Integer houseUse;
 
     private String messagePerson;

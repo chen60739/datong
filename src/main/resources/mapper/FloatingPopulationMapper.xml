@@ -63,7 +63,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, name, name_used_before, sex,photo, id_card, fixed_phone, household_city_code, phone,
-    nation_id, come_time, education_level_id, political_outlook_id, faith_id, height, 
+    nation_id, come_time, education_level_id, political_outlook_id, faith_id, height,
     weight, blood_type_id, healthy, disability_code, employment_state_id, marital_state_id, is_del,
     state, gmt_create, gmt_modified, is_checked,check_reason_id,company_id
   </sql>
@@ -388,13 +388,30 @@
     WHERE is_checked=#{stateCode} and f.company_id=#{unitId}
   </select>
 
-  <select id="selectChecked" resultMap="BaseResultMap">
-    SELECT f.id,f.`name`,f.phone,f.gmt_create FROM floating_population as f
-    WHERE is_checked=2102
+  <select id="selectCheckingCount" resultType="integer">
+    SELECT COUNT(*) FROM floating_population as f
+    WHERE is_checked=#{stateCode} and f.company_id=#{unitId}
   </select>
 
-  <select id="selectNotCheckedCount" resultType="integer">
-    SELECT COUNT(*) FROM floating_population as f
-    WHERE is_checked=2101 and f.company_id=#{unitId}
+  <resultMap id="noPassed" type="com.example.datong.dto.NoPassedPerson">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="reason" jdbcType="VARCHAR" property="reason"/>
+  </resultMap>
+
+  <select id="selectNoPassed"  parameterType="integer" resultMap="noPassed">
+    SELECT p.id,p.`name`,p.phone,p.gmt_create,c.reason
+    FROM floating_population p,check_reason c
+    WHERE p.check_reason_id=c.id AND p.is_checked=2103
+     AND p.company_id=#{unitId}
+  </select>
+
+  <select id="selectNoPassedCount"  parameterType="integer" resultType="integer">
+    SELECT COUNT(*)
+    FROM floating_population p,check_reason c
+    WHERE p.check_reason_id=c.id AND p.is_checked=2103
+     AND p.company_id=#{unitId}
   </select>
 </mapper>

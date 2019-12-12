@@ -4,20 +4,20 @@ public class SpouseInfo {
     private Integer id;
 
     private Integer pId;
+    //配偶姓名
+    private String name;
+    //配偶身份证号
+    private String idCard;
 
-    private String spouseName;
-
-    private String spouseIdCard;
-
-    private Integer spouseCountyCode;
-
-    private String spouseAddress;
-
-    private Integer spouseEmploymentStateId;
-
-    private String spouseWorkUnit;
-
-    private String spousePhone;
+    private Integer countyCode;
+    //现居住地地址
+    private String address;
+    //从业状况id
+    private Integer employmentStateId;
+    //工作单位
+    private String workUnit;
+    //联系电话
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -35,74 +35,59 @@ public class SpouseInfo {
         this.pId = pId;
     }
 
-    public String getSpouseName() {
-        return spouseName;
+    public String getName() {
+        return name;
     }
 
-    public void setSpouseName(String spouseName) {
-        this.spouseName = spouseName;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getSpouseIdCard() {
-        return spouseIdCard;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setSpouseIdCard(String spouseIdCard) {
-        this.spouseIdCard = spouseIdCard;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard == null ? null : idCard.trim();
     }
 
-    public Integer getSpouseCountyCode() {
-        return spouseCountyCode;
+    public Integer getCountyCode() {
+        return countyCode;
     }
 
-    public void setSpouseCountyCode(Integer spouseCountyCode) {
-        this.spouseCountyCode = spouseCountyCode;
+    public void setCountyCode(Integer countyCode) {
+        this.countyCode = countyCode;
     }
 
-    public String getSpouseAddress() {
-        return spouseAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setSpouseAddress(String spouseAddress) {
-        this.spouseAddress = spouseAddress;
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
     }
 
-    public Integer getSpouseEmploymentStateId() {
-        return spouseEmploymentStateId;
+    public Integer getEmploymentStateId() {
+        return employmentStateId;
     }
 
-    public void setSpouseEmploymentStateId(Integer spouseEmploymentStateId) {
-        this.spouseEmploymentStateId = spouseEmploymentStateId;
+    public void setEmploymentStateId(Integer employmentStateId) {
+        this.employmentStateId = employmentStateId;
     }
 
-    public String getSpouseWorkUnit() {
-        return spouseWorkUnit;
+    public String getWorkUnit() {
+        return workUnit;
     }
 
-    public void setSpouseWorkUnit(String spouseWorkUnit) {
-        this.spouseWorkUnit = spouseWorkUnit;
+    public void setWorkUnit(String workUnit) {
+        this.workUnit = workUnit == null ? null : workUnit.trim();
     }
 
-    public String getSpousePhone() {
-        return spousePhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setSpousePhone(String spousePhone) {
-        this.spousePhone = spousePhone;
-    }
-
-    @Override
-    public String toString() {
-        return "SpouseInfo{" +
-                "id=" + id +
-                ", pId=" + pId +
-                ", spouseName='" + spouseName + '\'' +
-                ", spouseIdCard='" + spouseIdCard + '\'' +
-                ", spouseCountyCode=" + spouseCountyCode +
-                ", spouseAddress='" + spouseAddress + '\'' +
-                ", spouseEmploymentStateId=" + spouseEmploymentStateId +
-                ", spouseWorkUnit='" + spouseWorkUnit + '\'' +
-                ", spousePhone='" + spousePhone + '\'' +
-                '}';
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 }

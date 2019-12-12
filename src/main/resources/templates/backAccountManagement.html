@@ -19,7 +19,7 @@
                     <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
                 </div>
             </div>
-            <button type="button" class="layui-btn">搜索</button>
+            <button type="button" class="layui-btn" id="search">搜索</button>
         </div>
         <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
         <table class="layui-hide" id="test"></table>
@@ -42,7 +42,7 @@
         //方法级渲染
         table.render({
             elem: '#LAY_table_user'
-            ,url: '/back_account_info'
+            ,url: 'findAllCompany'
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'unitId', width:80, title: '编号', sort: true, fixed: true}
@@ -78,6 +78,18 @@
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
+        $("#search").click(function(){
+            var phone =$(".layui-input").val();
+            table.reload('testReload', {
+                method: 'post'
+                , where: {
+                    'phone': phone,
+                }
+                , page: {
+                    curr: 1
+                }
+            });
+        })
     });
 
 

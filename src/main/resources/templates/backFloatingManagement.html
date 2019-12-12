@@ -17,35 +17,35 @@
             <div class="layui-inline">
                 <label class="layui-form-label">从</label>
                 <div class="layui-input-inline">
-                    <!--查询框，按照时间范围查询-->   <input name="Create_time1" class="layui-input" type="date" autocomplete="off" lay-verify="">
+                    <!--查询框，按照时间范围查询-->   <input name="Create_time1" class="layui-input" id="time1" type="date" autocomplete="off" lay-verify="">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">到</label>
                 <div class="layui-input-inline">
-                    <!--查询框，按照时间范围查询-->   <input name="Create_time2" class="layui-input" type="date" autocomplete="off" lay-verify="">
+                    <!--查询框，按照时间范围查询-->   <input name="Create_time2" class="layui-input" id="time2" type="date" autocomplete="off" lay-verify="">
                 </div>
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">公司：</label>
-            <div class="layui-input-inline">
-                <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
+            <label class="layui-form-label1">公司：</label>
+            <div class="layui-input-inline" >
+                <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" id="unit" type="text" autocomplete="off" lay-verify="">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">姓名：</label>
+            <label class="layui-form-label2" >姓名：</label>
             <div class="layui-input-inline">
-                <!--查询框，按照员工姓名的查询-->   <input name="name" class="layui-input" type="text" autocomplete="off" lay-verify="">
+                <!--查询框，按照员工姓名的查询-->   <input name="name" class="layui-input" id="name" type="text" autocomplete="off" lay-verify="">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">手机号：</label>
+            <label class="layui-form-label3" >手机号：</label>
             <div class="layui-input-inline">
-                <!--查询框，按照手机号查询-->   <input name="phone" class="layui-input" type="text" autocomplete="off" lay-verify="">
+                <!--查询框，按照手机号查询-->   <input name="phone" class="layui-input" id="phone" type="text" autocomplete="off" lay-verify="">
             </div>
         </div>
-        <button type="button" class="layui-btn">搜索</button>
+        <button type="button" class="layui-btn" id="search">搜索</button>
         <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
         <table class="layui-hide" id="test"></table>
     </div>
@@ -67,14 +67,16 @@
         //方法级渲染
         table.render({
             elem: '#LAY_table_user'
-            ,url: '/back_population'
+            ,url: 'findAllFloatingPopulation'
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'id', width:80, title: '编号', sort: true, fixed: true}
-                ,{field:'companyId', width:160, title: '单位名称'}
+                ,{field:'companyId', width:160, title: '单位名称',
+                    templet:function (res) {
+                        return '<span>'+res.companyRegistrationInfo.unitName+'</span>'}}
                 ,{field:'name', width:80, title: '姓名'}
                 ,{field:'phone', width:120, title: '手机', sort: true}
-                ,{field:'gmtCreate', width:100, title: '提交时间'}
+                ,{field:'gmtCreateStr', width:100, title: '提交时间'}
                 ,{fixed: 'right', width:110, align:'center', toolbar: '#barDemo', title: '详情'}
             ]]
             ,id: 'testReload'
@@ -105,6 +107,26 @@
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
+        $("#search").click(function(){
+            var time1 =$("#time1").val();
+            var time2 =$("#time2").val();
+            var unitName =$("#unit").val();
+            var name =$("#name").val();
+            var phone =$("#phone").val();
+            table.reload('testReload', {
+                method: 'post'
+                , where: {
+                    'time1': time1,
+                    'time2': time2,
+                    'unitName': unitName,
+                    'name': name,
+                    'phone': phone,
+                }
+                , page: {
+                    curr: 1
+                }
+            });
+        })
     });
 
 

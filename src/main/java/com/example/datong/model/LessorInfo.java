@@ -1,5 +1,8 @@
 package com.example.datong.model;
 
+/**
+ * 出租人情况信息
+ */
 public class LessorInfo {
     private Integer id;
 

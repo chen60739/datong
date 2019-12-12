@@ -19,6 +19,12 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="is_checked" jdbcType="INTEGER" property="isChecked" />
+
+    <association property="dictionary" javaType="com.example.datong.model.Dictionary">
+      <id column="top_id" property="topId"/>
+      <result column="dictionary_name" property="dictionaryName"/>
+      <result column="dictionary_id" property="dictionaryId"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     unit_id, unit_name, phone, password, county_code, town_code, unit_type_id, unit_address, 
@@ -234,14 +240,14 @@
   </update>
   <!--注册信息审核查询-->
   <select id="selectAll" resultMap="BaseResultMap">
-      SELECT  * FROM company_registration_info
-        <where>
-            <if test="unitName != null">
-              unit_name LIKE CONCAT("%",#{unitName},"%")
-            </if>
-            <if test="phone != null">
-              phone LIKE CONCAT("%",#{phone},"%")
-            </if>
-        </where>
-    </select>
+        SELECT  * FROM company_registration_info,dictionary
+        WHERE company_registration_info.is_checked=dictionary.dictionary_id
+        <if test="unitName != null and unitName !=''">
+          AND  company_registration_info.unit_name LIKE CONCAT("%",#{unitName},"%")
+        </if>
+        <if test="phone !=null and phone !=''">
+          AND company_registration_info.phone like CONCAT("%",#{phone},"%")
+        </if>
+
+  </select>
 </mapper>
