@@ -21,8 +21,8 @@
     <result column="is_checked" jdbcType="INTEGER" property="isChecked" />
   </resultMap>
   <sql id="Base_Column_List">
-    unit_id, unit_name, unit_phone, password, unit_county_code, unit_town_code, unit_type_id, 
-    unit_address, unit_num, unit_social, industry_category_id, organization_code, legal_person_name, 
+    unit_id, unit_name, unit_phone, password, unit_county_code, unit_town_code, unit_type_id,
+    unit_address, unit_num, unit_social, industry_category_id, organization_code, legal_person_name,
     worker_num, gmt_create, gmt_modified, is_checked
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -37,13 +37,13 @@
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     insert into company_registration_info (unit_name, unit_phone,
-      password, unit_county_code, unit_town_code, 
+      password, unit_county_code, unit_town_code,
       unit_type_id, unit_address, unit_num, 
       unit_social, industry_category_id, organization_code, 
       legal_person_name, worker_num, gmt_create, 
       gmt_modified)
     values (#{unitName,jdbcType=VARCHAR}, #{unitPhone,jdbcType=CHAR},
-      #{password,jdbcType=VARCHAR}, #{unitCountyCode,jdbcType=VARCHAR}, #{unitTownCode,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{unitCountyCode,jdbcType=VARCHAR}, #{unitTownCode,jdbcType=VARCHAR},
       #{unitTypeId,jdbcType=INTEGER}, #{unitAddress,jdbcType=VARCHAR}, #{unitNum,jdbcType=VARCHAR}, 
       #{unitSocial,jdbcType=VARCHAR}, #{industryCategoryId,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, 
       #{legalPersonName,jdbcType=VARCHAR}, #{workerNum,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
@@ -232,11 +232,16 @@
       is_checked = #{isChecked,jdbcType=INTEGER}
     where unit_id = #{unitId,jdbcType=INTEGER}
   </update>
+  <!--注册信息审核查询-->
+  <select id="selectAll" resultMap="BaseResultMap">
+        SELECT  * FROM company_registration_info,dictionary
+        WHERE company_registration_info.is_checked=dictionary.dictionary_id
+        <if test="unitName != null and unitName !=''">
+          AND  company_registration_info.unit_name LIKE CONCAT("%",#{unitName},"%")
+        </if>
+        <if test="phone !=null and phone !=''">
+          AND company_registration_info.phone like CONCAT("%",#{phone},"%")
+        </if>
 
-  <select id="findByPhone" parameterType="string" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from company_registration_info
-    where unit_phone = #{phone,jdbcType=VARCHAR}
   </select>
 </mapper>
