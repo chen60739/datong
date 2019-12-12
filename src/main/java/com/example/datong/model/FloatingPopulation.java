@@ -53,8 +53,10 @@ public class FloatingPopulation {
     private Boolean state;
     //创建时间
     private Date gmtCreate;
+    private String gmtCreateStr;
     //修改时间
     private Date gmtModified;
+    private String gmtModifiedStr;
     //审核状态
     private Integer isChecked;
     //审核未通过原因表id
@@ -72,36 +74,44 @@ public class FloatingPopulation {
     //县级表
     private AddressCounty addressCounty;
 
-    public AddressCounty getAddressCounty() {
-        return addressCounty;
+    public FloatingPopulation() {
     }
 
-    public void setAddressCounty(AddressCounty addressCounty) {
-        this.addressCounty = addressCounty;
-    }
-
-    public ResidentialInfo getResidentialInfo() {
-        return residentialInfo;
-    }
-
-    public void setResidentialInfo(ResidentialInfo residentialInfo) {
-        this.residentialInfo = residentialInfo;
-    }
-
-    public AddressTown getAddressTown() {
-        return addressTown;
-    }
-
-    public void setAddressTown(AddressTown addressTown) {
-        this.addressTown = addressTown;
-    }
-
-    public AddressCity getAddressCitys() {
-        return addressCitys;
-    }
-
-    public void setAddressCitys(AddressCity addressCitys) {
+    public FloatingPopulation(Integer id, String name, String nameUsedBefore, Boolean sex, String photo, String idCard, String fixedPhone, String householdCityCode, String phone, Integer nationId, Date comeTime, Integer educationLevelId, Integer politicalOutlookId, Integer faithId, Double height, Double weight, Integer bloodTypeId, Integer healthy, String disabilityCode, Integer employmentStateId, Integer maritalStateId, Boolean isDel, Boolean state, Date gmtCreate, String gmtCreateStr, Date gmtModified, String gmtModifiedStr, Integer isChecked, Integer checkReasonId, Integer companyId, AddressCity addressCitys, ResidentialInfo residentialInfo, AddressTown addressTown, AddressCounty addressCounty) {
+        this.id = id;
+        this.name = name;
+        this.nameUsedBefore = nameUsedBefore;
+        this.sex = sex;
+        this.photo = photo;
+        this.idCard = idCard;
+        this.fixedPhone = fixedPhone;
+        this.householdCityCode = householdCityCode;
+        this.phone = phone;
+        this.nationId = nationId;
+        this.comeTime = comeTime;
+        this.educationLevelId = educationLevelId;
+        this.politicalOutlookId = politicalOutlookId;
+        this.faithId = faithId;
+        this.height = height;
+        this.weight = weight;
+        this.bloodTypeId = bloodTypeId;
+        this.healthy = healthy;
+        this.disabilityCode = disabilityCode;
+        this.employmentStateId = employmentStateId;
+        this.maritalStateId = maritalStateId;
+        this.isDel = isDel;
+        this.state = state;
+        this.gmtCreate = gmtCreate;
+        this.gmtCreateStr = gmtCreateStr;
+        this.gmtModified = gmtModified;
+        this.gmtModifiedStr = gmtModifiedStr;
+        this.isChecked = isChecked;
+        this.checkReasonId = checkReasonId;
+        this.companyId = companyId;
         this.addressCitys = addressCitys;
+        this.residentialInfo = residentialInfo;
+        this.addressTown = addressTown;
+        this.addressCounty = addressCounty;
     }
 
     public Integer getId() {
@@ -117,7 +127,7 @@ public class FloatingPopulation {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getNameUsedBefore() {
@@ -125,7 +135,7 @@ public class FloatingPopulation {
     }
 
     public void setNameUsedBefore(String nameUsedBefore) {
-        this.nameUsedBefore = nameUsedBefore == null ? null : nameUsedBefore.trim();
+        this.nameUsedBefore = nameUsedBefore;
     }
 
     public Boolean getSex() {
@@ -136,12 +146,20 @@ public class FloatingPopulation {
         this.sex = sex;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public String getIdCard() {
         return idCard;
     }
 
     public void setIdCard(String idCard) {
-        this.idCard = idCard == null ? null : idCard.trim();
+        this.idCard = idCard;
     }
 
     public String getFixedPhone() {
@@ -149,7 +167,7 @@ public class FloatingPopulation {
     }
 
     public void setFixedPhone(String fixedPhone) {
-        this.fixedPhone = fixedPhone == null ? null : fixedPhone.trim();
+        this.fixedPhone = fixedPhone;
     }
 
     public String getHouseholdCityCode() {
@@ -157,7 +175,7 @@ public class FloatingPopulation {
     }
 
     public void setHouseholdCityCode(String householdCityCode) {
-        this.householdCityCode = householdCityCode == null ? null : householdCityCode.trim();
+        this.householdCityCode = householdCityCode;
     }
 
     public String getPhone() {
@@ -165,7 +183,7 @@ public class FloatingPopulation {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public Integer getNationId() {
@@ -240,6 +258,14 @@ public class FloatingPopulation {
         this.healthy = healthy;
     }
 
+    public String getDisabilityCode() {
+        return disabilityCode;
+    }
+
+    public void setDisabilityCode(String disabilityCode) {
+        this.disabilityCode = disabilityCode;
+    }
+
     public Integer getEmploymentStateId() {
         return employmentStateId;
     }
@@ -254,6 +280,14 @@ public class FloatingPopulation {
 
     public void setMaritalStateId(Integer maritalStateId) {
         this.maritalStateId = maritalStateId;
+    }
+
+    public Boolean getDel() {
+        return isDel;
+    }
+
+    public void setDel(Boolean del) {
+        isDel = del;
     }
 
     public Boolean getState() {
@@ -272,6 +306,14 @@ public class FloatingPopulation {
         this.gmtCreate = gmtCreate;
     }
 
+    public String getGmtCreateStr() {
+        return gmtCreateStr;
+    }
+
+    public void setGmtCreateStr(String gmtCreateStr) {
+        this.gmtCreateStr = gmtCreateStr;
+    }
+
     public Date getGmtModified() {
         return gmtModified;
     }
@@ -280,36 +322,20 @@ public class FloatingPopulation {
         this.gmtModified = gmtModified;
     }
 
+    public String getGmtModifiedStr() {
+        return gmtModifiedStr;
+    }
+
+    public void setGmtModifiedStr(String gmtModifiedStr) {
+        this.gmtModifiedStr = gmtModifiedStr;
+    }
+
     public Integer getIsChecked() {
         return isChecked;
     }
 
     public void setIsChecked(Integer isChecked) {
         this.isChecked = isChecked;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getDisabilityCode() {
-        return disabilityCode;
-    }
-
-    public void setDisabilityCode(String disabilityCode) {
-        this.disabilityCode = disabilityCode==""?null:disabilityCode;
-    }
-
-    public Boolean getDel() {
-        return isDel;
-    }
-
-    public void setDel(Boolean del) {
-        isDel = del;
     }
 
     public Integer getCheckReasonId() {
@@ -326,6 +352,38 @@ public class FloatingPopulation {
 
     public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
+    }
+
+    public AddressCity getAddressCitys() {
+        return addressCitys;
+    }
+
+    public void setAddressCitys(AddressCity addressCitys) {
+        this.addressCitys = addressCitys;
+    }
+
+    public ResidentialInfo getResidentialInfo() {
+        return residentialInfo;
+    }
+
+    public void setResidentialInfo(ResidentialInfo residentialInfo) {
+        this.residentialInfo = residentialInfo;
+    }
+
+    public AddressTown getAddressTown() {
+        return addressTown;
+    }
+
+    public void setAddressTown(AddressTown addressTown) {
+        this.addressTown = addressTown;
+    }
+
+    public AddressCounty getAddressCounty() {
+        return addressCounty;
+    }
+
+    public void setAddressCounty(AddressCounty addressCounty) {
+        this.addressCounty = addressCounty;
     }
 
     @Override
@@ -355,13 +413,16 @@ public class FloatingPopulation {
                 ", isDel=" + isDel +
                 ", state=" + state +
                 ", gmtCreate=" + gmtCreate +
+                ", gmtCreateStr='" + gmtCreateStr + '\'' +
                 ", gmtModified=" + gmtModified +
+                ", gmtModifiedStr='" + gmtModifiedStr + '\'' +
                 ", isChecked=" + isChecked +
                 ", checkReasonId=" + checkReasonId +
                 ", companyId=" + companyId +
+                ", addressCitys=" + addressCitys +
+                ", residentialInfo=" + residentialInfo +
+                ", addressTown=" + addressTown +
+                ", addressCounty=" + addressCounty +
                 '}';
-    }
-
-    public FloatingPopulation() {
     }
 }
