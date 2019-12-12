@@ -19,22 +19,25 @@
                     <label for="phone" class="layui-form-label">
                         <span class="x-red">*</span>手机号</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="phone" name="adminPhone" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                        <input type="text" id="phone" name="adminPhone" lay-verify="required|phone|username" autocomplete="off" class="layui-input"></div>
                 </div>
                 <div class="layui-form-item">
                     <label for="password" class="layui-form-label">
                         <span class="x-red">*</span>密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" id="password" name="adminPassword" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                        <input type="password" id="password" name="adminPassword" lay-verify="required|pwd" autocomplete="off" class="layui-input"></div>
                 </div>
                 <div class="layui-form-item">
                     <label for="unitName" class="layui-form-label">
                         <span class="x-red">*</span>工作单位</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="unitName" name="adminName" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                        <input type="text" id="unitName" name="adminName" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     <div class="layui-input-inline">
-                        <select name="">
-                            <option value="140200">等级</option>
+                        <select name="power">
+                            <option value="">等级</option>
+                            <option value="1">派出所</option>
+                            <option value="2">分局</option>
+                            <option value="3">市局</option>
                         </select>
                     </div>
                 </div>
@@ -48,12 +51,12 @@
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="countyCode">
+                        <select name="countyCode" id="countyCode" lay-filter="county" lay-verify="required">
                             <option value="">请选择县/区</option>
                         </select>
                     </div>
                     <div class="layui-input-inline">
-                        <select name="townCode">
+                        <select name="townCode" id="town" lay-filter="town" lay-verify="required">
                             <option value="">请选择街道/镇</option>
                         </select>
                     </div>
@@ -72,31 +75,53 @@
 
 <script>
     //Demo
-    layui.use('form', function(){
-        var form = layui.form;
-        //监听提交
-        form.on('submit(demo1)', function(data){
-            //layer.msg(JSON.stringify(data.field));
-            /* var phone = data.field.phone;
-              var password = data.field.password;
-              var unitName = data.field.unitName;*/
-            /*data:{adminPhone:data.adminPhone,adminPassword:data.adminPassword,adminName:data.adminName},*/
-            // data:"phone="+phone+"&password"+password+"&unitName"+unitName,
-            /*{"adminPhone":phone,"adminPassword":password,"adminName":unitName
-        }*/
-            /*$.ajax({
-                type:"POST",
-                url:"/register",
-                dataType:"json",
-                data:{
-                    adminPhone:phone
-                },
-                success:function (data) {
-                    alert(data)
+    layui.use(['form','jquery','layer'], function(){
+        var form = layui.form,
+            $ = layui.jquery;
+
+        form.verify({
+            username:function(value) {
+                var message = '';
+                $.ajax({
+                    type: "GET",
+                    url: "/checkAdminPhone/?adminPhone="+value,
+                    async: false, //改为同步请求
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res) {
+
+                        } else {
+                            message = "手机号已存在，请重新输入！"
+                        }
+                    }
+                });
+                //需要注意  需要将返回信息写在ajax方法外
+                if (message !== '') {
+                    return message;
                 }
-            })*/
-            //return false;
+            }
+            ,pwd: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
         });
+
+        form.on('select(county)', function(data){
+            $.getJSON("/getTown",{"countyCode":data.value},function (result) {
+                $("#town").empty();
+                for (var i = 0; i < result.length; i++) {
+                    $("#town").append("<option value='"+result[i].townCode+"'>"+result[i].townName+"</option>")
+                }
+                form.render("select");
+            })
+        });
+
+        $(document).ready(function () {
+            $.getJSON("/getCounty",function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $("#countyCode").append("<option value='"+result[i].countyCode+"'>"+result[i].countyName+"</option>")
+                }
+                form.render();
+            })
+        })
     });
 </script>
 </body>
