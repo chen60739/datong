@@ -76,9 +76,14 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
 
 
     @Override
-    public List<NoPassedPerson> findNoPassed(Integer unitId) {
+    public Map<String, Object> findNoPassed(Integer unitId) {
         List<NoPassedPerson> list = populationMapper.selectNoPassed(unitId);
-        return list;
+        int count = populationMapper.selectNoPassedCount(unitId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("code",0);
+        map.put("count",count);
+        map.put("data",list);
+        return map;
     }
 
     @Override
