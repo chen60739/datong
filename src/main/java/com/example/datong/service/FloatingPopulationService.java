@@ -1,10 +1,8 @@
 package com.example.datong.service;
 
-import com.example.datong.dto.NoPassedPerson;
 import com.example.datong.model.*;
 
 import java.text.ParseException;
-import java.util.List;
 import java.util.Map;
 
 public interface FloatingPopulationService {
@@ -23,6 +21,6 @@ public interface FloatingPopulationService {
     int changePass(Integer id);
     Map<String,Object> changeNoPass(Integer id, CheckReason reason);
 
-    List<NoPassedPerson> findNoPassed(Integer unitId);
+    Map<String, Object> findNoPassed(Integer unitId);
 
 }
