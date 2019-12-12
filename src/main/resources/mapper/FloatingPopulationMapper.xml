@@ -414,4 +414,28 @@
     WHERE p.check_reason_id=c.id AND p.is_checked=2103
      AND p.company_id=#{unitId}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT  * FROM floating_population fp,company_registration_info cri,dictionary
+    WHERE fp.company_id=cri.unit_id
+    and fp.is_checked=dictionary.dictionary_id
+    <if test="unitName !=null and unitName !=''">
+      AND cri.unit_name like CONCAT("%",#{unitName},"%")
+    </if>
+    <if test="name !=null and name !=''">
+      AND  fp.name like CONCAT("%",#{name},"%")
+    </if>
+    <if test="phone !=null and phone !=''">
+      AND  fp.phone like CONCAT("%",#{phone},"%")
+    </if>
+    <if test="time1 !=null and time1 !=''">
+      AND  fp.gmt_create between #{time1} and #{time2}
+    </if>
+  </select>
+  <update id="updatePass">
+    update floating_population SET is_checked = 2103 WHERE id=#{id}
+  </update>
+  <update id="updateNoPass">
+    update floating_population SET is_checked = 2104 WHERE id=#{id}
+  </update>
 </mapper>
