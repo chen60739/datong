@@ -40,7 +40,7 @@ public class SpouseInfo {
     }
 
     public void setSpouseName(String spouseName) {
-        this.spouseName = spouseName;
+        this.spouseName = spouseName == "" ? null : spouseName;
     }
 
     public String getSpouseIdCard() {
@@ -48,7 +48,7 @@ public class SpouseInfo {
     }
 
     public void setSpouseIdCard(String spouseIdCard) {
-        this.spouseIdCard = spouseIdCard;
+        this.spouseIdCard = spouseIdCard == "" ? null : spouseIdCard;
     }
 
     public Integer getSpouseCountyCode() {
@@ -64,7 +64,7 @@ public class SpouseInfo {
     }
 
     public void setSpouseAddress(String spouseAddress) {
-        this.spouseAddress = spouseAddress;
+        this.spouseAddress = spouseAddress == "" ? null : spouseAddress;
     }
 
     public Integer getSpouseEmploymentStateId() {
@@ -80,7 +80,7 @@ public class SpouseInfo {
     }
 
     public void setSpouseWorkUnit(String spouseWorkUnit) {
-        this.spouseWorkUnit = spouseWorkUnit;
+        this.spouseWorkUnit = spouseWorkUnit == "" ? null : spouseWorkUnit;
     }
 
     public String getSpousePhone() {
@@ -88,7 +88,7 @@ public class SpouseInfo {
     }
 
     public void setSpousePhone(String spousePhone) {
-        this.spousePhone = spousePhone;
+        this.spousePhone = spousePhone == "" ? null : spousePhone;
     }
 
     @Override
