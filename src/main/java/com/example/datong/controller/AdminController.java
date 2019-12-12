@@ -13,7 +13,13 @@ public class AdminController {
     @Resource
     AdminService adminService;
 
-    //登录
+    /**
+     * 后台登录页面
+     * @param adminPhone
+     * @param adminPassword
+     * @param session
+     * @return
+     */
     @RequestMapping("back_login")
     public String login(String adminPhone, String adminPassword, HttpSession session) {
         Admin login = adminService.login(adminPhone, adminPassword);
@@ -29,8 +35,12 @@ public class AdminController {
     }
 
 
-    //注册
-    @RequestMapping("register")
+    /**
+     * 注册
+     * @param record
+     * @return
+     */
+    @RequestMapping("back_register")
     public String register(Admin record) {
         Admin admin=new Admin();
         admin.setAdminPhone(record.getAdminPhone());
