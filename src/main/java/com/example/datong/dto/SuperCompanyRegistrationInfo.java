@@ -4,24 +4,20 @@ import com.example.datong.model.CompanyRegistrationInfo;
 import com.example.datong.model.Dictionary;
 
 public class SuperCompanyRegistrationInfo extends CompanyRegistrationInfo {
-    private Dictionary dictionary;
+    private String dictionaryName;
 
-    public SuperCompanyRegistrationInfo(Dictionary dictionary) {
-        this.dictionary = dictionary;
+    public String getDictionaryName() {
+        return dictionaryName;
     }
 
-    public Dictionary getDictionary() {
-        return dictionary;
-    }
-
-    public void setDictionary(Dictionary dictionary) {
-        this.dictionary = dictionary;
+    public void setDictionaryName(String dictionaryName) {
+        this.dictionaryName = dictionaryName;
     }
 
     @Override
     public String toString() {
         return "SuperCompanyRegistrationInfo{" +
-                "dictionary=" + dictionary +
+                "dictionaryName='" + dictionaryName + '\'' +
                 '}';
     }
 }
