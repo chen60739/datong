@@ -25,10 +25,10 @@
     where admin_id = #{adminId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.Admin">
-    insert into admin (admin_id, admin_phone, admin_password, 
+    insert into admin (admin_phone, admin_password,
       admin_name, town_code, county_code, 
       power)
-    values (#{adminId,jdbcType=INTEGER}, #{adminPhone,jdbcType=CHAR}, #{adminPassword,jdbcType=VARCHAR}, 
+    values (#{adminPhone,jdbcType=CHAR}, #{adminPassword,jdbcType=VARCHAR},
       #{adminName,jdbcType=VARCHAR}, #{townCode,jdbcType=VARCHAR}, #{countyCode,jdbcType=VARCHAR}, 
       #{power,jdbcType=INTEGER})
   </insert>

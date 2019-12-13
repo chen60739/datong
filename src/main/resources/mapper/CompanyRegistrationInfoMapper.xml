@@ -20,12 +20,8 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="is_checked" jdbcType="INTEGER" property="isChecked" />
   </resultMap>
-  <resultMap id="super" type="com.example.datong.dto.SuperCompanyRegistrationInfo">
-    <association property="dictionary" javaType="com.example.datong.model.Dictionary">
-      <id column="top_id" property="topId"/>
-      <result column="dictionary_name" property="dictionaryName"/>
-      <result column="dictionary_id" property="dictionaryId"/>
-    </association>
+  <resultMap id="super" type="com.example.datong.dto.SuperCompanyRegistrationInfo" extends="BaseResultMap">
+      <result column="dictionary_name" jdbcType="VARCHAR" property="dictionaryName"/>
   </resultMap>
   <sql id="Base_Column_List">
     unit_id, unit_name, unit_phone, password, unit_county_code, unit_town_code, unit_type_id,
@@ -240,14 +236,19 @@
     where unit_id = #{unitId,jdbcType=INTEGER}
   </update>
   <!--注册信息审核查询-->
-  <select id="selectAll" resultMap="super">
-        SELECT  * FROM company_registration_info,dictionary
-        WHERE company_registration_info.is_checked=dictionary.dictionary_id
+  <select id="selectAll" resultMap="super" parameterType="com.example.datong.model.CompanyRegistrationInfo">
+        SELECT
+        c.*,d.dictionary_name
+        FROM
+        company_registration_info c,
+        dictionary d
+        WHERE
+        c.is_checked = d.dictionary_id
         <if test="unitName != null and unitName !=''">
-          AND  company_registration_info.unit_name LIKE CONCAT("%",#{unitName},"%")
+          AND  c.unit_name LIKE CONCAT("%",#{unitName},"%")
         </if>
         <if test="unitPhone !=null and unitPhone !=''">
-          AND company_registration_info.unit_phone like CONCAT("%",#{unitPhone},"%")
+          AND c.unit_phone like CONCAT("%",#{unitPhone},"%")
         </if>
   </select>
 
