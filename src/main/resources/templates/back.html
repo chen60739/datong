@@ -36,7 +36,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a onclick="xadmin.add_tab('注册信息审核','member-list1.html',true)" class="" >注册信息审核</a>
+                    <a onclick="xadmin.add_tab('注册信息审核','backInforAudit')">注册信息审核</a>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">账户管理</a>
@@ -58,16 +58,22 @@
         <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
             <ul class="layui-tab-title">
                 <li class="home">
-                    <i class="layui-icon">&#xe68e;</i>我的桌面</li></ul>
-
-
+                    <i class="layui-icon">&#xe68e;</i>我的桌面</li>
+            </ul>
+            <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                <dl>
+                    <dd data-type="this">关闭当前</dd>
+                    <dd data-type="other">关闭其它</dd>
+                    <dd data-type="all">关闭全部</dd>
+                </dl>
+            </div>
             <div id="tab_show"></div>
         </div>
 
-        <div style="padding: 15px;">
+<!--        <div style="padding: 15px;">
             <div class="layui-inline">
                 <div class="layui-input-inline">
-                    <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
+                    &lt;!&ndash;查询框，按照公司的名称查询&ndash;&gt;   <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
                 </div>
             </div>
             <button type="button" class="layui-btn" id="search">搜索</button>
@@ -75,7 +81,7 @@
             <button type="button" class="layui-btn">不通过</button>
         </div>
         <table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
-        <table class="layui-hide" id="test"></table>
+        <table class="layui-hide" id="test"></table>-->
     </div>
 
     <div class="layui-footer">

@@ -17,7 +17,8 @@
     <div style="padding: 15px;">
         <div class="layui-inline">
             <div class="layui-input-inline">
-                <!--查询框，按照公司的名称查询-->   <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
+                <!--查询框，按照公司的名称查询-->
+                <input name="companay_name" class="layui-input" type="text" autocomplete="off" lay-verify="">
             </div>
         </div>
         <button type="button" class="layui-btn" id="search">搜索</button>
@@ -58,13 +59,11 @@
                 {checkbox: true, fixed: true}
                 ,{field:'unitId', width:80, title: '编号', sort: true, fixed: true}
                 ,{field:'unitName', width:160, title: '单位名称'}
-                ,{field:'phone', width:120, title: '手机', sort: true}
-                ,{field:'gmtCreate', width:100, title: '提交时间',templet:'<div>{{ Format(gmtCreate,"yyyy-MM-dd")}}</div>'}
+                ,{field:'unitPhone', width:120, title: '手机', sort: true}
+                ,{field:'gmtCreate', width:100, title: '提交时间',templet:'<div>{{ layui.util.toDateString(d.gmtCreate, "yyyy-MM-dd") }}</div>'}
                 ,{fixed: 'right', width:110, align:'center', toolbar: '#barDemo', title: '详情'}
-                ,{field:'dictionary', width:100, title: '审核状态', sort: true,align:'center',
-                    templet:function (res) {
-                        return '<span>'+res.dictionary.dictionaryName+'</span>'}
-                }
+                ,{field:'dictionaryName', width:100, title: '审核状态', sort: true,align:'center'}
+
             ]]
             ,id: 'testReload'
             ,page: true

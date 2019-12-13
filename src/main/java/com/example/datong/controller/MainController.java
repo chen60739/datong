@@ -1,6 +1,5 @@
 package com.example.datong.controller;
 
-import com.example.datong.dto.NoPassedPerson;
 import com.example.datong.model.*;
 import com.example.datong.service.AddressService;
 import com.example.datong.service.DictionaryService;
@@ -30,7 +29,7 @@ public class MainController {
 
     @RequestMapping("/audit")
     public String aduit(){
-        return "audit";
+        return "passing";
     }
 
     @RequestMapping("/passed")
