@@ -5,63 +5,68 @@
     <title>后台注册</title>
     <link rel="stylesheet" href="/plugs/layui/css/layui.css">
     <script src="/plugs/layui/layui.js"></script>
+    <!--<script type="text/javascript" src="../js/jquery1.11.3-jquery.min.js"></script>-->
 </head>
 <body>
 <div class="layui-col-xs6 layui-col-md12">
     <div style="width: 900px;height:50px;text-align: center;float: left;margin-left: 200px;margin-top: 20px" >
-    <div>
-        <h1>后台账号注册</h1>
-    </div>
-    <div style="float: top;margin-top: 20px">
-        <form method="post" class="layui-form">
-            <div class="layui-form-item">
-                <label for="phone" class="layui-form-label">
-                    <span class="x-red">*</span>手机号</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="phone" name="phone" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label for="password" class="layui-form-label">
-                    <span class="x-red">*</span>密码</label>
-                <div class="layui-input-inline">
-                    <input type="password" id="password" name="password" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label for="unitName" class="layui-form-label">
-                    <span class="x-red">*</span>工作单位</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="unitName" name="unitName" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
-                <div class="layui-input-inline">
-                    <select name="">
-                        <option value="140200">等级</option>
-                    </select>
+        <div>
+            <h1>后台账号注册</h1>
+        </div>
+        <div style="float: top;margin-top: 20px">
+            <form method="post" class="layui-form" action="back_register">
+                <div class="layui-form-item">
+                    <label for="phone" class="layui-form-label">
+                        <span class="x-red">*</span>手机号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="phone" name="adminPhone" lay-verify="required|phone|username" autocomplete="off" class="layui-input"></div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="code" class="layui-form-label">
-                <span class="x-red">*</span>所在地
-                </label>
-                <div class="layui-input-inline">
-                    <select name="">
-                        <option value="140200">大同市</option>
-                    </select>
+                <div class="layui-form-item">
+                    <label for="password" class="layui-form-label">
+                        <span class="x-red">*</span>密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="password" name="adminPassword" lay-verify="required|pwd" autocomplete="off" class="layui-input"></div>
                 </div>
-                <div class="layui-input-inline">
-                    <select name="countyCode">
-                        <option value="">请选择县/区</option>
-                    </select>
+                <div class="layui-form-item">
+                    <label for="unitName" class="layui-form-label">
+                        <span class="x-red">*</span>工作单位</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="unitName" name="adminName" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    <div class="layui-input-inline">
+                        <select name="power">
+                            <option value="">等级</option>
+                            <option value="1">派出所</option>
+                            <option value="2">分局</option>
+                            <option value="3">市局</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="layui-input-inline">
-                    <select name="townCode">
-                        <option value="">请选择街道/镇</option>
-                    </select>
+                <div class="layui-form-item">
+                    <label for="code" class="layui-form-label">
+                        <span class="x-red">*</span>所在地
+                    </label>
+                    <div class="layui-input-inline">
+                        <select name="">
+                            <option value="140200">大同市</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="countyCode" id="countyCode" lay-filter="county" lay-verify="required">
+                            <option value="">请选择县/区</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="townCode" id="town" lay-filter="town" lay-verify="required">
+                            <option value="">请选择街道/镇</option>
+                        </select>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" id="submit">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+                        </div>
+                    </div>
                 </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
             </form>
         </div>
     </div>
@@ -70,14 +75,53 @@
 
 <script>
     //Demo
-    layui.use('form', function(){
-        var form = layui.form;
+    layui.use(['form','jquery','layer'], function(){
+        var form = layui.form,
+            $ = layui.jquery;
 
-        //监听提交
-        form.on('submit(demo1)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return false;
+        form.verify({
+            username:function(value) {
+                var message = '';
+                $.ajax({
+                    type: "GET",
+                    url: "/checkAdminPhone/?adminPhone="+value,
+                    async: false, //改为同步请求
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res) {
+
+                        } else {
+                            message = "手机号已存在，请重新输入！"
+                        }
+                    }
+                });
+                //需要注意  需要将返回信息写在ajax方法外
+                if (message !== '') {
+                    return message;
+                }
+            }
+            ,pwd: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
         });
+
+        form.on('select(county)', function(data){
+            $.getJSON("/getTown",{"countyCode":data.value},function (result) {
+                $("#town").empty();
+                for (var i = 0; i < result.length; i++) {
+                    $("#town").append("<option value='"+result[i].townCode+"'>"+result[i].townName+"</option>")
+                }
+                form.render("select");
+            })
+        });
+
+        $(document).ready(function () {
+            $.getJSON("/getCounty",function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $("#countyCode").append("<option value='"+result[i].countyCode+"'>"+result[i].countyName+"</option>")
+                }
+                form.render();
+            })
+        })
     });
 </script>
 </body>
