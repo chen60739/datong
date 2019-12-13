@@ -20,4 +20,9 @@ public interface CheckReasonMapper {
     int updateByPrimaryKeySelective(CheckReason record);
 
     int updateByPrimaryKey(CheckReason record);
+
+    //添加审核原因
+    int insertrecord(CheckReason record);
+    //根据id查询是否有审核原因
+    CheckReason selectOne(Integer id);
 }
