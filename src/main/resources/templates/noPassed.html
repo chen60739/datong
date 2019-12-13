@@ -22,7 +22,7 @@
                 {field:'id', width:80, title: '编号', sort: true, fixed: true}
                 ,{field:'name', width:80, title: '姓名', sort: true}
                 ,{field:'phone', width: 120, title: '手机号'}
-                ,{field:'gmtCreate', width:160, title: '填写时间',templet:'<div>{{ layui.util.toDateString(d.createDate, "yyyy-MM-dd HH:mm:ss") }}</div>', sort: true}
+                ,{field:'gmtCreate', width:160, title: '填写时间',templet:'<div>{{ layui.util.toDateString(d.gmtCreate, "yyyy-MM-dd") }}</div>', sort: true}
                 ,{field:'reason', width:160, title: '未通过原因', sort: true}
             ]]
             ,id: 'testReload'
