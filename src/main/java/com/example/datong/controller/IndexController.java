@@ -4,7 +4,7 @@ import com.example.datong.message.Result;
 import com.example.datong.model.*;
 import com.example.datong.service.AddressService;
 import com.example.datong.service.CompanyService;
-import com.example.datong.service.DictionaryImpl;
+import com.example.datong.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +22,7 @@ public class IndexController {
     @Autowired
     private CompanyService companyService;
     @Autowired
-    private DictionaryImpl dictionaryService;
+    private DictionaryService dictionaryService;
 
     /**
      * 检查登录账户是否正确
