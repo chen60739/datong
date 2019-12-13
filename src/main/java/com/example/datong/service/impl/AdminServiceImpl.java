@@ -29,8 +29,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int register(Admin admin) {
-        return adminMapper.insert(admin);
+    public int register(Admin record) {
+        return adminMapper.insertSelective(record);
     }
 
 }
