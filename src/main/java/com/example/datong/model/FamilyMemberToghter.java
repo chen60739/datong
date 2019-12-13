@@ -17,6 +17,31 @@ public class FamilyMemberToghter {
     //是否在本市就学
     private Boolean isLocal;
 
+    @Override
+    public String toString() {
+        return "FamilyMemberToghter{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", memberName='" + memberName + '\'' +
+                ", memberSex=" + memberSex +
+                ", memberIdCard='" + memberIdCard + '\'' +
+                ", relationId=" + relationId +
+                ", hasVaccinate=" + hasVaccinate +
+                ", isLocal=" + isLocal +
+                ", dictionary=" + dictionary +
+                '}';
+    }
+
+    private Dictionary dictionary;
+
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
+    public void setDictionary(Dictionary dictionary) {
+        this.dictionary = dictionary;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -81,17 +106,5 @@ public class FamilyMemberToghter {
         this.isLocal = isLocal;
     }
 
-    @Override
-    public String toString() {
-        return "FamilyMemberToghter{" +
-                "id=" + id +
-                ", pId=" + pId +
-                ", memberName='" + memberName + '\'' +
-                ", memberSex=" + memberSex +
-                ", memberIdCard='" + memberIdCard + '\'' +
-                ", relationId=" + relationId +
-                ", hasVaccinate=" + hasVaccinate +
-                ", isLocal=" + isLocal +
-                '}';
-    }
+
 }

@@ -13,6 +13,17 @@ public class FertilityInfo {
 
     private Boolean isInside;
 
+    @Override
+    public String toString() {
+        return "FertilityInfo{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", childSex=" + childSex +
+                ", childBirthday=" + childBirthday +
+                ", isInside=" + isInside +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
@@ -45,22 +56,12 @@ public class FertilityInfo {
         this.childBirthday = childBirthday;
     }
 
-    public Boolean getIsInside() {
+    public Boolean getInside() {
         return isInside;
     }
 
-    public void setIsInside(Boolean isInside) {
-        this.isInside = isInside;
+    public void setInside(Boolean inside) {
+        isInside = inside;
     }
 
-    @Override
-    public String toString() {
-        return "FertilityInfo{" +
-                "id=" + id +
-                ", pId=" + pId +
-                ", childSex=" + childSex +
-                ", childBirthday=" + childBirthday +
-                ", isInside=" + isInside +
-                '}';
-    }
 }

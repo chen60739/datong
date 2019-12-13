@@ -5,6 +5,13 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface InsuranceStateMapper {
+    /**
+     * 查找人的保险状况
+     * @param id
+     * @return
+     */
+    Integer[]selectInsuranceState(Integer id);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(InsuranceState record);

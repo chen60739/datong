@@ -7,6 +7,7 @@ public class Dictionary {
 
     private Integer topId;
 
+
     public Integer getDictionaryId() {
         return dictionaryId;
     }

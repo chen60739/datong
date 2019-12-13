@@ -1,9 +1,8 @@
 package com.example.datong.model;
 
 public class SpouseInfo {
-
     private Integer id;
-    //人id
+
     private Integer pId;
 
     private String spouseName;

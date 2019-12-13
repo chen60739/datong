@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface EmploymentInfoMapper {
+    EmploymentInfo selectEmploymentInfo(Integer id);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(EmploymentInfo record);

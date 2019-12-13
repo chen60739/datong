@@ -15,6 +15,19 @@ public class LessorInfo {
 
     private Boolean isSign;
 
+    @Override
+    public String toString() {
+        return "LessorInfo{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", lessorType=" + lessorType +
+                ", lessorName='" + lessorName + '\'' +
+                ", lessorPhone='" + lessorPhone + '\'' +
+                ", lessorIdCard='" + lessorIdCard + '\'' +
+                ", isSign=" + isSign +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
@@ -71,16 +84,4 @@ public class LessorInfo {
         this.isSign = isSign;
     }
 
-    @Override
-    public String toString() {
-        return "LessorInfo{" +
-                "id=" + id +
-                ", pId=" + pId +
-                ", lessorType=" + lessorType +
-                ", lessorName='" + lessorName + '\'' +
-                ", lessorPhone='" + lessorPhone + '\'' +
-                ", lessorIdCard='" + lessorIdCard + '\'' +
-                ", isSign=" + isSign +
-                '}';
-    }
 }

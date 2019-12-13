@@ -5,15 +5,17 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CompanyRegistrationInfoMapper {
+    int updateCompanyNoPass(Integer unitId);
+
     int deleteByPrimaryKey(Integer unitId);
 
     int insert(CompanyRegistrationInfo record);
 
     int insertSelective(CompanyRegistrationInfo record);
 
-    CompanyRegistrationInfo selectByPrimaryKey(Integer unitId);
+    CompanyRegistrationInfo selectByCompanyId(Integer unitId);
 
-    int updateByPrimaryKeySelective(CompanyRegistrationInfo record);
+    int updateCheckedByCompanyId(Integer unitId );
 
     int updateByPrimaryKey(CompanyRegistrationInfo record);
 

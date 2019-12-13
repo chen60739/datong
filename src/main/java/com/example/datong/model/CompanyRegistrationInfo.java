@@ -24,7 +24,7 @@ public class CompanyRegistrationInfo {
 
     private String unitSocial;
 
-    private String industryCategoryId;
+    private Integer industryCategoryId;
 
     private String organizationCode;
 
@@ -37,6 +37,37 @@ public class CompanyRegistrationInfo {
     private Date gmtModified;
 
     private Integer isChecked;
+
+    @Override
+    public String toString() {
+        return "CompanyRegistrationInfo{" +
+                "unitId=" + unitId +
+                ", unitName='" + unitName + '\'' +
+                ", unitPhone='" + unitPhone + '\'' +
+                ", password='" + password + '\'' +
+                ", unitCountyCode='" + unitCountyCode + '\'' +
+                ", unitTownCode='" + unitTownCode + '\'' +
+                ", unitTypeId=" + unitTypeId +
+                ", unitAddress='" + unitAddress + '\'' +
+                ", unitNum='" + unitNum + '\'' +
+                ", unitSocial='" + unitSocial + '\'' +
+                ", industryCategoryId=" + industryCategoryId +
+                ", organizationCode='" + organizationCode + '\'' +
+                ", legalPersonName='" + legalPersonName + '\'' +
+                ", workerNum='" + workerNum + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", isChecked=" + isChecked +
+                '}';
+    }
+
+    public Integer getIndustryCategoryId() {
+        return industryCategoryId;
+    }
+
+    public void setIndustryCategoryId(Integer industryCategoryId) {
+        this.industryCategoryId = industryCategoryId;
+    }
 
     public Integer getUnitId() {
         return unitId;
@@ -118,13 +149,6 @@ public class CompanyRegistrationInfo {
         this.unitSocial = unitSocial == null ? null : unitSocial.trim();
     }
 
-    public String getIndustryCategoryId() {
-        return industryCategoryId;
-    }
-
-    public void setIndustryCategoryId(String industryCategoryId) {
-        this.industryCategoryId = industryCategoryId == null ? null : industryCategoryId.trim();
-    }
 
     public String getOrganizationCode() {
         return organizationCode;
@@ -173,27 +197,5 @@ public class CompanyRegistrationInfo {
     public void setIsChecked(Integer isChecked) {
         this.isChecked = isChecked;
     }
-
-    @Override
-    public String toString() {
-        return "CompanyRegistrationInfo{" +
-                "unitId=" + unitId +
-                ", unitName='" + unitName + '\'' +
-                ", unitPhone='" + unitPhone + '\'' +
-                ", password='" + password + '\'' +
-                ", unitCountyCode='" + unitCountyCode + '\'' +
-                ", unitTownCode='" + unitTownCode + '\'' +
-                ", unitTypeId=" + unitTypeId +
-                ", unitAddress='" + unitAddress + '\'' +
-                ", unitNum='" + unitNum + '\'' +
-                ", unitSocial='" + unitSocial + '\'' +
-                ", industryCategoryId='" + industryCategoryId + '\'' +
-                ", organizationCode='" + organizationCode + '\'' +
-                ", legalPersonName='" + legalPersonName + '\'' +
-                ", workerNum='" + workerNum + '\'' +
-                ", gmtCreate=" + gmtCreate +
-                ", gmtModified=" + gmtModified +
-                ", isChecked=" + isChecked +
-                '}';
-    }
 }
+

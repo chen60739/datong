@@ -15,6 +15,8 @@ public class EmploymentInfo {
 
     private String occupation;
 
+    private CompanyRegistrationInfo company;
+
     public Integer getId() {
         return id;
     }
@@ -71,6 +73,14 @@ public class EmploymentInfo {
         this.occupation = occupation;
     }
 
+    public CompanyRegistrationInfo getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyRegistrationInfo company) {
+        this.company = company;
+    }
+
     @Override
     public String toString() {
         return "EmploymentInfo{" +
@@ -80,7 +90,8 @@ public class EmploymentInfo {
                 ", contractYear=" + contractYear +
                 ", positionalTitleId=" + positionalTitleId +
                 ", skillId=" + skillId +
-                ", occupation=" + occupation +
+                ", occupation='" + occupation + '\'' +
+                ", company=" + company +
                 '}';
     }
 }

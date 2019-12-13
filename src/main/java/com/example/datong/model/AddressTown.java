@@ -9,6 +9,7 @@ public class AddressTown {
 
     private String countyCode;
 
+
     public Integer getTownId() {
         return townId;
     }

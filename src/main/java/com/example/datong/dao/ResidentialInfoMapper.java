@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ResidentialInfoMapper {
+
+    ResidentialInfo selectResidentialInfo(Integer id);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(ResidentialInfo record);

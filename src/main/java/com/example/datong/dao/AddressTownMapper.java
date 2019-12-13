@@ -7,6 +7,17 @@ import java.util.List;
 
 @Mapper
 public interface AddressTownMapper {
+    /**
+     * 通过区查找下面的镇
+     * @param code
+     * @return
+     */
+    List<AddressTown>selectTownByCode(String code);
+    /**
+     * 查询所有镇
+     * @return
+     */
+    List<AddressTown> selectTown();
     int deleteByPrimaryKey(Integer townId);
 
     int insert(AddressTown record);

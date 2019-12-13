@@ -1,4 +1,4 @@
-package com.example.datong.Controller;
+package com.example.datong.controller;
 
 import com.example.datong.model.*;
 import com.example.datong.model.Dictionary;
@@ -220,12 +220,17 @@ public class ViewController {
 
     }
     //审核通过
-    @GetMapping("/toPass")
+    @RequestMapping("/toPass")
     @ResponseBody
-    public int pass(@RequestParam("id") Integer id,String reason){
-        System.out.println(id);
-        int insert=1;
-        return insert;
+    public int pass(@RequestParam("id") Integer id){
+       Integer a= showService.replayCheckedByCompanyId(id);
+       Integer message = null;
+        if(a!=null){
+            message = 1;
+        }else {
+            message = 0;
+        }
+        return message;
     }
     //不通过
    @RequestMapping("/noPass")
@@ -248,12 +253,39 @@ public class ViewController {
         }
         return messsage;
     }
-
+    @RequestMapping("/companyPass")
+    @ResponseBody
+    public int companyPass(Integer id){
+        System.err.println(id);
+        Integer row= showService.replayCheckedByCompanyId(id);
+        Integer message =null;
+        if(row!=null){
+            message=1;
+        }else {
+            message=0;
+        }
+        return message;
+    }
+    @RequestMapping("/companyNoPass")
+    @ResponseBody
+    public int companyNoPass(Integer id){
+       Integer row= showService.replayCompanyNoPass(id);
+       Integer message =null;
+        if(row!=null){
+            message=1;
+        }else {
+            message=0;
+        }
+        return message;
+    }
     @RequestMapping("/noPassReason")
     public String noPassReason(Integer id,ModelMap map){
         map.put("id",id);
-        System.err.println(map);
         return "noPass";
+    }
+    @RequestMapping("/showCompany")
+    public String showCompany(Integer id){
+        return "register";
     }
 
 }

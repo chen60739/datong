@@ -7,6 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface DictionaryMapper {
+    /**
+     * 查询所有字典信息
+     * @return
+     */
+    List<Dictionary> selectDictionary();
     int insert(Dictionary record);
 
     int insertSelective(Dictionary record);

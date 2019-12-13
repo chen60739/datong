@@ -5,6 +5,12 @@ import java.util.List;
 
 
 public interface ShowService {
+    //公司不通过
+    int replayCompanyNoPass(Integer unitId);
+    //公司通过
+    int replayCheckedByCompanyId(Integer unitId);
+
+    CompanyRegistrationInfo getByCompanyId(Integer unitId);
     /**
      * 通过市code找到下面的县
      * @param code

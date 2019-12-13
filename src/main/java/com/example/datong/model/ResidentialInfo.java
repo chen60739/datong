@@ -21,6 +21,33 @@ public class ResidentialInfo {
 
     private String messagePerson;
 
+    private LessorInfo lessorInfo;
+
+    @Override
+    public String toString() {
+        return "ResidentialInfo{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", residentialTownCode='" + residentialTownCode + '\'' +
+                ", residentialAddres='" + residentialAddres + '\'' +
+                ", livingStyleId=" + livingStyleId +
+                ", reasonForResidenceId=" + reasonForResidenceId +
+                ", houseTypeId=" + houseTypeId +
+                ", houseGener=" + houseGener +
+                ", houseUse=" + houseUse +
+                ", messagePerson='" + messagePerson + '\'' +
+                ", lessorInfo=" + lessorInfo +
+                '}';
+    }
+
+    public LessorInfo getLessorInfo() {
+        return lessorInfo;
+    }
+
+    public void setLessorInfo(LessorInfo lessorInfo) {
+        this.lessorInfo = lessorInfo;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -101,19 +128,5 @@ public class ResidentialInfo {
         this.messagePerson = messagePerson == null ? null : messagePerson.trim();
     }
 
-    @Override
-    public String toString() {
-        return "ResidentialInfo{" +
-                "id=" + id +
-                ", pId=" + pId +
-                ", residentialTownCode='" + residentialTownCode + '\'' +
-                ", residentialAddres='" + residentialAddres + '\'' +
-                ", livingStyleId=" + livingStyleId +
-                ", reasonForResidenceId=" + reasonForResidenceId +
-                ", houseTypeId=" + houseTypeId +
-                ", houseGener=" + houseGener +
-                ", houseUse=" + houseUse +
-                ", messagePerson='" + messagePerson + '\'' +
-                '}';
-    }
+
 }
