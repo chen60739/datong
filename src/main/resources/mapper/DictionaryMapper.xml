@@ -6,6 +6,9 @@
         <result column="dictionary_name" jdbcType="VARCHAR" property="dictionaryName" />
         <result column="top_id" jdbcType="INTEGER" property="topId" />
     </resultMap>
+    <select id="selectDictionary" resultMap="BaseResultMap">
+    SELECT  *  FROM  dictionary
+  </select>
     <insert id="insert" parameterType="com.example.datong.model.Dictionary">
         insert into dictionary (dictionary_id, dictionary_name, top_id
         )

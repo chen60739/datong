@@ -1,7 +1,10 @@
 package com.example.datong.controller;
 
+import com.example.datong.dto.SuperEmploymentInfo;
+import com.example.datong.dto.SuperResidentialInfo;
 import com.example.datong.model.*;
 import com.example.datong.model.Dictionary;
+import com.example.datong.service.AddressService;
 import com.example.datong.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,52 +22,32 @@ import java.util.*;
 public class ViewController {
     @Autowired
     ShowService showService;
+    @Autowired
+    AddressService addressService;
 
-    //后台注册
-    @GetMapping("/back_register")
-    public String backRegister(){ return "back_register";}
-    //后台登录
-    @GetMapping("/back_login")
-    public String back_login(){ return "back_login";}
-    //布局首页
-    @GetMapping("/back_index")
-    public String toBackIndex(){return  "backIndex";}
-    //跳转到注册信息审核
-    @GetMapping("/back_info_audit")
-    public String toBackInfoAudit(){
-        return "backInforAudit";
-    }
-    //跳转到账户管理
-    @GetMapping("/back_account_management")
-    public String toBackAccountManagement(){
-        return "backAccountManagement";
-    }
-    //跳转到登记信息审核
-    @GetMapping("/back_register_audit")
-    public String toBackRegistrationInfoAudit(){ return "backRegistrationInfoAudit";}
-    //跳转到流动人口信息管理页面
-    @GetMapping("/back_floatingManagement")
-    public String toBackFloatingManagement(){ return "backFloatingManagement";}
+
     @GetMapping("/show_person")
     public String toshowPerson(){ return "show_person";}
+    @GetMapping("/show_person2")
+    public String toshowPerson2(){ return "show_person2";}
     @RequestMapping("/changeProvince")
     @ResponseBody
     public List<AddressCity> findCity(String code){
-        List<AddressCity> result=showService.findCityBy(code);
+        List<AddressCity> result=addressService.getCityByProvinceCode(code);
         System.err.println(result);
         return result;
     }
     @RequestMapping("/changeCity")
     @ResponseBody
     public List<AddressCounty> findCounty(String code){
-        List<AddressCounty> result=showService.findCountyBy(code);
+        List<AddressCounty> result=addressService.getCountyByCityCode(code);
         System.err.println(result);
         return result;
     }
     @RequestMapping("/changeTown")
     @ResponseBody
     public List<AddressTown> findTown(String code){
-        List<AddressTown> result=showService.findTownByCode(code);
+        List<AddressTown> result=addressService.getTownByCountyCode(code);
         System.err.println(result);
         return result;
     }
@@ -91,17 +74,13 @@ public class ViewController {
         //配偶信息
         SpouseInfo spouseInfo = showService.getByPid(pid);
         map.put("spouseInfo",spouseInfo);
-
         FamilyPlanningInfo familyPlanningInfo= showService.getPlanningInfoById(pid);
         List<FertilityInfo> fertilityInfos = showService.findFertilityInfoById(pid);
-        EmploymentInfo employmentInfo =showService.getEmploymentInfo(pid);
-        AddressProvince employmentAddress =showService.getAddressByTownCode(employmentInfo.getCompany().getUnitTownCode());
-        ResidentialInfo residentialInfo =showService.getResidentialInfo(pid);
+        SuperEmploymentInfo superEmploymentInfo =showService.getEmploymentInfo(pid);
+        AddressProvince employmentAddress =showService.getAddressByTownCode(superEmploymentInfo.getCompanyRegistrationInfo().getUnitTownCode());
+        SuperResidentialInfo residentialInfo =showService.getResidentialInfo(pid);
         AddressProvince residentialAddress = showService.getAddressByTownCode(residentialInfo.getResidentialTownCode());
-        //System.err.println(employmentAddress);
-        //System.err.println(peopleSelf);
         map.put("insuranceStates",insuranceStates);
-       // System.err.println(insuranceStates);
         map.put("address",address);
         map.put("dictionary",dictionaries);
         map.put("people",peopleSelf);
@@ -113,10 +92,13 @@ public class ViewController {
         map.put("familyMember",familyMember);
         map.put("familyPlanningInfo",familyPlanningInfo);
         map.put("fertilityInfos",fertilityInfos);
-        map.put("employmentInfo",employmentInfo);
+        map.put("employmentInfo",superEmploymentInfo);
         map.put("residentialInfo",residentialInfo);
         map.put("employmentAddress",employmentAddress);
         map.put("residentialAddress",residentialAddress);
+        // System.err.println(insuranceStates);
+        //System.err.println(employmentAddress);
+        //System.err.println(peopleSelf);
 //        System.err.println(residentialInfo);
 //        System.err.println(employmentInfo);
 //        System.err.println(spouseInfo);
@@ -256,7 +238,7 @@ public class ViewController {
     @RequestMapping("/companyPass")
     @ResponseBody
     public int companyPass(Integer id){
-        System.err.println(id);
+        //System.err.println(id);
         Integer row= showService.replayCheckedByCompanyId(id);
         Integer message =null;
         if(row!=null){

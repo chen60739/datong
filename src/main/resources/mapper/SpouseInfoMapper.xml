@@ -13,14 +13,13 @@
     <result column="spouse_phone" jdbcType="CHAR" property="spousePhone" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, p_id, spouse_name, spouse_id_card, spouse_county_code, spouse_address,
-    spouse_employment_state_id, spouse_work_unit, spouse_phone
+    id, p_id, spouse_name, spouse_id_card, spouse_county_code, spouse_address, spouse_employment_state_id, spouse_work_unit, spouse_phone
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from spouse_info
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectByPid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT
+    *
+    FROM spouse_info si
+    WHERE si.p_id=#{pid}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from spouse_info

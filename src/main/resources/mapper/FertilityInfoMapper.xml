@@ -11,6 +11,9 @@
   <sql id="Base_Column_List">
     id, p_id, child_sex, child_birthday, is_inside
   </sql>
+  <select id="selectFertilityInfoById" resultMap="BaseResultMap">
+    SELECT * FROM fertility_info WHERE p_id=#{id}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

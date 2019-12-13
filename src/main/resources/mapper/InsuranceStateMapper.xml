@@ -9,6 +9,9 @@
   <sql id="Base_Column_List">
     id, p_id, insurance_id
   </sql>
+  <select id="selectInsuranceState" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT  insurance_id from  insurance_state where  p_id=#{id}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

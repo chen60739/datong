@@ -7,8 +7,14 @@
     <result column="reason" jdbcType="VARCHAR" property="reason" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, account_id, reason
+    id, admin_id, reason
   </sql>
+  <select id="selectByAccountId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from check_reason where admin_id=#{id}
+  </select>
+  <update id="updateByAccountId" >
+    update check_reason set reason=#{reason} where admin_id=#{id}
+  </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

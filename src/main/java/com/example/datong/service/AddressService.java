@@ -8,6 +8,8 @@ import com.example.datong.model.AddressTown;
 import java.util.List;
 
 public interface AddressService {
+    //通过省级编码获取市
+    List<AddressCity> getCityByProvinceCode(String ProvinceCode);
     //通过城市编码获取县级
     List<AddressCounty> getCountyByCityCode(String cityCode);
     //通过县级获取镇

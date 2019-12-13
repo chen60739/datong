@@ -5,10 +5,53 @@
     <id column="province_id" jdbcType="INTEGER" property="provinceId" />
     <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
     <result column="province_name" jdbcType="VARCHAR" property="provinceName" />
+    <collection property="addressCityList" ofType="com.example.datong.model.AddressCity">
+      <id column="city_id" jdbcType="INTEGER" property="cityId" />
+      <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+      <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+      <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
+    </collection>
+    <collection property="addressCountyList" ofType="com.example.datong.model.AddressCounty">
+      <id column="county_id" jdbcType="INTEGER" property="countyId" />
+      <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
+      <result column="county_name" jdbcType="VARCHAR" property="countyName" />
+      <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    </collection>
+    <collection property="addressTownList" ofType="com.example.datong.model.AddressTown">
+      <id column="town_id" jdbcType="INTEGER" property="townId" />
+      <result column="town_code" jdbcType="VARCHAR" property="townCode" />
+      <result column="town_name" jdbcType="VARCHAR" property="townName" />
+      <result column="county_code" jdbcType="VARCHAR" property="countyCode" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     province_id, province_code, province_name
   </sql>
+  <select id="selectAllProvince" resultMap="BaseResultMap">
+  	SELECT * FROM address_province
+  </select>
+  <select id="selectSpouseAddress" resultMap="BaseResultMap">
+    SELECT p.province_code,p.province_name,c.city_code,c.city_name,ac.county_code,ac.county_name
+  	 FROM
+  	 	address_province p LEFT JOIN address_city c ON p.province_code=c.province_code
+  	 LEFT JOIN
+  	 	address_county ac ON ac.city_code=c.city_code
+	WHERE
+        ac.county_code=#{countyCode}
+  </select>
+<select id="selectCodeName" resultMap="BaseResultMap">
+  SELECT p.province_code,p.province_name,c.city_code,c.city_name,ac.county_code,ac.county_name,
+        adt.town_code,adt.town_name
+  	 FROM
+  	 	address_province p LEFT JOIN address_city c ON p.province_code=c.province_code
+  	 LEFT JOIN
+  	 	address_county ac ON ac.city_code=c.city_code
+  	 LEFT JOIN
+  	    address_town adt on adt.county_code=ac.county_code
+	WHERE
+        adt.town_code=#{townCode}
+</select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

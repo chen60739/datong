@@ -21,8 +21,6 @@ public class ResidentialInfo {
 
     private String messagePerson;
 
-    private LessorInfo lessorInfo;
-
     @Override
     public String toString() {
         return "ResidentialInfo{" +
@@ -36,16 +34,7 @@ public class ResidentialInfo {
                 ", houseGener=" + houseGener +
                 ", houseUse=" + houseUse +
                 ", messagePerson='" + messagePerson + '\'' +
-                ", lessorInfo=" + lessorInfo +
                 '}';
-    }
-
-    public LessorInfo getLessorInfo() {
-        return lessorInfo;
-    }
-
-    public void setLessorInfo(LessorInfo lessorInfo) {
-        this.lessorInfo = lessorInfo;
     }
 
     public Integer getId() {

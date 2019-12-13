@@ -1,30 +1,17 @@
 package com.example.datong.service;
 
+import com.example.datong.dto.SuperEmploymentInfo;
+import com.example.datong.dto.SuperResidentialInfo;
 import com.example.datong.model.*;
 import java.util.List;
 
 
 public interface ShowService {
-    /**
-     * 通过市code找到下面的县
-     * @param code
-     * @return
-     */
-    List<AddressCounty> findCountyBy(String code);
+    //公司不通过
+    int replayCompanyNoPass(Integer unitId);
 
-    /**
-     * 通过县/区code找到下面的镇/街
-     * @param code
-     * @return
-     */
-    List<AddressTown> findTownByCode(String code);
+    int replayCheckedByCompanyId(Integer unitId);
 
-    /**
-     * 通过省code找到下面的市
-     * @param code
-     * @return city集合对象
-     */
-    List<AddressCity> findCityBy(String code);
 
     Integer[] findInsuranceState(Integer id);
     CheckReason getCheckedReason(Integer id);
@@ -46,9 +33,9 @@ public interface ShowService {
      */
     AddressProvince getSpouseAddress(String countyCode);
 
-    ResidentialInfo getResidentialInfo(Integer id);
+    SuperResidentialInfo getResidentialInfo(Integer id);
 
-    EmploymentInfo getEmploymentInfo(Integer id);
+    SuperEmploymentInfo getEmploymentInfo(Integer id);
 
     String getProvinceByCity(String code);
 

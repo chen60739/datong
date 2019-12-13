@@ -21,6 +21,15 @@
     id, p_id, is_together, has_prove, number, is_checked, measure, pregnancy_info_id, 
     boy_num, girl_num, inside_num, outside_num, has_certificate, is_levy
   </sql>
+  <select id="selectPlanningInfo" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT
+        *
+    FROM
+        family_planning_info fpi
+--     LEFT JOIN
+--         dictionary d on fpi.pregnancy_info_id=d.dictionary_id
+    WHERE p_id=#{id}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -27,6 +27,11 @@ public class AddressImpl implements AddressService {
     private AddressTownMapper townMapper;
 
     @Override
+    public List<AddressCity> getCityByProvinceCode(String ProvinceCode) {
+        return cityMapper.selectByProvinceCode(ProvinceCode);
+    }
+
+    @Override
     public List<AddressCounty> getCountyByCityCode(String cityCode) {
         List<AddressCounty> counties = countyMapper.selectByCityCode(cityCode);
         return counties;

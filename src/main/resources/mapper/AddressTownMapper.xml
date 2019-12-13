@@ -10,6 +10,12 @@
   <sql id="Base_Column_List">
     town_id, town_code, town_name, county_code
   </sql>
+  <select id="selectTownByCode" resultMap="BaseResultMap">
+  SELECT * FROM address_town WHERE county_code=#{code}
+  </select>
+  <select id="selectTown" resultMap="BaseResultMap">
+  SELECT * FROM address_town
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

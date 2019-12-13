@@ -13,10 +13,27 @@
     <result column="house_use" jdbcType="INTEGER" property="houseUse" />
     <result column="message_person" jdbcType="VARCHAR" property="messagePerson" />
   </resultMap>
+  <resultMap id="superResidential" type="com.example.datong.dto.SuperResidentialInfo" extends="BaseResultMap">
+    <association property="lessorInfo" javaType="com.example.datong.model.LessorInfo">
+      <id column="lid" jdbcType="INTEGER" property="id" />
+      <result column="lpid" jdbcType="INTEGER" property="pId" />
+      <result column="lessor_type" jdbcType="BIT" property="lessorType" />
+      <result column="lessor_name" jdbcType="VARCHAR" property="lessorName" />
+      <result column="lessor_phone" jdbcType="CHAR" property="lessorPhone" />
+      <result column="lessor_id_card" jdbcType="CHAR" property="lessorIdCard" />
+      <result column="is_sign" jdbcType="BIT" property="isSign" />
+    </association>
+  </resultMap>
   <sql id="Base_Column_List">
     id, p_id, residential_town_code, residential_addres, living_style_id, reason_for_residence_id, 
     house_type_id, house_gener, house_use, message_person
   </sql>
+  <select id="selectResidentialInfo" resultMap="superResidential">
+    SELECT ri.*,li.id lid,li.p_id lpid,li.lessor_type,li.lessor_phone,li.lessor_name,li.lessor_id_card,li.is_sign
+    FROM residential_info ri
+    LEFT JOIN lessor_info li on ri.p_id=li.p_id
+    where ri.p_id=#{id}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

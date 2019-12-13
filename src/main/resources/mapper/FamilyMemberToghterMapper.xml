@@ -14,6 +14,13 @@
   <sql id="Base_Column_List">
     id, p_id, member_name, member_sex, member_id_card, relation_id, has_vaccinate, is_local
   </sql>
+  <select id="selectById" resultMap="BaseResultMap">
+    SELECT
+        *
+    FROM
+        family_member_toghter fmt
+    WHERE p_id=#{id}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

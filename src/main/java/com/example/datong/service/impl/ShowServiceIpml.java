@@ -38,21 +38,17 @@ public class ShowServiceIpml implements ShowService {
     CheckReasonMapper checkReasonMapper;
     @Autowired
     InsuranceStateMapper insuranceStateMapper;
-
+    @Autowired
+    CompanyRegistrationInfoMapper companyRegistrationInfoMapper;
 
     @Override
-    public List<AddressCounty> findCountyBy(String code) {
-        return addressCountyMapper.selectCountyBy(code);
+    public int replayCompanyNoPass(Integer unitId) {
+        return companyRegistrationInfoMapper.updateCompanyNoPass();
     }
 
     @Override
-    public List<AddressTown> findTownByCode(String code) {
-        return addressTownMapper.selectTownByCode(code);
-    }
-
-    @Override
-    public List<AddressCity> findCityBy(String code) {
-        return addressCityMapper.selectCityBy(code);
+    public int replayCheckedByCompanyId(Integer unitId) {
+        return companyRegistrationInfoMapper.updateCheckedByCompanyId();
     }
 
     @Override

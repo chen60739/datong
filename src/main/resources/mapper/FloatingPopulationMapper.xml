@@ -67,6 +67,41 @@
     weight, blood_type_id, healthy, disability_code, employment_state_id, marital_state_id, is_del,
     state, gmt_create, gmt_modified, is_checked,check_reason_id,company_id
   </sql>
+  <select id="selectSelf" resultMap="BaseResultMap" >
+   SELECT
+         *
+    FROM
+    floating_population fp
+        LEFT JOIN residential_info ri on  fp.id=ri.p_id
+    where fp.id=#{id}
+  </select>
+  <select id="selectPeople" resultMap="BaseResultMap">
+    SELECT
+    fp.id,fp.name,fp.phone,fp.gmt_create,cr.reason,di.dictionary_name,cri.unit_name
+    FROM
+    floating_population fp LEFT JOIN check_reason cr  on fp.id=cr.account_id
+    LEFT JOIN dictionary di   on di.dictionary_id =fp.is_checked
+    LEFT JOIN company_registration_info cri on cri.unit_id=company_id
+    where 1=1
+    <if test="unit_name ! =null and ! = '' " >
+      cri.unit_name LIKE concat("%",#{unit_name},"%")
+    </if>
+    <if test="time != null and ! =''">
+      AND gmt_create BETWEEN #{time} AND #{time2}
+    </if>
+    <if test="name !=null and ! = ''">
+      AND fp.name LIKE concat("%",#{name},"%")
+    </if>
+    <if test="phone !=null and ! = ''">
+      AND fp.phone =#{phone}
+    </if>
+  </select>
+  <update id="updatePass" parameterType="java.lang.Integer">
+  update floating_population set is_checked=2103 where id=#{id}
+</update>
+  <update id="updateNoPass" parameterType="java.lang.Integer">
+  update floating_population set is_checked=2104 where id=#{id}
+</update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
