@@ -4,14 +4,11 @@ import com.example.datong.message.Result;
 import com.example.datong.model.*;
 import com.example.datong.service.AddressService;
 import com.example.datong.service.CompanyService;
-import com.example.datong.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -21,8 +18,6 @@ public class IndexController {
     private AddressService addressService;
     @Autowired
     private CompanyService companyService;
-    @Autowired
-    private DictionaryService dictionaryService;
 
     /**
      * 检查登录账户是否正确
