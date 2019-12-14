@@ -5,7 +5,7 @@ package com.example.datong.model;
 public class FamilyPlanningInfo {
     private Integer id;
     //用户id
-    private String pId;
+    private Integer pId;
     //夫妻是否同行
     private Boolean isTogether;
     //婚育证明有无
@@ -39,12 +39,12 @@ public class FamilyPlanningInfo {
         this.id = id;
     }
 
-    public String getpId() {
+    public Integer getpId() {
         return pId;
     }
 
-    public void setpId(String pId) {
-        this.pId = pId == null ? null : pId.trim();
+    public void setpId(Integer pId) {
+        this.pId = pId;
     }
 
     public Boolean getIsTogether() {

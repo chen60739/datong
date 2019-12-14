@@ -3,18 +3,17 @@ package com.example.datong.service.impl;
 import com.example.datong.dao.*;
 import com.example.datong.dto.NoPassedPerson;
 import com.example.datong.model.*;
+import com.example.datong.service.AddressService;
 import com.example.datong.service.FloatingPopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class FloatingPopulationImpl implements FloatingPopulationService {
@@ -43,11 +42,13 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
     FloatingPopulationMapper floatingPopulationMapper;
     @Resource
     CheckReasonMapper checkReasonMapper;
+    @Autowired
+    private AddressService addressService;
 
-    @Override
+    /*@Override
     public int changePass(Integer id) {
         return floatingPopulationMapper.updatePass(id);
-    }
+    }*/
 
     @Override
     @Transactional
@@ -58,7 +59,7 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
             map.put("error","已存在原因");
         }else {
             checkReasonMapper.insertrecord(reason);
-            floatingPopulationMapper.updateNoPass(id);
+            //floatingPopulationMapper.updateNoPass(id);
             map.put("success","添加成功");
         }
         return map;
@@ -125,7 +126,7 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
             employmentInfo.setCompanyId(companyRegistrationInfo.getUnitId());
             employmentInfoMapper.insert(employmentInfo);
             companyRegistrationInfo.setGmtModified(new Date());
-            companyRegistrationInfoMapper.updateByPrimaryKeySelective(companyRegistrationInfo);
+            companyRegistrationInfoMapper.updateByPrimaryKey(companyRegistrationInfo);
             if (familyMember != "") {
                 String[] members = familyMember.split(",");
                 for (String member : members) {
@@ -161,6 +162,36 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
             }
         }
 
+    }
+
+    @Override
+    public Model findModel(Model model, String county, String town, String Create_time1, String Create_time2) {
+        //查询省份
+        List<AddressProvince> list= addressService.getProvice();
+        List<Integer> rs=new ArrayList<>();
+        List<String> ps=new ArrayList<>();
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("county",county);
+        map.put("town",town);
+        if(Create_time1!=null && !"".equals(Create_time1)){
+            map.put("time1",Create_time1);
+            map.put("time2",Create_time2);
+        }
+        for (AddressProvince province:list ) {
+            //通过省份查询人数
+            map.put("provinceCode",province.getProvinceCode());
+            int count= floatingPopulationMapper.selectCountByProvince(map);
+            rs.add(count);
+            ps.add(province.getProvinceName());
+
+        }
+        model.addAttribute("rs",rs);
+        model.addAttribute("provinces",ps);
+        model.addAttribute("Create_time1",Create_time1);
+        model.addAttribute("Create_time2",Create_time2);
+        model.addAttribute("county",county);
+        model.addAttribute("town",town);
+        return model;
     }
 
     private boolean parseBoolean(String s){

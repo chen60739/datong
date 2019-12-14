@@ -61,6 +61,12 @@
       <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
     </association>
   </resultMap>
+
+  <resultMap id="super" type="com.example.datong.dto.SuperFloatingPopulation" extends="BaseResultMap">
+    <result column="dictionary_name"  property="dictionaryName"/>
+    <result column="unit_name"  property="unitName"/>
+  </resultMap>
+
   <sql id="Base_Column_List">
     id, name, name_used_before, sex,photo, id_card, fixed_phone, household_city_code, phone,
     nation_id, come_time, education_level_id, political_outlook_id, faith_id, height, 
@@ -96,12 +102,14 @@
       AND fp.phone =#{phone}
     </if>
   </select>
+
   <update id="updatePass" parameterType="java.lang.Integer">
-  update floating_population set is_checked=2103 where id=#{id}
-</update>
+    update floating_population set is_checked=2102 where id=#{id}
+  </update>
+
   <update id="updateNoPass" parameterType="java.lang.Integer">
-  update floating_population set is_checked=2104 where id=#{id}
-</update>
+    update floating_population set is_checked=2103 where id=#{id}
+  </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -109,7 +117,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <!--我写的关联语句-->
-  <select id="selectCountByProvince" resultType="int">
+  <select id="selectCountByProvince" resultType="integer">
     select count(*) from floating_population f,address_city c ,residential_info r,address_town t
     where f.household_city_code=c.city_code and r.p_id=f.id and r.residential_town_code=t.town_code
     <if test="county != null and  county!= ''" >
@@ -448,4 +456,28 @@
     WHERE p.check_reason_id=c.id AND p.is_checked=2103
      AND p.company_id=#{unitId}
   </select>
+
+  <select id="selectAll" resultMap="super">
+    SELECT
+    fp.*,cri.unit_name,d.dictionary_name
+    FROM
+    floating_population fp,company_registration_info cri,dictionary d
+    WHERE
+    fp.company_id=cri.unit_id
+    and
+    fp.is_checked=d.dictionary_id
+    <if test="unitName !=null and unitName !=''">
+      AND cri.unit_name like CONCAT("%",#{unitName},"%")
+    </if>
+    <if test="name !=null and name !=''">
+      AND  fp.name like CONCAT("%",#{name},"%")
+    </if>
+    <if test="phone !=null and phone !=''">
+      AND  fp.phone like CONCAT(#{phone},"%")
+    </if>
+    <if test="time1 !=null and time1 !=''">
+      AND  fp.gmt_create between #{time1} and #{time2}
+    </if>
+  </select>
+
 </mapper>

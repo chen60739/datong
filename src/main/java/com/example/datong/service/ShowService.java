@@ -18,8 +18,8 @@ public interface ShowService {
 
     int replayReason(Integer id, String reason);
 
-    int replayPass(Integer id);
-    int replayNoPass(Integer id);
+    void replayPass(String[] id);
+    void replayNoPass(String[] id);
     /**
      * 添加未通过原因
      * @param checkReason

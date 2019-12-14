@@ -20,6 +20,9 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="is_checked" jdbcType="INTEGER" property="isChecked" />
   </resultMap>
+  <resultMap id="super" type="com.example.datong.dto.SuperCompanyRegistrationInfo" extends="BaseResultMap">
+    <result column="dictionary_name" jdbcType="VARCHAR" property="dictionaryName"/>
+  </resultMap>
   <sql id="Base_Column_List">
     unit_id, unit_name, unit_phone, password, unit_county_code, unit_town_code, unit_type_id,
     unit_address, unit_num, unit_social, industry_category_id, organization_code, legal_person_name, 
@@ -244,5 +247,22 @@
     <include refid="Base_Column_List" />
     from company_registration_info
     where unit_phone = #{phone,jdbcType=VARCHAR}
+  </select>
+
+  <!--注册信息审核查询-->
+  <select id="selectAll" resultMap="super" parameterType="com.example.datong.model.CompanyRegistrationInfo">
+    SELECT
+    c.*,d.dictionary_name
+    FROM
+    company_registration_info c,
+    dictionary d
+    WHERE
+    c.is_checked = d.dictionary_id
+    <if test="unitName != null and unitName !=''">
+      AND  c.unit_name LIKE CONCAT("%",#{unitName},"%")
+    </if>
+    <if test="unitPhone !=null and unitPhone !=''">
+      AND c.unit_phone like CONCAT(#{unitPhone},"%")
+    </if>
   </select>
 </mapper>

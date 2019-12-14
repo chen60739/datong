@@ -1,5 +1,6 @@
 package com.example.datong.dao;
 
+import com.example.datong.dto.SuperResidentialInfo;
 import com.example.datong.model.ResidentialInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -7,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ResidentialInfoMapper {
 
-    ResidentialInfo selectResidentialInfo(Integer id);
+    SuperResidentialInfo selectResidentialInfo(Integer id);
 
     int deleteByPrimaryKey(Integer id);
 

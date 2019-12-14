@@ -27,7 +27,7 @@ public class AdminController {
         Admin login = adminService.login(adminPhone, adminPassword);
         if (login != null) {
             session.setAttribute("admin",login);
-            return "back";
+            return "back_main";
         }
         return "back_login";
     }

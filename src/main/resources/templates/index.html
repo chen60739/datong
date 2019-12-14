@@ -1,9 +1,9 @@
 <!doctype html>
 <html  class="x-admin-sm">
 <head>
-	<meta charset="UTF-8">
-	<title>大同市流动人口服务管理系统</title>
-	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta charset="UTF-8">
+    <title>大同市流动人口服务管理系统</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -14,65 +14,61 @@
     <link rel="stylesheet" href="/css/login.css">
     <script src="/js/jquery-2.1.1.min.js"></script>
     <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body class="login-bg">
-    
-    <div class="login layui-anim layui-anim-up">
-        <div class="message">大同市流动人口服务管理系统</div>
-        <div id="darkbannerwrap"></div>
-        <div class="layui-form" >
-            <form  id="user-name" class="layui-form">
+
+<div class="login layui-anim layui-anim-up">
+    <div class="message">大同市流动人口服务管理系统</div>
+    <div id="darkbannerwrap"></div>
+    <div class="layui-form" >
+        <form  id="user-name" class="layui-form">
             <input name="username" placeholder="用户名"  type="text" required="" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码" required="" type="password" class="layui-input">
             <hr class="hr15">
             <button class="layui-btn" lay-submit lay-filter="login" id="submit" style="width:100%;height: 45px;">登录</button>
             <hr class="hr15">
-            </form>
+        </form>
         <a href="/registerPage"><input value="注册"   style="width:100%;" type="submit"></a>
-        </div>
     </div>
+</div>
 
 <script>
-    $(function  () {
-        layui.use(['form','layer'], function(){
-            var form = layui.form,
-                layer = layui.layer;
-            // layer.msg('玩命卖萌中', function(){
-            //   //关闭后的操作
-            //   });
-            //监听提交
-            form.on('submit(login)', function(data){
-                $.getJSON('/login',data.field,function (result) {
-                    if (result.resultCode=='USER_NOT_EXIST') {
-                        layer.msg(result.message, {icon: 5});
-                    }else if (result.resultCode=='PASSWORD_ERROR') {
-                        layer.msg(result.message, {icon: 5});
-                    }else if (result.resultCode=='SUCCESS') {
-                        location.href='/main';
-                    }
-                })
-                return false;
-            });
+    layui.use(['form','layer','jquery'], function(){
+        var form = layui.form,
+            $ = layui.jquery,
+            layer = layui.layer;
+
+        form.on('submit(login)', function(data){
+            $.getJSON('/login',data.field,function (result) {
+                if (result.resultCode=='USER_NOT_EXIST') {
+                    layer.msg(result.message, {icon: 5});
+                }else if (result.resultCode=='PASSWORD_ERROR') {
+                    layer.msg(result.message, {icon: 5});
+                }else if (result.resultCode=='SUCCESS') {
+                    location.href='/main';
+                }
+            })
+            return false;
         });
-    })
+    });
 </script>
 
 
 
-    <!-- 底部结束 -->
-    <script>
+<!-- 底部结束 -->
+<script>
     //百度统计可去掉
     var _hmt = _hmt || [];
     (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
     })();
-    </script>
+</script>
 </body>
 </html>

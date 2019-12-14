@@ -90,4 +90,5 @@ public class IndexController {
         boolean flag = companyService.checkPhone(phone);
         return flag;
     }
+
 }

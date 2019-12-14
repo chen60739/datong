@@ -5,19 +5,158 @@
     <title>信息统计管理</title>
     <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
     <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+    <link rel="stylesheet" href="plugs/layui/css/layui.css">
+    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+    <script src="plugs/layui/layui.js"></script>
 </head>
 <body>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div class="layui-body">
-<div id="main" style="width: 600px;height:400px;"></div>
-<input type="hidden" th:value="${provinces}" id="provinces"/>
+<div class="xx">
+
+
+
+    <div style="padding: 15px;">
+        <div class="layui-inline">
+            <label class="layui-form-label">从</label>
+            <div class="layui-input-inline">
+                <!--查询框，按照时间范围查询-->
+                <input th:value="${Create_time1}" placeholder="起始时间" id="Create_time1" name="Create_time1" class="layui-input" type="text" >
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">到</label>
+            <div class="layui-input-inline">
+                <!--查询框，按照时间范围查询-->   <input placeholder="终止时间" th:value="${Create_time2}" id="Create_time2" name="Create_time2" class="layui-input" type="text" >
+            </div>
+        </div>
+        <div class="layui-input-inline">
+            <select>
+                <option value="">大同市</option>
+            </select>
+        </div>
+
+        <div class="layui-input-inline">
+            <select lay-filter="countyHouse"  lay-verify="required" id="countyCode" name="countyCode" onchange="changeCounty()">
+                <option value="">请选择县/区</option>
+
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="townCode" id="townCode"  lay-verify="required">
+                <option value="">请选择乡/镇</option>
+            </select>
+        </div>
+        <button type="button" class="layui-btn" onclick="search()">搜索</button>
+        <input type="hidden" th:value="${county}" id="county">
+    </div>
+    <div id="main" style="width: 1000px;height:300px; float: left;margin-left: 30px;" ></div>
+    <div style="float: left;margin-left: 120px;">
+        <table border="1" width="400px" cellpadding="0" cellspacing="0" style="text-align: center">
+            <tr >
+                <td>省份</td>
+                <td th:each="addressProvince:${provinces}">
+                    <span th:text="${addressProvince}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>人数</td>
+                <td th:each="count:${rs}">
+                    <span th:text="${count}"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <input type="hidden" th:value="${provinces}" id="provinces"/>
+    <input type="hidden" th:value="${town}" id="town"/>
 </div>
+<script>
+    layui.use('laydate',function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem : '#Create_time1'
+            ,min: '2007-1-1'
+            ,max:-1
+            ,done:function (value) {
+                laydate.render({
+                    elem:'#Create_time2'
+                    ,min:value
+                });
+            }
+        });
+    })
+</script>
+<script type="text/javascript">
+    function search() {
+        var county=$("#countyCode").val();
+        var town=$("#townCode").val();
+        var Create_time1=$("#Create_time1").val();
+        var Create_time2=$("#Create_time2").val();
+        location.href="back_statis?county="+county+"&town="+town+"&Create_time1="+Create_time1+"&Create_time2="+Create_time2;
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        findCounty();
+        findTownByCountyCode();
+    })
+    function findCounty() {
+        var county= $("#county").val();
+        $.getJSON('/findDaTongCounty',{},function (res) {
+            for(var i=0;i<res.length;i++){
+                if(county==res[i].countyCode){
+                    $("#countyCode").append("<option selected value='"+res[i].countyCode+"'>"+res[i].countyName+"</option>");
+                }else{
+                    $("#countyCode").append("<option value='"+res[i].countyCode+"'>"+res[i].countyName+"</option>");
+                }
+
+            }
+        })
+
+    }
+    function findTownByCountyCode() {
+        var county= $("#county").val();
+        var town= $("#town").val();
+        $.getJSON('/findTownByCountyCode',{'countyCode':county},function (res) {
+            $("#townCode").empty();
+            $("#townCode").append("<option value=''>请选择乡/镇</option>");
+            for(var i=0;i<res.length;i++){
+                if(town==res[i].townCode){
+                    $("#townCode").append("<option selected value='"+res[i].townCode+"'>"+res[i].townName+"</option>");
+                }else{
+                    $("#townCode").append("<option value='"+res[i].townCode+"'>"+res[i].townName+"</option>");
+                }
+
+            }
+
+        })
+    }
+</script>
+<script type="text/javascript">
+    function changeCounty(){
+        var countyCode=$("#countyCode").val();
+        if(countyCode==""){
+            $("#townCode").empty();
+            $("#townCode").append("<option value=''>请选择乡/镇</option>");
+        }else{
+            $.getJSON('/findTownByCountyCode',{'countyCode':countyCode},function (res) {
+                $("#townCode").empty();
+                $("#townCode").append("<option value=''>请选择乡/镇</option>");
+                for(var i=0;i<res.length;i++){
+                    $("#townCode").append("<option value='"+res[i].townCode+"'>"+res[i].townName+"</option>");
+                }
+
+            })
+        }
+    }
+</script>
 <script type="text/javascript">
     $(function () {
         var rs=$("#provinces").val();
         var ccc =rs.substring(1,rs.length-1);
-        var str = ccc.split(', ');
+        var str = ccc.split(',');
         var ss=[[${rs}]];
+        //alert(str);
         var myChart = echarts.init(document.getElementById('main'));
 
         // 指定图表的配置项和数据
@@ -30,7 +169,15 @@
                 data:['省份']
             },
             xAxis: {
-                data: str
+                data: str,
+                axisLabel: {
+                    interval:0,
+                    rotate:40
+                },
+                grid: {
+                    left: '10%',
+                    bottom:'35%'
+                }
             },
             yAxis: {},
             series: [{

@@ -1,6 +1,8 @@
 package com.example.datong.service.impl;
 
 import com.example.datong.dao.*;
+import com.example.datong.dto.SuperEmploymentInfo;
+import com.example.datong.dto.SuperResidentialInfo;
 import com.example.datong.model.*;
 import com.example.datong.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +45,12 @@ public class ShowServiceIpml implements ShowService {
 
     @Override
     public int replayCompanyNoPass(Integer unitId) {
-        return companyRegistrationInfoMapper.updateCompanyNoPass();
+        return companyRegistrationInfoMapper.updateCompanyNoPass(unitId);
     }
 
     @Override
     public int replayCheckedByCompanyId(Integer unitId) {
-        return companyRegistrationInfoMapper.updateCheckedByCompanyId();
+        return companyRegistrationInfoMapper.updateCheckedByCompanyId(unitId);
     }
 
     @Override
@@ -67,13 +69,21 @@ public class ShowServiceIpml implements ShowService {
     }
 
     @Override
-    public int replayPass(Integer id) {
-        return floatingPopulationMapper.updatePass(id);
+    public void replayPass(String[] id) {
+        if (id != null) {
+            for (String s : id) {
+                floatingPopulationMapper.updatePass(Integer.parseInt(s));
+            }
+        }
     }
 
     @Override
-    public int replayNoPass(Integer id) {
-        return floatingPopulationMapper.updateNoPass(id);
+    public void replayNoPass(String[] id) {
+        if (id != null) {
+            for (String s : id) {
+                floatingPopulationMapper.updateNoPass(Integer.parseInt(s));
+            }
+        }
     }
 
     @Override
@@ -87,12 +97,12 @@ public class ShowServiceIpml implements ShowService {
     }
 
     @Override
-    public ResidentialInfo getResidentialInfo(Integer id) {
+    public SuperResidentialInfo getResidentialInfo(Integer id) {
         return residentialInfoMapper.selectResidentialInfo(id);
     }
 
     @Override
-    public EmploymentInfo getEmploymentInfo(Integer id) {
+    public SuperEmploymentInfo getEmploymentInfo(Integer id) {
         return employmentInfoMapper.selectEmploymentInfo(id);
     }
 

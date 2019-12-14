@@ -1,12 +1,13 @@
 package com.example.datong.dao;
 
 
+import com.example.datong.dto.SuperEmploymentInfo;
 import com.example.datong.model.EmploymentInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface EmploymentInfoMapper {
-    EmploymentInfo selectEmploymentInfo(Integer id);
+    SuperEmploymentInfo selectEmploymentInfo(Integer id);
 
     int deleteByPrimaryKey(Integer id);
 

@@ -5,6 +5,7 @@ import com.example.datong.model.FloatingPopulation;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -38,7 +39,10 @@ public interface FloatingPopulationMapper {
 
     int updateByPrimaryKey(FloatingPopulation record);
     //根据省份查询人数
-    int selectCountByProvince(String provinceCode);
+    int selectCountByProvince(HashMap map);
+
+    //查询个人登记信息审核
+    List<FloatingPopulation> selectAll(@Param("unitName") String unitName, @Param("name") String name, @Param("phone") String phone,@Param("time1") String time1,@Param("time2") String time2);
 
     List<FloatingPopulation> selectChecking(@Param("stateCode") Integer stateCode,@Param("unitId") Integer unitId);
 
@@ -47,4 +51,7 @@ public interface FloatingPopulationMapper {
     List<NoPassedPerson> selectNoPassed(Integer unitId);
 
     int selectNoPassedCount(Integer unitId);
+
+
+
 }

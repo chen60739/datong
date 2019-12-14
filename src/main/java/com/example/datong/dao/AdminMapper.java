@@ -16,4 +16,9 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    //登录
+    Admin selectOne(String adminPhone,String adminPassword);
+
+    Admin selectOne1(String adminPhone);
 }
