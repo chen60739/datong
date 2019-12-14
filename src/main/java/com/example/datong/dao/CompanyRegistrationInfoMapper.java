@@ -2,6 +2,7 @@ package com.example.datong.dao;
 
 import com.example.datong.model.CompanyRegistrationInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,9 +21,16 @@ public interface CompanyRegistrationInfoMapper {
     int updateCheckedByCompanyId(Integer unitId );
 
     int updateByPrimaryKey(CompanyRegistrationInfo record);
+    int updateByPrimaryKeySelective(CompanyRegistrationInfo record);
 
     CompanyRegistrationInfo findByPhone(String username);
 
-    //注册信息审核查询
-    List<CompanyRegistrationInfo> selectAll(CompanyRegistrationInfo companyRegistrationInfo);
+    /**
+     * 注册信息审核查询
+     * @param companyRegistrationInfo
+     * @return
+     */
+    List<CompanyRegistrationInfo> selectAll(@Param("company") CompanyRegistrationInfo company, @Param("offest") Integer offest, @Param("limit") Integer limit);
+
+    int selectAllCount(CompanyRegistrationInfo companyRegistrationInfo);
 }

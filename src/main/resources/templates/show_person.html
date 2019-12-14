@@ -51,7 +51,7 @@
                                 <div class="layui-upload">
                                     <button type="button" class="layui-btn" id="test1">上传图片</button>
                                     <div class="layui-upload-list">
-                                        <img class="layui-upload-img" id="photo" th:src="@{${people.photo}}" >
+                                        <img class="layui-upload-img" id="photo" width="50px" height="50px" th:src="@{/file/{filename}(filename=${people.photo})}" >
                                         <p id="demoText"></p>
                                     </div>
                                 </div>
@@ -333,7 +333,7 @@
                             </select>
                         </td>
                         <td>
-                            <input th:value="${family.memberIdCard}" class="layui-input" name="memberIdCard" placeholder="身份证号"/>
+                            <input th:value="${family.memberIdCard}" class="familyIdCard" name="memberIdCard" placeholder="身份证号"/>
                         </td>
                         <td>
                             <input th:value="${family.memberName} " class="layui-input" name="memberName" placeholder="姓名"/>
@@ -487,14 +487,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">单位名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" th:value="${employmentInfo.company.unitName}" name="unitName" required lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" th:value="${employmentInfo.companyRegistrationInfo.unitName}" name="unitName" required lay-verify="required" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">单位类型</label>
                         <div class="layui-input-inline">
                             <select name="unitTypeId">
-                                <option th:each="unitType : ${dictionary}" th:if="${unitType.topId} eq '1700'" th:field="${employmentInfo.company.unitTypeId}" th:text="${unitType.dictionaryName}" th:value="${unitType.dictionaryId}">请选择</option>
+                                <option th:each="unitType : ${dictionary}" th:if="${unitType.topId} eq '1700'" th:field="${employmentInfo.companyRegistrationInfo.unitTypeId}" th:text="${unitType.dictionaryName}" th:value="${unitType.dictionaryId}">请选择</option>
                             </select>
                         </div>
                     </div>
@@ -526,7 +526,7 @@
 
                     </div>
                     <div class="layui-input-inline">
-                        <input type="text" th:value="${employmentInfo.company.unitAddress}" name="unitAddress" required  lay-verify="required" placeholder="详细地址" autocomplete="off" class="layui-input">
+                        <input type="text" th:value="${employmentInfo.companyRegistrationInfo.unitAddress}" name="unitAddress" required  lay-verify="required" placeholder="详细地址" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
@@ -535,19 +535,19 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">组织机构代码</label>
                         <div class="layui-input-inline">
-                            <input type="text" th:value="${employmentInfo.company.organizationCode}" name="organizationCode" lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" th:value="${employmentInfo.companyRegistrationInfo.organizationCode}" name="organizationCode" lay-verify="required" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">法人代表</label>
                         <div class="layui-input-inline">
-                            <input type="text" th:value="${employmentInfo.company.legalPersonName}" name="legalPersonName" lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" th:value="${employmentInfo.companyRegistrationInfo.legalPersonName}" name="legalPersonName" lay-verify="required" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">联系电话</label>
                         <div class="layui-input-inline">
-                            <input type="text" th:value="${employmentInfo.company.unitPhone}" name="unitPhone" lay-verify="phone" autocomplete="off" class="layui-input">
+                            <input type="text" th:value="${employmentInfo.companyRegistrationInfo.unitPhone}" name="unitPhone" lay-verify="phone" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -568,27 +568,27 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">社会社保号</label>
                     <div class="layui-input-inline">
-                        <input type="text" th:value="${employmentInfo.company.unitSocial}" name="unitSocial" lay-verify="required" autocomplete="off" class="layui-input">
+                        <input type="text" th:value="${employmentInfo.companyRegistrationInfo.unitSocial}" name="unitSocial" lay-verify="required" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">单位编号</label>
                         <div class="layui-input-inline">
-                            <input type="text" th:value="${employmentInfo.company.unitNum}" name="unitNum" lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" th:value="${employmentInfo.companyRegistrationInfo.unitNum}" name="unitNum" lay-verify="required" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">用工人数</label>
                         <div class="layui-input-inline">
-                            <input type="text" th:value="${employmentInfo.company.workerNum}" name="workerNum" lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" th:value="${employmentInfo.companyRegistrationInfo.workerNum}" name="workerNum" lay-verify="required" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">行业类别</label>
                         <div class="layui-input-inline">
                             <select name="industryCategoryId">
-<!--                                <option th:each="industryCategory : ${dictionary}" th:if="${industryCategory.topId} eq '2000'" th:field="${employmentInfo.company.industryCategoryId}" th:text="${industryCategory.dictionaryName}" th:value="${industryCategory.dictionaryId}">请选择</option>-->
+                                <option th:each="industryCategory : ${dictionary}" th:if="${industryCategory.topId} eq '1900'" th:field="${employmentInfo.companyRegistrationInfo.industryCategoryId}" th:text="${industryCategory.dictionaryName}" th:value="${industryCategory.dictionaryId}">请选择</option>
                             </select>
                         </div>
                     </div>
@@ -957,14 +957,18 @@
             var data = form.val('example');
             alert(JSON.stringify(data));
         });
-        $(document).on('blur',"input[placeholder='身份证号']",function(){
-            var IDNumber = $(this).val();
-            var strYear = IDNumber.substring(6,10);
-            var strMonth = IDNumber.substring(10,12);
-            var strDay = IDNumber.substring(12,14);
-            var birth = strYear+"-"+strMonth+"-"+strDay;
-            $(this).parents("tr").find("#birth").val(birth);
+
+        $(document).ready(function(){
+            $(".familyIdCard").each(function(){
+                var IDNumber = $(this).val();
+                var strYear = IDNumber.substring(6,10);
+                var strMonth = IDNumber.substring(10,12);
+                var strDay = IDNumber.substring(12,14);
+                var birth = strYear+"-"+strMonth+"-"+strDay;
+                $(this).parents("tr").find("#pdate").val(birth);
+            });
         })
+
         $(document).on('click','#member',function(){
             $("#memberTab").append("<tr>\n" +
                 "                        <td>\n" +

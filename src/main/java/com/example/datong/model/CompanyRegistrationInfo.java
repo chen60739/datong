@@ -82,7 +82,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitName(String unitName) {
-        this.unitName = unitName == null ? null : unitName.trim();
+        this.unitName = unitName == "" ? null : unitName.trim();
     }
 
     public String getUnitPhone() {
@@ -90,7 +90,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitPhone(String unitPhone) {
-        this.unitPhone = unitPhone == null ? null : unitPhone.trim();
+        this.unitPhone = unitPhone == "" ? null : unitPhone.trim();
     }
 
     public String getPassword() {
@@ -98,7 +98,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password == "" ? null : password.trim();
     }
 
     public String getUnitCountyCode() {
@@ -106,7 +106,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitCountyCode(String unitCountyCode) {
-        this.unitCountyCode = unitCountyCode == null ? null : unitCountyCode.trim();
+        this.unitCountyCode = unitCountyCode == "" ? null : unitCountyCode.trim();
     }
 
     public String getUnitTownCode() {
@@ -114,7 +114,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitTownCode(String unitTownCode) {
-        this.unitTownCode = unitTownCode == null ? null : unitTownCode.trim();
+        this.unitTownCode = unitTownCode == "" ? null : unitTownCode.trim();
     }
 
     public Integer getUnitTypeId() {
@@ -130,7 +130,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitAddress(String unitAddress) {
-        this.unitAddress = unitAddress == null ? null : unitAddress.trim();
+        this.unitAddress = unitAddress == "" ? null : unitAddress.trim();
     }
 
     public String getUnitNum() {
@@ -138,7 +138,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitNum(String unitNum) {
-        this.unitNum = unitNum == null ? null : unitNum.trim();
+        this.unitNum = unitNum == "" ? null : unitNum.trim();
     }
 
     public String getUnitSocial() {
@@ -146,7 +146,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setUnitSocial(String unitSocial) {
-        this.unitSocial = unitSocial == null ? null : unitSocial.trim();
+        this.unitSocial = unitSocial == "" ? null : unitSocial.trim();
     }
 
 
@@ -155,7 +155,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setOrganizationCode(String organizationCode) {
-        this.organizationCode = organizationCode == null ? null : organizationCode.trim();
+        this.organizationCode = organizationCode == "" ? null : organizationCode.trim();
     }
 
     public String getLegalPersonName() {
@@ -163,7 +163,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setLegalPersonName(String legalPersonName) {
-        this.legalPersonName = legalPersonName == null ? null : legalPersonName.trim();
+        this.legalPersonName = legalPersonName == "" ? null : legalPersonName.trim();
     }
 
     public String getWorkerNum() {
@@ -171,7 +171,7 @@ public class CompanyRegistrationInfo {
     }
 
     public void setWorkerNum(String workerNum) {
-        this.workerNum = workerNum == null ? null : workerNum.trim();
+        this.workerNum = workerNum == "" ? null : workerNum.trim();
     }
 
     public Date getGmtCreate() {

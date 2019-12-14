@@ -3,6 +3,7 @@ package com.example.datong.service;
 import com.example.datong.dto.NoPassedPerson;
 import com.example.datong.model.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.util.List;
@@ -29,7 +30,7 @@ public interface FloatingPopulationService {
      * @param time2
      * @return
      */
-    Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2);
+    Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2,Integer page,Integer limit);
 
     /**
      * 修改个人信息审核状态--通过--未通过

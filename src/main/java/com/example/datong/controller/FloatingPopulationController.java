@@ -28,8 +28,10 @@ public class FloatingPopulationController {
     //个人登记信息审核
     @RequestMapping("findAllFloatingPopulation")
     @ResponseBody
-    public Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2){
-        return floatingPopulationService.findAll( unitName,name, phone,time1,time2);
+    public Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2,
+                                      @RequestParam("page") Integer page,
+                                      @RequestParam("limit") Integer limit){
+        return floatingPopulationService.findAll(unitName,name, phone,time1,time2,page,limit);
     }
     @RequestMapping("backRegistrationInfoAudit")
     public String backRegistrationInfoAudit(){

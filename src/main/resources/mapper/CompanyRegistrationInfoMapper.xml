@@ -258,6 +258,22 @@
     dictionary d
     WHERE
     c.is_checked = d.dictionary_id
+    <if test="company.unitName != null and company.unitName !=''">
+      AND  c.unit_name LIKE CONCAT("%",#{company.unitName},"%")
+    </if>
+    <if test="company.unitPhone !=null and company.unitPhone !=''">
+      AND c.unit_phone like CONCAT(#{company.unitPhone},"%")
+    </if>
+    limit  #{offest},#{limit}
+  </select>
+  
+  <select id="selectAllCount" parameterType="com.example.datong.model.CompanyRegistrationInfo" resultType="integer">
+    SELECT count(*)
+    FROM
+    company_registration_info c,
+    dictionary d
+    WHERE
+    c.is_checked = d.dictionary_id
     <if test="unitName != null and unitName !=''">
       AND  c.unit_name LIKE CONCAT("%",#{unitName},"%")
     </if>

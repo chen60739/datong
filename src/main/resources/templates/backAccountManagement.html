@@ -44,6 +44,7 @@
         table.render({
             elem: '#LAY_table_user'
             ,url: '/findAllCompany'
+            ,page: true
             ,cols: [[
                 {field:'unitId', width:80, title: '编号', sort: true, fixed: true}
                 ,{field:'unitPhone', width:120, title: '手机号', sort: true}
@@ -51,7 +52,6 @@
                 ,{field:'unitName', width:100, title: '单位名称', sort: true}
             ]]
             ,id: 'testReload'
-            ,page: true
             ,height: 310
             ,width: 464
         });

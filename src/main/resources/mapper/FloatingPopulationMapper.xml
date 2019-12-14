@@ -458,8 +458,31 @@
   </select>
 
   <select id="selectAll" resultMap="super">
-    SELECT
-    fp.*,cri.unit_name,d.dictionary_name
+  SELECT
+  fp.*,cri.unit_name,d.dictionary_name
+  FROM
+  floating_population fp,company_registration_info cri,dictionary d
+  WHERE
+  fp.company_id=cri.unit_id
+  and
+  fp.is_checked=d.dictionary_id
+  <if test="unitName !=null and unitName !=''">
+    AND cri.unit_name like CONCAT("%",#{unitName},"%")
+  </if>
+  <if test="name !=null and name !=''">
+    AND  fp.name like CONCAT("%",#{name},"%")
+  </if>
+  <if test="phone !=null and phone !=''">
+    AND  fp.phone like CONCAT(#{phone},"%")
+  </if>
+  <if test="time1 !=null and time1 !=''">
+    AND  fp.gmt_create between #{time1} and #{time2}
+  </if>
+    limit #{offest},#{limit}
+</select>
+
+  <select id="selectAllCount" resultType="integer">
+    SELECT count(*)
     FROM
     floating_population fp,company_registration_info cri,dictionary d
     WHERE

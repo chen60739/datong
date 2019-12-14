@@ -73,6 +73,7 @@
         table.render({
             elem: '#LAY_table_user'
             ,url: '/findAllFloatingPopulation'
+            ,page: true
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'id', width:80, title: '编号', sort: true, fixed: true}
@@ -83,7 +84,6 @@
                 ,{fixed: 'right', width:110, align:'center', toolbar: '#barDemo', title: '详情'}
             ]]
             ,id: 'testReload'
-            ,page: true
             ,height: 310
             ,width: 800
         });
