@@ -108,7 +108,7 @@
   </update>
 
   <update id="updateNoPass" parameterType="java.lang.Integer">
-    update floating_population set is_checked=2103 where id=#{id}
+    update floating_population set is_checked=2103,check_reason_id=#{reasonId} where id=#{id}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

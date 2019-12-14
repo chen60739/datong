@@ -36,6 +36,9 @@
 </script>
 
 </body>
+<script type="text/html" id="reason">
+    <input name="reason">
+</script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" >查看详情</a>
 </script>
@@ -132,12 +135,7 @@
                                 method: 'post',
                                 page: {
                                     curr: 1 //重新从第 1 页开始
-                                }
-                                /*,where: {
-                                    key: {
-                                        id: demoReload.val()
-                                    }
-                                }*/
+                                },
                             }, 'data');
                         }else{
                             layer.msg('操作失败');
@@ -146,6 +144,10 @@
                 })
             }else if (obj.event=="noPass") {
                 var tate = checkStatus.data;
+                if (tate.length>1){
+                    layer.msg('请选择一条数据！');
+                    return false;
+                }
                 var id=tate[0].id;
                 layer.open({
                     type:2,
@@ -157,50 +159,6 @@
                     content:'noPassReason?id='+id,//弹框路径+页面自己写，方法路径自己加一下
                 });
             }
-            /*switch(obj.event){
-                case 'pass'://通过按钮
-                    var tate = checkStatus.data;
-                    alert(JSON.stringify(tate.id));
-                    var ids = '';
-                    for (var i=0;i<tate.length;i++){
-                        ids+=tate[i].id+",";
-                    }
-                    /!*$.getJSON('/toPass',{'id':ids},function (res) {
-                        if(res==1){
-                            layer.msg('通过');
-                        }else{
-                            layer.msg('操作失败');
-                        }
-                    })*!/
-                    $.ajax({
-                        type:'get',
-                        url:'/toPass',
-                        data:{'id':ids},
-                        success:function (data) {
-                            if(data==1){
-                                layer.msg('通过');
-                            }else{
-                                layer.msg('操作失败');
-                            }
-                        }
-                    })
-                break;
-                case 'noPass'://不通过按钮
-                    var tate = checkStatus.data;
-                    var id=tate[0].id;
-                    layer.open({
-                        type:2,
-                        skin:'demo-class',
-                        title:'不通过',
-                        maxmin:true,
-                        shadeClose:true,
-                        area:['600px','400px'],
-                        content:'noPassReason?id='+id,//弹框路径+页面自己写，方法路径自己加一下
-                    });
-                    break;
-                //自定义头工具栏右侧图标 - 提示
-
-            };*/
         });
 
 

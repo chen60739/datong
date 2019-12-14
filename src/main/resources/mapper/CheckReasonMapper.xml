@@ -25,10 +25,10 @@
     delete from check_reason
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.datong.model.CheckReason">
-    insert into check_reason (id, admin_id, reason
+  <insert id="insert" parameterType="com.example.datong.model.CheckReason" useGeneratedKeys="true" keyProperty="id">
+    insert into check_reason (admin_id, reason
       )
-    values (#{id,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}
+    values (#{adminId,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.datong.model.CheckReason">

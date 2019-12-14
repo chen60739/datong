@@ -123,26 +123,22 @@ public class ViewController {
         showService.replayPass(id);
         return true;
     }
-    //不通过
+
+    /**
+     * 不通过
+     * @param checkReason
+     * @param pId
+     * @return
+     */
    @RequestMapping("/noPass")
    @ResponseBody
-    public int noPass(CheckReason checkReason){
-        CheckReason result= showService.getCheckedReason(checkReason.getadminId());
-       Integer row=null;
-        if(result!=null){
-            row=showService.replayReason(checkReason.getadminId(),checkReason.getReason());
-        }else {
-            row=showService.addReason(checkReason);
-            //showService.replayNoPass(checkReason.getadminId());
-        }
-        Integer messsage=0;
-        System.err.println(row);
-        if(row==null) {
-            messsage = 0;
-        } else {
-            messsage = 1;
-        }
-        return messsage;
+    public boolean noPass(CheckReason checkReason,@RequestParam("pId") String pId){
+       int i = showService.addReason(checkReason);
+       if(i==1){
+           showService.replayNoPass(checkReason.getId(),Integer.parseInt(pId));
+           return true;
+       }
+       return false;
     }
     @RequestMapping("/companyPass")
     @ResponseBody

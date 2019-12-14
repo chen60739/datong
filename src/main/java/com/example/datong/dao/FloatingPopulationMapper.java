@@ -12,7 +12,7 @@ import java.util.List;
 public interface FloatingPopulationMapper {
     int updatePass(Integer id);
 
-    int updateNoPass(Integer id);
+    int updateNoPass(@Param("reasonId") Integer reasonId,@Param("id")Integer id);
     /**
      * 通过人id查询个人信息
      * @param id
