@@ -249,6 +249,13 @@
     where unit_phone = #{phone,jdbcType=VARCHAR}
   </select>
 
+  <select id="findByUnitName" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_registration_info
+    where unit_name = #{unitName,jdbcType=VARCHAR}
+  </select>
+
   <!--注册信息审核查询-->
   <select id="selectAll" resultMap="super" parameterType="com.example.datong.model.CompanyRegistrationInfo">
     SELECT

@@ -33,4 +33,6 @@ public interface CompanyRegistrationInfoMapper {
     List<CompanyRegistrationInfo> selectAll(@Param("company") CompanyRegistrationInfo company, @Param("offest") Integer offest, @Param("limit") Integer limit);
 
     int selectAllCount(CompanyRegistrationInfo companyRegistrationInfo);
+
+    CompanyRegistrationInfo findByUnitName(String unitName);
 }

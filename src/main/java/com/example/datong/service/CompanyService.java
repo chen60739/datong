@@ -11,4 +11,6 @@ public interface CompanyService {
     Result login(String username, String password, HttpServletRequest request);
 
     boolean checkPhone(String phone);
+
+    boolean checkUnitName(String unitName);
 }
