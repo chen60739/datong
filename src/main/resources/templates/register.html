@@ -31,7 +31,7 @@
                 <label for="unitName" class="layui-form-label">
                     <span class="x-red">*</span>工作单位</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="unitName" name="unitName" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    <input type="text" id="unitName" name="unitName" lay-verify="required|unit" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
                 <label for="code" class="layui-form-label">
@@ -80,7 +80,6 @@
                         url: "checkPhone/?phone="+value,
                         async: false, //改为同步请求
                         contentType: 'application/json;charset=UTF-8',
-                        //data: {"phone":value},
                         dataType: 'json',
                         success: function (res) {
                             if (res) {
@@ -94,6 +93,28 @@
                     if (message !== '') {
                         return message;
                     }
+                },
+                unit:function (value) {
+                    var message = '';
+                    $.ajax({
+                        type: "GET",
+                        url: "checkUnit/?unitName="+value,
+                        async: false, //改为同步请求
+                        contentType: 'application/json;charset=UTF-8',
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res) {
+
+                            } else {
+                                message = "该公司已存在，请重新输入！"
+                            }
+                        }
+                    });
+                    //需要注意  需要将返回信息写在ajax方法外
+                    if (message !== '') {
+                        return message;
+                    }
+                    
                 }
                 ,pwd: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
             });

@@ -31,9 +31,18 @@ public class CompanyImpl implements CompanyService {
     }
 
     @Override
+    public boolean checkUnitName(String unitName) {
+        CompanyRegistrationInfo company = companyRegistrationInfoMapper.findByUnitName(unitName);
+        if (company != null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean checkPhone(String phone) {
-        CompanyRegistrationInfo compangy = companyRegistrationInfoMapper.findByPhone(phone);
-        if (compangy != null) {
+        CompanyRegistrationInfo company = companyRegistrationInfoMapper.findByPhone(phone);
+        if (company != null) {
             return false;
         }else {
             Admin admin = adminMapper.selectByPhone(phone);
