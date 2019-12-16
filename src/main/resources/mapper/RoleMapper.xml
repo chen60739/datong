@@ -5,10 +5,14 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="power_id" jdbcType="INTEGER" property="powerId" />
     <result column="menu" jdbcType="VARCHAR" property="menu" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, power_id, menu
+    id, power_id, menu, menu_name
   </sql>
+  <select id="selectMenuByPower" resultMap="BaseResultMap">
+    SELECT * FROM `role` WHERE power_id=#{power}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -20,10 +24,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.datong.model.Role">
-    insert into role (id, power_id, menu
-      )
-    values (#{id,jdbcType=INTEGER}, #{powerId,jdbcType=INTEGER}, #{menu,jdbcType=VARCHAR}
-      )
+    insert into role (id, power_id, menu,
+      menu_name)
+    values (#{id,jdbcType=INTEGER}, #{powerId,jdbcType=INTEGER}, #{menu,jdbcType=VARCHAR},
+      #{menuName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.datong.model.Role">
     insert into role
@@ -37,6 +41,9 @@
       <if test="menu != null">
         menu,
       </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -47,6 +54,9 @@
       </if>
       <if test="menu != null">
         #{menu,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -59,13 +69,17 @@
       <if test="menu != null">
         menu = #{menu,jdbcType=VARCHAR},
       </if>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.datong.model.Role">
     update role
     set power_id = #{powerId,jdbcType=INTEGER},
-      menu = #{menu,jdbcType=VARCHAR}
+      menu = #{menu,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
