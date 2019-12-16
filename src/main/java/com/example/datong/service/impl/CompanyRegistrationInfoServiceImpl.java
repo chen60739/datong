@@ -16,10 +16,13 @@ public class CompanyRegistrationInfoServiceImpl implements CompanyRegistrationIn
     CompanyRegistrationInfoMapper companyRegistrationInfoMapper;
 
     @Override
-    public Map<String,Object> findAll(CompanyRegistrationInfo companyRegistrationInfo) {
+    public Map<String,Object> findAll(CompanyRegistrationInfo companyRegistrationInfo,Integer page,Integer limit) {
         HashMap<String,Object> map=new HashMap<>();
-        List<CompanyRegistrationInfo> companyRegistrationInfos = companyRegistrationInfoMapper.selectAll(companyRegistrationInfo);
+        int offest = (page - 1) * limit;
+        List<CompanyRegistrationInfo> companyRegistrationInfos = companyRegistrationInfoMapper.selectAll(companyRegistrationInfo,offest,limit);
+        int count = companyRegistrationInfoMapper.selectAllCount(companyRegistrationInfo);
         map.put("data",companyRegistrationInfos);
+        map.put("count",count);
         map.put("code",0);
         return map;
 

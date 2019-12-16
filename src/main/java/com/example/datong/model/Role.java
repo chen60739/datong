@@ -7,6 +7,8 @@ public class Role {
 
     private String menu;
 
+    private String menuName;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Role {
 
     public void setMenu(String menu) {
         this.menu = menu == null ? null : menu.trim();
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName == null ? null : menuName.trim();
     }
 }

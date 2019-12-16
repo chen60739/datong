@@ -45,11 +45,6 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
     @Autowired
     private AddressService addressService;
 
-    /*@Override
-    public int changePass(Integer id) {
-        return floatingPopulationMapper.updatePass(id);
-    }*/
-
     @Override
     @Transactional
     public Map<String,Object> changeNoPass(Integer id,CheckReason reason) {
@@ -67,18 +62,22 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
     }
 
     @Override
-    public Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2) {
+    public Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2,Integer page,Integer limit) {
         HashMap<String,Object> map = new HashMap<>();
-        List<FloatingPopulation> floatingPopulations = floatingPopulationMapper.selectAll( unitName,name, phone,time1,time2);
+        int offest = (page - 1) * limit;
+        List<FloatingPopulation> floatingPopulations = floatingPopulationMapper.selectAll(unitName,name,phone,time1,time2,offest,limit);
+        int count = floatingPopulationMapper.selectAllCount(unitName, name, phone, time1, time2);
         map.put("data",floatingPopulations);
+        map.put("count",count);
         map.put("code",0);
         return map;
     }
 
 
     @Override
-    public Map<String, Object> findNoPassed(Integer unitId) {
-        List<NoPassedPerson> list = populationMapper.selectNoPassed(unitId);
+    public Map<String, Object> findNoPassed(Integer unitId,Integer page,Integer limit) {
+        int offest = (page - 1) * limit;
+        List<NoPassedPerson> list = populationMapper.selectNoPassed(unitId,offest,limit);
         int count = populationMapper.selectNoPassedCount(unitId);
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);
@@ -88,8 +87,9 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
     }
 
     @Override
-    public Map<String, Object> findChecking(Integer stateCode,Integer unitId) {
-        List<FloatingPopulation> list = populationMapper.selectChecking(stateCode,unitId);
+    public Map<String, Object> findChecking(Integer stateCode,Integer unitId,Integer page,Integer limit) {
+        int offest = (page - 1) * limit;
+        List<FloatingPopulation> list = populationMapper.selectChecking(stateCode,unitId,offest,limit);
         int count = populationMapper.selectCheckingCount(stateCode,unitId);
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);
@@ -126,7 +126,7 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
             employmentInfo.setCompanyId(companyRegistrationInfo.getUnitId());
             employmentInfoMapper.insert(employmentInfo);
             companyRegistrationInfo.setGmtModified(new Date());
-            companyRegistrationInfoMapper.updateByPrimaryKey(companyRegistrationInfo);
+            companyRegistrationInfoMapper.updateByPrimaryKeySelective(companyRegistrationInfo);
             if (familyMember != "") {
                 String[] members = familyMember.split(",");
                 for (String member : members) {
@@ -154,7 +154,7 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
             }
             residentialInfo.setpId(floatingPopulation.getId());
             residentialInfoMapper.insert(residentialInfo);
-            if (childBirthdayStr != "") {
+            if (childBirthdayStr != "" && childBirthdayStr != null) {
                 Date childBirthday = format.parse(childBirthdayStr);
                 fertilityInfo.setChildBirthday(childBirthday);
                 fertilityInfo.setpId(floatingPopulation.getId());

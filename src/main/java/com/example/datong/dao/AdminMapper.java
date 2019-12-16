@@ -3,6 +3,8 @@ package com.example.datong.dao;
 import com.example.datong.model.Admin;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer adminId);
@@ -21,4 +23,8 @@ public interface AdminMapper {
     Admin selectOne(String adminPhone,String adminPassword);
 
     Admin selectOne1(String adminPhone);
+
+    List<Admin> selectByPower(Integer power);
+
+    Admin selectByPhone(String adminPhone);
 }

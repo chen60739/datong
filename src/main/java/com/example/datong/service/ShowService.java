@@ -19,7 +19,7 @@ public interface ShowService {
     int replayReason(Integer id, String reason);
 
     void replayPass(String[] id);
-    void replayNoPass(String[] id);
+    void replayNoPass(Integer reasonId,Integer pId);
     /**
      * 添加未通过原因
      * @param checkReason

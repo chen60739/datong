@@ -5,6 +5,7 @@ import com.example.datong.dto.SuperEmploymentInfo;
 import com.example.datong.dto.SuperResidentialInfo;
 import com.example.datong.model.*;
 import com.example.datong.service.ShowService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -78,17 +79,13 @@ public class ShowServiceIpml implements ShowService {
     }
 
     @Override
-    public void replayNoPass(String[] id) {
-        if (id != null) {
-            for (String s : id) {
-                floatingPopulationMapper.updateNoPass(Integer.parseInt(s));
-            }
-        }
+    public void replayNoPass(Integer reasonId,Integer pId) {
+        floatingPopulationMapper.updateNoPass(reasonId,pId);
     }
 
     @Override
     public int addReason(CheckReason checkReason) {
-        return checkReasonMapper.insertSelective(checkReason);
+        return checkReasonMapper.insert(checkReason);
     }
 
     @Override

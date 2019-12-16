@@ -12,7 +12,7 @@ import java.util.List;
 public interface FloatingPopulationMapper {
     int updatePass(Integer id);
 
-    int updateNoPass(Integer id);
+    int updateNoPass(@Param("reasonId") Integer reasonId,@Param("id")Integer id);
     /**
      * 通过人id查询个人信息
      * @param id
@@ -41,14 +41,34 @@ public interface FloatingPopulationMapper {
     //根据省份查询人数
     int selectCountByProvince(HashMap map);
 
-    //查询个人登记信息审核
-    List<FloatingPopulation> selectAll(@Param("unitName") String unitName, @Param("name") String name, @Param("phone") String phone,@Param("time1") String time1,@Param("time2") String time2);
+    /**
+     * 查询个人登记信息审核
+     * @param unitName 单位名称
+     * @param name 人名
+     * @param phone 手机号
+     * @param time1 起止时间
+     * @param time2 结束时间
+     * @return
+     */
+    List<FloatingPopulation> selectAll(@Param("unitName") String unitName,
+                                       @Param("name") String name,
+                                       @Param("phone") String phone,
+                                       @Param("time1") String time1,
+                                       @Param("time2") String time2,
+                                       @Param("offest") Integer offest,
+                                       @Param("limit") Integer limit);
+    int selectAllCount(@Param("unitName") String unitName, @Param("name") String name, @Param("phone") String phone,@Param("time1") String time1,@Param("time2") String time2);
 
-    List<FloatingPopulation> selectChecking(@Param("stateCode") Integer stateCode,@Param("unitId") Integer unitId);
+    List<FloatingPopulation> selectChecking(@Param("stateCode") Integer stateCode,
+                                            @Param("unitId") Integer unitId,
+                                            @Param("offest") Integer offest,
+                                            @Param("limit") Integer limit);
 
     int selectCheckingCount(@Param("stateCode") Integer stateCode, @Param("unitId") Integer unitId);
 
-    List<NoPassedPerson> selectNoPassed(Integer unitId);
+    List<NoPassedPerson> selectNoPassed(@Param("unitId") Integer unitId,
+                                        @Param("offest") Integer offest,
+                                        @Param("limit") Integer limit);
 
     int selectNoPassedCount(Integer unitId);
 

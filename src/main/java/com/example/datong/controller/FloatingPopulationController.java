@@ -26,41 +26,42 @@ public class FloatingPopulationController {
     private AddressService addressService;
 
     //个人登记信息审核
-    @RequestMapping("findAllFloatingPopulation")
+    @RequestMapping("/back/findAllFloatingPopulation")
     @ResponseBody
-    public Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2){
-        return floatingPopulationService.findAll( unitName,name, phone,time1,time2);
+    public Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2,
+                                      @RequestParam("page") Integer page,
+                                      @RequestParam("limit") Integer limit){
+        return floatingPopulationService.findAll(unitName,name, phone,time1,time2,page,limit);
     }
-    @RequestMapping("backRegistrationInfoAudit")
+    @RequestMapping("/back/registrationInfoAudit")
     public String backRegistrationInfoAudit(){
         return  "backRegistrationInfoAudit" ;
     }
-    @RequestMapping("backAccountManagement")
+    @RequestMapping("/back/accountManagement")
     public String backAccountManagement(){
         return "backAccountManagement";
     }
 
-    @RequestMapping("backFloatingManagement")
+    @RequestMapping("/back/floatingManagement")
     public String backFloatingManagement(){
         return "backFloatingManagement";
     }
 
 
-    /*//修改个人等级审核状态--通过
-    @RequestMapping("changePass")
-    @ResponseBody
-    public int changePass(Integer id){
-        //return floatingPopulationService.changePass(id);
-    }*/
-    //修改个人等级审核状态--不通过
-    @RequestMapping("changeNoPass")
+    /**
+     * 修改个人等级审核状态--不通过
+     * @param id
+     * @param reason
+     * @return
+     */
+    @RequestMapping("back/changeNoPass")
     @ResponseBody
     public Map<String, Object> changeNoPass(Integer id,CheckReason reason){
         return  floatingPopulationService.changeNoPass(id, reason);
     }
 
     //流动人口信息跳转页面
-    @GetMapping("/back_statis")
+    @GetMapping("/back/statis")
     public String toBackStatis(Model model, String county, String town,
                                @RequestParam(name = "Create_time1",required = false) String Create_time1,
                                @RequestParam(name = "Create_time2",required = false) String Create_time2) {

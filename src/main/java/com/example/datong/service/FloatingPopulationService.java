@@ -3,6 +3,7 @@ package com.example.datong.service;
 import com.example.datong.dto.NoPassedPerson;
 import com.example.datong.model.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.util.List;
@@ -18,7 +19,7 @@ public interface FloatingPopulationService {
                    LessorInfo lessorInfo,SpouseInfo spouseInfo,
                    ResidentialInfo residentialInfo) throws ParseException;
 
-    Map<String, Object> findChecking(Integer stateCode,Integer unitId);
+    Map<String, Object> findChecking(Integer stateCode,Integer unitId,Integer page,Integer limit);
 
     /**
      * 查询登记信息审核
@@ -29,7 +30,7 @@ public interface FloatingPopulationService {
      * @param time2
      * @return
      */
-    Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2);
+    Map<String,Object> findAll(String unitName,String name,String phone,String time1,String time2,Integer page,Integer limit);
 
     /**
      * 修改个人信息审核状态--通过--未通过
@@ -39,7 +40,7 @@ public interface FloatingPopulationService {
     //int changePass(Integer id);
     Map<String,Object> changeNoPass(Integer id, CheckReason reason);
 
-    Map<String, Object> findNoPassed(Integer unitId);
+    Map<String, Object> findNoPassed(Integer unitId,Integer page,Integer limit);
 
     /**
      * 流动人口统计
