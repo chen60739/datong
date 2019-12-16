@@ -60,39 +60,19 @@
                             <cite>功能管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('注册信息审核','inforAudit')">
+                            <li th:each="roles:${session.roles}">
+                                <input type="hidden" class="menu" th:value="${roles.menu}">
+                                <input type="hidden" class="menuName" th:value="${roles.menuName}">
+                                <a class="aaa" >
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>注册信息审核</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('账户管理','accountManagement')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>账户管理</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('登记信息审核','registrationInfoAudit',true)">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>登记信息审核</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('流动信息人口管理','floatingManagement')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>流动人口信息管理</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('流动信息人口统计','statis')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>流动人口信息统计</cite></a>
+                                    <cite th:text="${roles.menuName}"></cite>
+                                </a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        <!-- <div class="x-slide_left"></div> -->
-        <!-- 左侧菜单结束 -->
-        <!-- 右侧主体开始 -->
         <div class="page-content">
             <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
                 <ul class="layui-tab-title">
@@ -122,7 +102,26 @@
                 hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
                 var s = document.getElementsByTagName("script")[0];
                 s.parentNode.insertBefore(hm, s);
-            })();</script>
+            })();
+        layui.use(['jquery', 'layer'], function(){
+            var $ = layui.$ //重点处
+                ,layer = layui.layer;
+            $(function () {
+                var power = $("#adpower").val();
+                if(power>1){
+                    $.get("backAdminInfo",{"power":power},function () {
+                    })
+                }
+
+                $(".menuName").each(function(){
+                    var aa = $(this).prev().val();
+                    var bb = $(this).val();
+                    $(this).next().attr("onclick","xadmin.add_tab('"+bb+'\',\''+aa+'\')');
+                });
+            })
+
+        });
+    </script>
     </body>
 
 </html>
