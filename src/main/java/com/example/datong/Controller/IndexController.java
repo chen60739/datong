@@ -91,4 +91,11 @@ public class IndexController {
         return flag;
     }
 
+    @RequestMapping("/front/checkUnit")
+    @ResponseBody
+    public boolean checkUnit(@RequestParam("unitName") String unitName){
+        boolean flag = companyService.checkUnitName(unitName);
+        return flag;
+    }
+
 }

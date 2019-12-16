@@ -14,7 +14,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //添加需要验证登录用户操作权限的请求
-        registry.addInterceptor(sessionInterceptor).addPathPatterns("/**").excludePathPatterns("/plugs/**","/css/**","/js/**","/","/front/login/**","/back/login/**","/back/loginPage","/back/login/**","/front/registerPage","/back/registerPage","/back/checkAdminPhone/**","/front/checkPhone/**","/front/checkUnit/**","/front/register/**","/back/register/**","/getCounty","/getTown");
+        registry.addInterceptor(sessionInterceptor).addPathPatterns("/**").excludePathPatterns("/plugs/**","/css/**","/js/**","/","/front/login/**","/back/login/**","/back/loginPage","/back/login/**","/front/registerPage","/back/registerPage","/back/checkAdminPhone/**","/front/checkPhone/**","/front/checkUnit/**","/back/checkAdminName/**","/front/register/**","/back/register/**","/getCounty","/getTown");
         //排除不需要验证登录用户操作权限的请求
     }
 }

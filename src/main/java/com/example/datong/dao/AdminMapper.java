@@ -26,4 +26,5 @@ public interface AdminMapper {
 
     Admin selectByPhone(String adminPhone);
 
+    Admin findByName(String adminName);
 }

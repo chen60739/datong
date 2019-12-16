@@ -76,6 +76,13 @@ public class AdminController {
         return flag;
     }
 
+    @RequestMapping("/back/checkAdminName")
+    @ResponseBody
+    public boolean checkAdminName(@RequestParam("adminName") String adminName){
+        boolean flag = adminService.checkadminName(adminName);
+        return flag;
+    }
+
     @RequestMapping("findAllAdmin")
     @ResponseBody
     public Map<String,Object> findAdmin(@RequestParam("power") Integer power){

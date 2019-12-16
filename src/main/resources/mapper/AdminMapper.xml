@@ -122,4 +122,8 @@
   <select id="selectByPhone" resultMap="BaseResultMap">
         select * from admin where admin_phone=#{param1}
   </select>
+
+  <select id="findByName" resultMap="BaseResultMap">
+        select * from admin where admin_name=#{adminName}
+  </select>
 </mapper>
