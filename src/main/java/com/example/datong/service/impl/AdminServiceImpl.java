@@ -32,10 +32,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Result login(String adminPhone, String adminPassword, HttpServletRequest request) {
         Admin admin = adminMapper.selectByPhone(adminPhone);
+        List<Role> roles=roleMapper.selectMenuByPower(admin.getPower());
         if (admin != null) {
             String pwd = MD5Utils.md5(adminPassword);
             if(admin.getAdminPassword().equals(pwd)){
                 request.getSession().setAttribute("admin",admin);
+                request.getSession().setAttribute("roles",roles);
                 return Result.success();
             }else {
                 return Result.failure(ResultCode.PASSWORD_ERROR);
