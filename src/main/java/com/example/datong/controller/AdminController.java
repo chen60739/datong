@@ -2,6 +2,7 @@ package com.example.datong.controller;
 
 import com.example.datong.model.Admin;
 import com.example.datong.service.AdminService;
+import com.example.datong.util.MD5Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,11 +25,18 @@ public class AdminController {
      */
     @RequestMapping("back_login")
     public String login(String adminPhone, String adminPassword, HttpSession session) {
-        Admin login = adminService.login(adminPhone, adminPassword);
-        if (login != null) {
-            session.setAttribute("admin",login);
-            return "back_main";
+        if(adminPassword !=null && adminPassword !=""){
+            System.out.println(adminPassword);
+            String password=MD5Utils.md5(adminPassword);
+            Admin login = adminService.login(adminPhone, password);
+            if (login != null) {
+                session.setAttribute("admin",login);
+                return "back_main";
+            }
         }
+
+
+
         return "back_login";
     }
     @RequestMapping("back_loginPage")
@@ -48,6 +56,7 @@ public class AdminController {
      */
     @RequestMapping("back_register")
     public String register(Admin record) {
+        record.setAdminPassword(MD5Utils.md5(record.getAdminPassword()));
         int register = adminService.register(record);
         System.out.println("注册成功");
         return "back_login";
