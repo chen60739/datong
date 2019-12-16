@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface AdminService {
     //登录
     Result login(String adminPhone, String adminPassword, HttpServletRequest request);

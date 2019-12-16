@@ -51,7 +51,7 @@
                                 <div class="layui-upload">
                                     <button type="button" class="layui-btn" id="test1">上传图片</button>
                                     <div class="layui-upload-list">
-                                        <img class="layui-upload-img" id="photo" th:src="@{${people.photo}}" >
+                                        <img class="layui-upload-img" id="photo" width="50px" height="50px" th:src="@{/file/{filename}(filename=${people.photo})}" >
                                         <p id="demoText"></p>
                                     </div>
                                 </div>

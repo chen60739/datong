@@ -14,7 +14,7 @@
         <h1>账号注册</h1>
     </div>
     <div style="float: top;margin-top: 20px">
-        <form method="post" class="layui-form" action="/register">
+        <form method="post" class="layui-form" action="/front/register">
             <div class="layui-form-item">
                 <label for="phone" class="layui-form-label">
                     <span class="x-red">*</span>手机号</label>
@@ -77,7 +77,7 @@
                     var message = '';
                     $.ajax({
                         type: "GET",
-                        url: "/checkPhone/?phone="+value,
+                        url: "checkPhone/?phone="+value,
                         async: false, //改为同步请求
                         contentType: 'application/json;charset=UTF-8',
                         //data: {"phone":value},

@@ -22,9 +22,8 @@ public interface AdminMapper {
     //登录
     Admin selectOne(String adminPhone,String adminPassword);
 
-    Admin selectOne1(String adminPhone);
-
     List<Admin> selectByPower(Integer power);
 
     Admin selectByPhone(String adminPhone);
+
 }
