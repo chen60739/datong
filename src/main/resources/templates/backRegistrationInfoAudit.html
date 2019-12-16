@@ -125,7 +125,7 @@
                 }
                 $.ajax({
                     type:'get',
-                    url:'/toPass',
+                    url:'toPass',
                     dataType: 'json',
                     data:{"id":ids},
                     success:function (data) {
@@ -156,7 +156,7 @@
                     maxmin:true,
                     shadeClose:true,
                     area:['600px','400px'],
-                    content:'noPassReason?id='+id,//弹框路径+页面自己写，方法路径自己加一下
+                    content:'/back/noPassReason?id='+id,//弹框路径+页面自己写，方法路径自己加一下
                 });
             }
         });
@@ -174,7 +174,7 @@
                     maxmin: true,
                     shadeClose: true, //点击遮罩关闭层
                     area: ['1000px', '570px'],
-                    content: '/showPeople?id='+data.id,//跳转到弹窗的方法和他的id
+                    content: 'showPeople?id='+data.id,//跳转到弹窗的方法和他的id
                 });
             }
         });

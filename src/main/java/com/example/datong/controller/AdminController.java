@@ -91,4 +91,10 @@ public class AdminController {
         System.out.println(all);
         return all;
     }
+
+    @RequestMapping("/back/exit")
+    public String exit(HttpServletRequest request){
+        request.getSession().removeAttribute("admin");
+        return "redirect:/back";
+    }
 }
