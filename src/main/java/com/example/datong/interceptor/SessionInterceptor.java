@@ -28,7 +28,7 @@ public class SessionInterceptor implements HandlerInterceptor {
             if (request_url.startsWith("/front")){
                 response.sendRedirect("/");
                 return false;
-            }else {
+            }else if(request_url.startsWith("/back")){
                 response.sendRedirect("/back/loginPage");
                 return false;
             }

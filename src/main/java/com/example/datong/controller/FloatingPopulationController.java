@@ -48,13 +48,12 @@ public class FloatingPopulationController {
     }
 
 
-    /*//修改个人等级审核状态--通过
-    @RequestMapping("changePass")
-    @ResponseBody
-    public int changePass(Integer id){
-        //return floatingPopulationService.changePass(id);
-    }*/
-    //修改个人等级审核状态--不通过
+    /**
+     * 修改个人等级审核状态--不通过
+     * @param id
+     * @param reason
+     * @return
+     */
     @RequestMapping("back/changeNoPass")
     @ResponseBody
     public Map<String, Object> changeNoPass(Integer id,CheckReason reason){

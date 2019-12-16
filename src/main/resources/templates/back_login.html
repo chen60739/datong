@@ -8,11 +8,10 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="stylesheet" href="/plugs/layui/css/layui.css">
+    <script src="/plugs/layui/layui.js"></script>
     <link rel="stylesheet" href="/css/login.css" >
     <link rel="stylesheet" href="/css/xadmin.css">
-    <script src="/plugs/layui/layui.js" charset="utf-8"></script>
     <link rel="stylesheet" href="/css/login.css">
-    <script src="/js/jquery-2.1.1.min.js"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -29,7 +28,7 @@
     <div class="message">大同市流动人口服务管理系统</div>
     <div id="darkbannerwrap"></div>
     <div class="layui-form">
-        <form  id="user-name" class="layui-form" method="post" action="/back/login">
+        <form  id="user-name" class="layui-form">
             <input name="adminPhone" placeholder="用户名"  type="text" required="" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="adminPassword" lay-verify="required" placeholder="密码" required="" type="password" class="layui-input">
@@ -37,33 +36,30 @@
             <button class="layui-btn" lay-submit lay-filter="login" id="submit" style="width:100%;height: 45px;">登录</button>
             <hr class="hr15">
         </form>
-        <a href="/back_registerPage"><input value="注册"   style="width:100%;" type="submit"></a>
+        <a href="registerPage"><input value="注册"   style="width:100%;" type="submit"></a>
     </div>
 </div>
 
 <script>
-    $(function  () {
-        layui.use(['form','layer'], function(){
-            var form = layui.form,
-                layer = layui.layer;
-            // layer.msg('玩命卖萌中', function(){
-            //   //关闭后的操作
-            //   });
-            //监听提交
-            /* form.on('submit(login)', function(data){
-                 $.getJSON('/login',data.field,function (result) {
-                     if (result.resultCode=='USER_NOT_EXIST') {
-                         layer.msg(result.message, {icon: 5});
-                     }else if (result.resultCode=='PASSWORD_ERROR') {
-                         layer.msg(result.message, {icon: 5});
-                     }else if (result.resultCode=='SUCCESS') {
-                         location.href='/main';
-                     }
-                 })*/
+layui.use(['form','layer','jquery'],function(){
+    var form = layui.form,
+        $ = layui.jquery,
+        layer = layui.layer;
+
+        //监听提交
+        form.on('submit(login)', function(data){
+             $.getJSON('/back/login',data.field,function (result) {
+                 if (result.resultCode=='USER_NOT_EXIST') {
+                     layer.msg(result.message, {icon: 5});
+                 }else if (result.resultCode=='PASSWORD_ERROR') {
+                     layer.msg(result.message, {icon: 5});
+                 }else if (result.resultCode=='SUCCESS') {
+                     location.href='main';
+                 }
+             })
             return false;
         });
-    });
-    })
+});
 </script>
 
 

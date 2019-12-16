@@ -14,7 +14,7 @@
             <h1>后台账号注册</h1>
         </div>
         <div style="float: top;margin-top: 20px">
-            <form method="post" class="layui-form" action="back_register">
+            <form method="post" class="layui-form" action="register">
                 <div class="layui-form-item">
                     <label for="phone" class="layui-form-label">
                         <span class="x-red">*</span>手机号</label>
@@ -33,7 +33,7 @@
                     <div class="layui-input-inline">
                         <input type="text" id="unitName" name="adminName" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     <div class="layui-input-inline">
-                        <select name="power">
+                        <select name="power" lay-verify="required">
                             <option value="">等级</option>
                             <option value="1">派出所</option>
                             <option value="2">分局</option>
@@ -84,7 +84,7 @@
                 var message = '';
                 $.ajax({
                     type: "GET",
-                    url: "/checkAdminPhone/?adminPhone="+value,
+                    url: "checkAdminPhone/?adminPhone="+value,
                     async: false, //改为同步请求
                     contentType: 'application/json;charset=UTF-8',
                     dataType: 'json',

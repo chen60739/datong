@@ -119,7 +119,7 @@
   <select id="selectOne" resultMap="BaseResultMap">
       select * from admin where admin_phone=#{param1} and admin_password=#{param2}
   </select>
-  <select id="selectOne1" resultMap="BaseResultMap">
+  <select id="selectByPhone" resultMap="BaseResultMap">
         select * from admin where admin_phone=#{param1}
   </select>
 </mapper>

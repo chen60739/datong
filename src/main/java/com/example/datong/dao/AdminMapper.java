@@ -20,5 +20,5 @@ public interface AdminMapper {
     //登录
     Admin selectOne(String adminPhone,String adminPassword);
 
-    Admin selectOne1(String adminPhone);
+    Admin selectByPhone(String adminPhone);
 }
