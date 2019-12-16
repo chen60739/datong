@@ -18,13 +18,18 @@
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<script type="text/javascript">
+    if(top!=window){
+        top.location.href="/back/loginPage";
+    }
+</script>
 <body class="login-bg">
 
 <div class="login layui-anim layui-anim-up">
     <div class="message">大同市流动人口服务管理系统</div>
     <div id="darkbannerwrap"></div>
     <div class="layui-form">
-        <form  id="user-name" class="layui-form" method="post" action="back_login">
+        <form  id="user-name" class="layui-form" method="post" action="/back/login">
             <input name="adminPhone" placeholder="用户名"  type="text" required="" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="adminPassword" lay-verify="required" placeholder="密码" required="" type="password" class="layui-input">

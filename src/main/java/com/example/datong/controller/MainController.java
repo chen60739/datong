@@ -27,17 +27,17 @@ public class MainController {
     @Autowired
     private FloatingPopulationService floatingPopulationService;
 
-    @RequestMapping("/audit")
+    @RequestMapping("/front/audit")
     public String aduit(){
         return "passing";
     }
 
-    @RequestMapping("/passed")
+    @RequestMapping("/front/passed")
     public String passed(){
         return "passed";
     }
 
-    @RequestMapping("/noPassed")
+    @RequestMapping("/front/noPassed")
     public String noPassed(){
         return "noPassed";
     }
@@ -47,7 +47,7 @@ public class MainController {
      *
      * @return 主页
      */
-    @GetMapping("/personInfoPage")
+    @GetMapping("/front/personInfoPage")
     public String mainPage(Model model) {
         HashMap<String, List<Dictionary>> dictionary = dictionaryService.getDictionary();
         model.addAttribute("dictionary", dictionary);
@@ -89,7 +89,7 @@ public class MainController {
      * @return
      * @throws ParseException
      */
-    @PostMapping("/addPerson")
+    @PostMapping("/front/addPerson")
     @ResponseBody
     public String addPerson(FloatingPopulation floatingPopulation,
                             @RequestParam(name = "cometime",required = false) String time,
@@ -116,7 +116,7 @@ public class MainController {
      * @param file
      * @return 返回图片名称
      */
-    @RequestMapping("/savePhoto")
+    @RequestMapping("/front/savePhoto")
     @ResponseBody
     public Map<String, Object> addPhoto(@RequestParam MultipartFile file) {
         String name = FileUtil.savePhoto(file);
@@ -129,11 +129,13 @@ public class MainController {
     /**
      * 审核中列表
      */
-    @RequestMapping("/checking")
+    @RequestMapping("/front/checking")
     @ResponseBody
-    public Map<String, Object> checking(HttpServletRequest request){
+    public Map<String, Object> checking(HttpServletRequest request,
+                                        @RequestParam("page") Integer page,
+                                        @RequestParam("limit") Integer limit){
         CompanyRegistrationInfo company = (CompanyRegistrationInfo) request.getSession().getAttribute("user");
-        Map<String, Object> map = floatingPopulationService.findChecking(2101,company.getUnitId());
+        Map<String, Object> map = floatingPopulationService.findChecking(2101,company.getUnitId(),page,limit);
         return map;
     }
 
@@ -141,11 +143,13 @@ public class MainController {
      * 已通过审核列表
      * @return
      */
-    @RequestMapping("/passedData")
+    @RequestMapping("/front/passedData")
     @ResponseBody
-    public Map<String, Object> passedData(HttpServletRequest request){
+    public Map<String, Object> passedData(HttpServletRequest request,
+                                          @RequestParam("page") Integer page,
+                                          @RequestParam("limit") Integer limit){
         CompanyRegistrationInfo company = (CompanyRegistrationInfo) request.getSession().getAttribute("user");
-        Map<String, Object> map = floatingPopulationService.findChecking(2102, company.getUnitId());
+        Map<String, Object> map = floatingPopulationService.findChecking(2102, company.getUnitId(),page,limit);
         return map;
     }
 
@@ -154,15 +158,17 @@ public class MainController {
      * @param request
      * @return
      */
-    @RequestMapping("/noPassedData")
+    @RequestMapping("/front/noPassedData")
     @ResponseBody
-    public Map<String, Object> noPassedData(HttpServletRequest request){
+    public Map<String, Object> noPassedData(HttpServletRequest request,
+                                            @RequestParam("page") Integer page,
+                                            @RequestParam("limit") Integer limit){
         CompanyRegistrationInfo company = (CompanyRegistrationInfo) request.getSession().getAttribute("user");
-        Map<String, Object> map = floatingPopulationService.findNoPassed(company.getUnitId());
+        Map<String, Object> map = floatingPopulationService.findNoPassed(company.getUnitId(),page,limit);
         return map;
     }
 
-    @RequestMapping("/exit")
+    @RequestMapping("/front/exit")
     public String exit(HttpServletRequest request){
         request.getSession().removeAttribute("user");
         return "redirect:/";

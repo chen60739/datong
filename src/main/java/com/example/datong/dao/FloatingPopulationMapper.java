@@ -59,11 +59,16 @@ public interface FloatingPopulationMapper {
                                        @Param("limit") Integer limit);
     int selectAllCount(@Param("unitName") String unitName, @Param("name") String name, @Param("phone") String phone,@Param("time1") String time1,@Param("time2") String time2);
 
-    List<FloatingPopulation> selectChecking(@Param("stateCode") Integer stateCode,@Param("unitId") Integer unitId);
+    List<FloatingPopulation> selectChecking(@Param("stateCode") Integer stateCode,
+                                            @Param("unitId") Integer unitId,
+                                            @Param("offest") Integer offest,
+                                            @Param("limit") Integer limit);
 
     int selectCheckingCount(@Param("stateCode") Integer stateCode, @Param("unitId") Integer unitId);
 
-    List<NoPassedPerson> selectNoPassed(Integer unitId);
+    List<NoPassedPerson> selectNoPassed(@Param("unitId") Integer unitId,
+                                        @Param("offest") Integer offest,
+                                        @Param("limit") Integer limit);
 
     int selectNoPassedCount(Integer unitId);
 

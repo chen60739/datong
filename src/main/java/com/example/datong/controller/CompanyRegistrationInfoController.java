@@ -15,7 +15,7 @@ public class CompanyRegistrationInfoController {
     @Resource
     CompanyRegistrationInfoService companyRegistrationInfoService;
 
-    @RequestMapping("findAllCompany")
+    @RequestMapping("/back/findAllCompany")
     @ResponseBody
     public Map<String,Object> findAllCompany(CompanyRegistrationInfo companyRegistrationInfo,
                                              @RequestParam("page") Integer page,
@@ -23,11 +23,11 @@ public class CompanyRegistrationInfoController {
         Map<String, Object> all = companyRegistrationInfoService.findAll(companyRegistrationInfo,page,limit);
         return all;
     }
-    @RequestMapping("backInforAudit")
+    @RequestMapping("/back/inforAudit")
     public String backInforAudit(){
         return "backInforAudit";
     }
-    @RequestMapping("back_all")
+    @RequestMapping("/back/all")
     public String back_all(){
         return "back_all";
     }

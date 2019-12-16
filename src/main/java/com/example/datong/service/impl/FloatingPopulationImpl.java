@@ -75,8 +75,9 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
 
 
     @Override
-    public Map<String, Object> findNoPassed(Integer unitId) {
-        List<NoPassedPerson> list = populationMapper.selectNoPassed(unitId);
+    public Map<String, Object> findNoPassed(Integer unitId,Integer page,Integer limit) {
+        int offest = (page - 1) * limit;
+        List<NoPassedPerson> list = populationMapper.selectNoPassed(unitId,offest,limit);
         int count = populationMapper.selectNoPassedCount(unitId);
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);
@@ -86,8 +87,9 @@ public class FloatingPopulationImpl implements FloatingPopulationService {
     }
 
     @Override
-    public Map<String, Object> findChecking(Integer stateCode,Integer unitId) {
-        List<FloatingPopulation> list = populationMapper.selectChecking(stateCode,unitId);
+    public Map<String, Object> findChecking(Integer stateCode,Integer unitId,Integer page,Integer limit) {
+        int offest = (page - 1) * limit;
+        List<FloatingPopulation> list = populationMapper.selectChecking(stateCode,unitId,offest,limit);
         int count = populationMapper.selectCheckingCount(stateCode,unitId);
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);

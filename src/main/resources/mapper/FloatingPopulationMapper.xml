@@ -428,6 +428,7 @@
   <select id="selectChecking" resultMap="BaseResultMap">
     SELECT f.id,f.`name`,f.phone,f.gmt_create FROM floating_population as f
     WHERE is_checked=#{stateCode} and f.company_id=#{unitId}
+    limit #{offest},#{limit}
   </select>
 
   <select id="selectCheckingCount" resultType="integer">
@@ -448,6 +449,7 @@
     FROM floating_population p,check_reason c
     WHERE p.check_reason_id=c.id AND p.is_checked=2103
      AND p.company_id=#{unitId}
+     limit #{offest},#{limit}
   </select>
 
   <select id="selectNoPassedCount"  parameterType="integer" resultType="integer">

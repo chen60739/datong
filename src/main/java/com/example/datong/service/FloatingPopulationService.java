@@ -19,7 +19,7 @@ public interface FloatingPopulationService {
                    LessorInfo lessorInfo,SpouseInfo spouseInfo,
                    ResidentialInfo residentialInfo) throws ParseException;
 
-    Map<String, Object> findChecking(Integer stateCode,Integer unitId);
+    Map<String, Object> findChecking(Integer stateCode,Integer unitId,Integer page,Integer limit);
 
     /**
      * 查询登记信息审核
@@ -40,7 +40,7 @@ public interface FloatingPopulationService {
     //int changePass(Integer id);
     Map<String,Object> changeNoPass(Integer id, CheckReason reason);
 
-    Map<String, Object> findNoPassed(Integer unitId);
+    Map<String, Object> findNoPassed(Integer unitId,Integer page,Integer limit);
 
     /**
      * 流动人口统计

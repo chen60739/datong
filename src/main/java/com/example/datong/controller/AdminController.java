@@ -22,7 +22,7 @@ public class AdminController {
      * @param session
      * @return
      */
-    @RequestMapping("back_login")
+    @RequestMapping("/back/login")
     public String login(String adminPhone, String adminPassword, HttpSession session) {
         Admin login = adminService.login(adminPhone, adminPassword);
         if (login != null) {
@@ -31,11 +31,12 @@ public class AdminController {
         }
         return "back_login";
     }
-    @RequestMapping("back_loginPage")
+    @RequestMapping("/back/loginPage")
     public  String back_login(){
         return "back_login";
     }
-    @RequestMapping("back_registerPage")
+
+    @RequestMapping("/back/registerPage")
     public  String back_register(){
         return "back_register";
     }
@@ -46,14 +47,14 @@ public class AdminController {
      * @param record
      * @return
      */
-    @RequestMapping("back_register")
+    @RequestMapping("/back/register")
     public String register(Admin record) {
         int register = adminService.register(record);
         System.out.println("注册成功");
-        return "back_login";
+        return "login";
     }
 
-    @RequestMapping("checkAdminPhone")
+    @RequestMapping("/back/checkAdminPhone")
     @ResponseBody
     public boolean checkAdminPhone(@RequestParam("adminPhone") String adminPhone){
         Admin admin = adminService.login1(adminPhone);
