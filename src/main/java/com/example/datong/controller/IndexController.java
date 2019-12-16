@@ -26,7 +26,7 @@ public class IndexController {
      * @param password 密码
      * @return 结果集
      */
-    @RequestMapping("/login")
+    @RequestMapping("/front/login")
     @ResponseBody
     public Result login(@RequestBody @RequestParam("username") String username,
                         @RequestBody @RequestParam("password") String password,
@@ -40,7 +40,7 @@ public class IndexController {
      * 返回前台主页
      * @return
      */
-    @RequestMapping("/main")
+    @RequestMapping("/front/main")
     public String frontMain(){
         return "front_main";
     }
@@ -49,7 +49,7 @@ public class IndexController {
     /**
      * @return 注册页面
      */
-    @GetMapping("/registerPage")
+    @GetMapping("/front/registerPage")
     public String registerPage() {
         return "register";
     }
@@ -73,7 +73,7 @@ public class IndexController {
      * @param company
      * @return 返回登录页面
      */
-    @PostMapping("/register")
+    @PostMapping("/front/register")
     public String register(CompanyRegistrationInfo company) {
         companyService.insert(company);
         return "redirect:/";
@@ -84,7 +84,7 @@ public class IndexController {
      * @param phone 手机号
      * @return true为不重复，可用
      */
-    @RequestMapping("/checkPhone")
+    @RequestMapping("/front/checkPhone")
     @ResponseBody
     public boolean checkUnitPhone(@RequestParam("phone") String phone){
         boolean flag = companyService.checkPhone(phone);
