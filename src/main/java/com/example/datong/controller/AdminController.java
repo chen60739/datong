@@ -2,6 +2,7 @@ package com.example.datong.controller;
 
 import com.example.datong.message.Result;
 import com.example.datong.model.Admin;
+import com.example.datong.model.Role;
 import com.example.datong.service.AdminService;
 import com.example.datong.util.MD5Utils;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -44,6 +48,12 @@ public class AdminController {
     public  String back_register(){
         return "back_register";
     }
+    @RequestMapping("backAdminInfo")
+    public  String backAdmin(Integer power, HttpSession session){
+        if (power!=null){
+            session.setAttribute("power",power);
+        }
+        return  "backAdminInfo"; }
 
 
     /**
@@ -64,5 +74,14 @@ public class AdminController {
     public boolean checkAdminPhone(@RequestParam("adminPhone") String adminPhone){
         boolean flag = adminService.checkPhone(adminPhone);
         return flag;
+    }
+
+    @RequestMapping("findAllAdmin")
+    @ResponseBody
+    public Map<String,Object> findAdmin(@RequestParam("power") Integer power){
+        power=power-1;
+        Map<String, Object> all = adminService.findAdminByPower(power);
+        System.out.println(all);
+        return all;
     }
 }

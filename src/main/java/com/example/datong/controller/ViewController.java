@@ -100,7 +100,6 @@ public class ViewController {
         }else{
             return "show_person";
         }
-
     }
 
     //个人注册页面或者回显页面
@@ -109,7 +108,6 @@ public class ViewController {
         System.out.println("进入方法内");
         System.out.println(id);
         return "register_person";
-
     }
 
     /**
@@ -170,7 +168,8 @@ public class ViewController {
         return "noPass";
     }
     @RequestMapping("/showCompany")
-    public String showCompany(Integer id){
+    public String showCompany(Integer id,ModelMap map){
+
         return "register";
     }
 
