@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>个人信息添加</title>
@@ -8,18 +8,6 @@
 </head>
 
 <body >
-<div>
-    <ul class="layui-nav" >
-        <li class="layui-nav-item layui-this">
-            <a href="javascript:;">个人中心</a>
-            <dl class="layui-nav-child">
-                <dd><a href="">审核中</a></dd>
-                <dd><a href="">未通过</a></dd>
-                <dd><a href="">已通过</a></dd>
-            </dl>
-        </li>
-    </ul>
-</div>
 
 <div align="center"><h1>大同市流动人口信息详情</h1></div>
 <div style="float: top;margin-top: 20px">
@@ -328,7 +316,6 @@
                     </tr>
 
                     <tr th:each="family: ${familyMember}">
-
                         <td>
                             <select name="relationId">
                                 <option th:each="relation : ${dictionary}" th:if="${relation.topId} eq '1500'" th:selected="${family.getRelationId() eq  relation.dictionaryId}" th:text="${relation.dictionaryName}" th:value="${relation.dictionaryId}">关系</option>
@@ -340,21 +327,34 @@
                         <td>
                             <input th:value="${family.memberName} " class="layui-input" name="memberName" placeholder="姓名"/>
                         </td>
-                        <td>
+                        <td th:if="${family.memberSex eq true}">
                             <input type="hidden" id="fam" th:value="${family.id}">
-                            <input type="radio" th:if="${family.getMemberSex() ne null}" th:attr ="checked=${family.getMemberSex()}" name="memberSex" value="1" title="男" lay-verify="otherReq">
-                            <input type="radio" th:if="${family.getMemberSex() ne null}" th:attr ="checked=${family.getMemberSex()}" name="memberSex" value="0" title="女" checked lay-verify="otherReq">
+                            <input type="radio"  checked th:name="memberSex+${family.id}" value="1" title="男" lay-verify="otherReq">
+                            <input type="radio"  th:name="memberSex+${family.id}" value="0" title="女" lay-verify="otherReq">
+                        </td>
+                        <td th:if="${family.memberSex eq false}">
+                            <input type="hidden" id="fam" th:value="${family.id}">
+                            <input type="radio"   th:name="memberSex+${family.id}" value="1" title="男" lay-verify="otherReq">
+                            <input type="radio" checked th:name="memberSex+${family.id}" value="0" title="女" lay-verify="otherReq">
                         </td>
                         <td>
                             <input type="date"  class="layui-input" id="pdate" placeholder="出生日期">
                         </td>
-                        <td>
-                            <input type="radio"   th:if="${family.getHasVaccinate() ne null}" th:attr ="checked=${family.getHasVaccinate()}" name="hasVaccinate" value="1" title="是" lay-verify="otherReq">
-                            <input type="radio"  th:if="${family.getHasVaccinate() ne null}" th:attr ="checked=${family.getHasVaccinate()}" name="hasVaccinate" value="0" title="否" checked lay-verify="otherReq">
+                        <td th:if="${family.hasVaccinate eq true}">
+                            <input type="radio" checked th:name="hasVaccinate+${family.id}" value="1" title="是" lay-verify="otherReq">
+                            <input type="radio" th:name="hasVaccinate+${family.id}" value="0" title="否"  lay-verify="otherReq">
                         </td>
-                        <td>
-                            <input type="radio"  th:if="${family.getIsLocal() ne null}" th:attr ="checked=${family.getIsLocal()}" name="isLocal" value="1" title="是" lay-verify="otherReq">
-                            <input type="radio" th:if="${family.getIsLocal() ne null}"   th:attr ="checked=${family.getIsLocal()}" name="isLocal" value="0" title="否" checked lay-verify="otherReq">
+                        <td th:if="${family.hasVaccinate eq false}">
+                            <input type="radio" th:name="hasVaccinate+${family.id}" value="1" title="是" lay-verify="otherReq">
+                            <input type="radio" checked th:name="hasVaccinate+${family.id}" value="0" title="否"  lay-verify="otherReq">
+                        </td>
+                        <td th:if="${family.isLocal eq true}">
+                            <input type="radio" checked th:name="isLocal+${family.id}" value="1" title="是" lay-verify="otherReq">
+                            <input type="radio" th:name="isLocal+${family.id}" value="0" title="否" lay-verify="otherReq">
+                        </td>
+                        <td th:if="${family.isLocal eq false}">
+                            <input type="radio" th:name="isLocal+${family.id}" value="1" title="是" lay-verify="otherReq">
+                            <input type="radio" checked th:name="isLocal+${family.id}" value="0" title="否" lay-verify="otherReq">
                         </td>
                     </tr>
                 </table>
@@ -887,9 +887,6 @@
             })
         });
 
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
         //自定义验证规则
         form.verify({
             otherReq: function(value,item){
@@ -923,15 +920,6 @@
                 layedit.sync(editIndex);
             }
         });
-        $(document).ready(function(){
-            var dd = new Array();
-            $("#fam").each(function(key,e){
-                dd[key] = $(this).val();
-                console.log(dd[key]);
-                $("#fam").siblings().attr("name","memberSex"+dd[key]);
-            });
-        });
-
 
         //监听指定开关
         form.on('switch(switchTest)', function(data){
