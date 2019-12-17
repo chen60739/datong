@@ -11,4 +11,6 @@ public interface CompanyRegistrationInfoService {
      * @return
      */
     Map<String,Object> findAll(CompanyRegistrationInfo companyRegistrationInfo,Integer page,Integer limit);
+
+    CompanyRegistrationInfo getByCompanyId(Integer unitId);
 }
