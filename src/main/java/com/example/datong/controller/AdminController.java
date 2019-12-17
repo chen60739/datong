@@ -76,6 +76,13 @@ public class AdminController {
         return flag;
     }
 
+    @RequestMapping("/back/checkAdminName")
+    @ResponseBody
+    public boolean checkAdminName(@RequestParam("adminName") String adminName){
+        boolean flag = adminService.checkadminName(adminName);
+        return flag;
+    }
+
     @RequestMapping("findAllAdmin")
     @ResponseBody
     public Map<String,Object> findAdmin(@RequestParam("power") Integer power){
@@ -83,5 +90,11 @@ public class AdminController {
         Map<String, Object> all = adminService.findAdminByPower(power);
         System.out.println(all);
         return all;
+    }
+
+    @RequestMapping("/back/exit")
+    public String exit(HttpServletRequest request){
+        request.getSession().removeAttribute("admin");
+        return "redirect:/back";
     }
 }

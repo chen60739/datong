@@ -72,6 +72,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public boolean checkadminName(String adminName) {
+        Admin admin = adminMapper.findByName(adminName);
+        if (admin != null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public Map<String,Object> findAdminByPower(Integer power) {
         HashMap<String,Object> map=new HashMap<>();
         List<Admin> adminList=adminMapper.selectByPower(power);

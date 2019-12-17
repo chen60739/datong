@@ -27,4 +27,5 @@ public interface AdminService {
     Map<String,Object> findAdminByPower(Integer power);
 
 
+    boolean checkadminName(String adminName);
 }

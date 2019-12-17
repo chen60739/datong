@@ -17,14 +17,14 @@
                 <label class="layui-form-label">从</label>
                 <div class="layui-input-inline">
                     <!--查询框，按照时间范围查询-->
-                    <input name="Create_time1" id="time1" class="layui-input" type="date" autocomplete="off" lay-verify="">
+                    <input name="Create_time1" id="time1" class="layui-input" type="text" autocomplete="off" lay-verify="">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">到</label>
                 <div class="layui-input-inline">
                     <!--查询框，按照时间范围查询-->
-                    <input name="Create_time2" id="time2" class="layui-input" type="date" autocomplete="off" lay-verify="">
+                    <input name="Create_time2" id="time2" class="layui-input" type="text" autocomplete="off" lay-verify="">
                 </div>
             </div>
         </div>
@@ -65,8 +65,21 @@
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看详情</a>
 </script>
 <script type="text/javascript"  th:inline="none">
-    layui.use('table', function(){
-        var table = layui.table;
+    layui.use(['table','laydate'], function(){
+        var table = layui.table,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem : '#time1'
+            ,min: '2007-1-1'
+            ,max:-1
+            ,done:function (value) {
+                laydate.render({
+                    elem:'#time2'
+                    ,min:value
+                });
+            }
+        });
 
         //方法级渲染
         table.render({

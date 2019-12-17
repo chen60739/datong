@@ -31,7 +31,7 @@
                     <label for="unitName" class="layui-form-label">
                         <span class="x-red">*</span>工作单位</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="unitName" name="adminName" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                        <input type="text" id="unitName" name="adminName" lay-verify="required|name" autocomplete="off" class="layui-input"></div>
                     <div class="layui-input-inline">
                         <select name="power" lay-verify="required">
                             <option value="">等级</option>
@@ -60,11 +60,11 @@
                             <option value="">请选择街道/镇</option>
                         </select>
                     </div>
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" id="submit">立即提交</button>
-                            <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
-                        </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" id="submit">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
                     </div>
                 </div>
             </form>
@@ -93,6 +93,27 @@
 
                         } else {
                             message = "手机号已存在，请重新输入！"
+                        }
+                    }
+                });
+                //需要注意  需要将返回信息写在ajax方法外
+                if (message !== '') {
+                    return message;
+                }
+            },
+            name:function(value) {
+                var message = '';
+                $.ajax({
+                    type: "GET",
+                    url: "checkAdminName/?adminName="+value,
+                    async: false, //改为同步请求
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res) {
+
+                        } else {
+                            message = "已存在，请重新输入！"
                         }
                     }
                 });

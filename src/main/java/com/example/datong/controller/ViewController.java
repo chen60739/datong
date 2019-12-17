@@ -26,9 +26,9 @@ public class ViewController {
     CompanyRegistrationInfoService companyRegistrationInfoService;
 
 
-    @GetMapping("/show_person")
+    @GetMapping("/back/show_person")
     public String toshowPerson(){ return "show_person";}
-    @GetMapping("/show_person2")
+    @GetMapping("/back/show_person2")
     public String toshowPerson2(){ return "show_person2";}
     @RequestMapping("/changeProvince")
     @ResponseBody
@@ -52,7 +52,7 @@ public class ViewController {
         return result;
     }
 
-    @RequestMapping("/showPeople")
+    @RequestMapping("/back/showPeople")
     public String showPeople(ModelMap map,@RequestParam("id") String id){
         Integer pid=Integer.valueOf(id);
         //字典集合
@@ -118,7 +118,7 @@ public class ViewController {
      * @param id
      * @return
      */
-    @RequestMapping("/toPass")
+    @RequestMapping("/back/toPass")
     @ResponseBody
     public boolean pass(@RequestParam(value = "id[]") String[] id){
         showService.replayPass(id);
@@ -131,7 +131,7 @@ public class ViewController {
      * @param pId
      * @return
      */
-   @RequestMapping("/noPass")
+   @RequestMapping("/back/noPass")
    @ResponseBody
     public boolean noPass(CheckReason checkReason,@RequestParam("pId") String pId){
        int i = showService.addReason(checkReason);
@@ -165,14 +165,14 @@ public class ViewController {
         }
         return message;
     }
-    @RequestMapping("/noPassReason")
+    @RequestMapping("/back/noPassReason")
     public String noPassReason(Integer id,ModelMap map){
         map.put("id",id);
         return "noPass";
     }
-    @RequestMapping("/showCompany")
-    public String showCompany(Integer id,ModelMap map){
-      CompanyRegistrationInfo company= companyRegistrationInfoService.getByCompanyId(id);
+    @RequestMapping("/back/showCompany")
+    public String showCompany(Integer unitId,ModelMap map){
+      CompanyRegistrationInfo company= companyRegistrationInfoService.getByCompanyId(unitId);
       AddressProvince address = showService.getAddressByTownCode(company.getUnitTownCode());
         map.put("companyRegistrationInfo",company);
         map.put("address",address);

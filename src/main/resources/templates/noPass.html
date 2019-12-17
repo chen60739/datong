@@ -25,7 +25,7 @@
 			form = layui.form;
 
         form.on('submit(demo1)',function (data) {
-            $.getJSON('/noPass',data.field,function (res) {
+            $.getJSON('noPass',data.field,function (res) {
 				if (res){
                     layer.msg('操作成功');
                     parent.layer.closeAll();
