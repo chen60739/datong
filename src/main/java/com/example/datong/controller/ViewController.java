@@ -167,9 +167,10 @@ public class ViewController {
         map.put("id",id);
         return "noPass";
     }
-    @RequestMapping("/showCompany")
-    public String showCompany(Integer id,ModelMap map){
-        return "register";
+
+    @RequestMapping("/back/showCompany")
+    public String showCompany(@RequestParam("unitId") Integer unitId,ModelMap map){
+        return "showCompany";
     }
 
 }
