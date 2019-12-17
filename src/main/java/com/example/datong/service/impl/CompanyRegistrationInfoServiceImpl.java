@@ -27,4 +27,9 @@ public class CompanyRegistrationInfoServiceImpl implements CompanyRegistrationIn
         return map;
 
     }
+
+    @Override
+    public CompanyRegistrationInfo getByCompanyId(Integer unitId) {
+        return companyRegistrationInfoMapper.selectByCompanyId(unitId);
+    }
 }

@@ -5,6 +5,7 @@ import com.example.datong.dto.SuperResidentialInfo;
 import com.example.datong.model.*;
 import com.example.datong.model.Dictionary;
 import com.example.datong.service.AddressService;
+import com.example.datong.service.CompanyRegistrationInfoService;
 import com.example.datong.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class ViewController {
     ShowService showService;
     @Autowired
     AddressService addressService;
+    @Autowired
+    CompanyRegistrationInfoService companyRegistrationInfoService;
 
 
     @GetMapping("/show_person")
@@ -169,8 +172,11 @@ public class ViewController {
     }
     @RequestMapping("/showCompany")
     public String showCompany(Integer id,ModelMap map){
-
-        return "register";
+      CompanyRegistrationInfo company= companyRegistrationInfoService.getByCompanyId(id);
+      AddressProvince address = showService.getAddressByTownCode(company.getUnitTownCode());
+        map.put("companyRegistrationInfo",company);
+        map.put("address",address);
+        return "showCompany";
     }
 
 }
